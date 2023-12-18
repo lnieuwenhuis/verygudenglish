@@ -2,9 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-
 </head>
 
 <body>
-    startpagina voor docenten
+    Startpagina voor studenten
 </body>
