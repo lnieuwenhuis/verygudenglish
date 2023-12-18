@@ -84,7 +84,5 @@
         </div>
     </nav>
 
-    <div class="">
-        Dit is de home voor docenten
-    </div>
+
 </body>
