@@ -5,5 +5,7 @@
 </head>
 
 <body>
-    Startpagina voor studenten
+    <nav class="h-6 bg-blue-600">
+
+    </nav>
 </body>
