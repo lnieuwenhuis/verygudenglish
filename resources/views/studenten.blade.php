@@ -13,4 +13,39 @@
         <div class="ml-auto p-3">[student naam]</div>
         <div class="p-3">Logout</div>
     </nav>
+    <div>
+        <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5">
+            <div class="flex flex-col">
+                {{-- Later Foreach periode toevoegen --}}
+                <div class="flex flex-row m-3">
+                    <div class="mr-3">
+                        {{-- percentage --}} 83%
+                    </div>
+                    Periode 1
+                </div>
+                <div class="flex flex-row m-4">
+                    <div class="mr-3">
+                        {{-- percentage --}} 12%
+                    </div>
+                    Periode 2
+                </div>
+                <div class="flex flex-row m-4">
+                    <div class="mr-3">
+                        {{-- percentage --}} 64%
+                    </div>
+                    Periode 3
+                </div>
+                <div class="flex flex-row m-4">
+                    <div class="mr-3">
+                        {{-- percentage --}} 74%
+                    </div>
+                    Periode 4
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5">
+            <div class="p-3">Woordenlijst</div>
+        </div>
+    </div>
 </body>
