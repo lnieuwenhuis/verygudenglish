@@ -43,8 +43,8 @@
         </div>
     </nav>
     <div class="bg-gray-400 h-screen">
-        <div class="w-3/4 ml-auto mr-auto bg-gray-500 rounded-b">
-            <div class="text-center">Leer hier eenvoudig jouw Engelse Woordenschat
+        <div class="w-3/4 ml-auto mr-auto bg-gray-500 h-full">
+            <div class="text-center text-2xl font-semibold pt-5">Leer hier eenvoudig jouw Engelse Woordenschat!
             </div>
         </div>
     </div>

@@ -36,9 +36,6 @@
                                 clip-rule="evenodd" />
                         </svg>
 
-
-
-
                         <span class="ms-3 text-left">[User Name]</span>
                     </button>
                 </li>
