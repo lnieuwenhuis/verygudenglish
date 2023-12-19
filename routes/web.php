@@ -31,6 +31,10 @@ Route::get("/ageofwords", function () {
     return view('ageofwords');
 });
 
+Route::get("/meteoriet", function () {
+    return view('meteoriet');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
