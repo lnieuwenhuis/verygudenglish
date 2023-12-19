@@ -5,7 +5,7 @@
     @vite('resources/css/app.css')
 
     <script>
-        //Functies voor de knoppen maken en functie voor de gebruiker maken
+        // TODO: Functies voor de knoppen maken en functie voor de gebruiker maken
     </script>
 </head>
 
