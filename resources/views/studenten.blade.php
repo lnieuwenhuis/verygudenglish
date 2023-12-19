@@ -16,6 +16,19 @@
             <div class="p-3">Logout</div>
         </nav>
 
+        <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
+            <div class="p-3">
+                <button href="#" class="pl-0">Toetsen
+                </button>
+            </div>
+            <div class="ml-auto mr-auto p-3">
+                <button href="#">Oefeningen</button>
+            </div>
+            <div class="p-3">
+                <button href="#">Woorden</button>
+            </div>
+        </div>
+
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded">
             <div class="flex flex-col">
                 {{-- Later Foreach periode toevoegen --}}
@@ -46,8 +59,6 @@
 
             </div>
         </div>
-        <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded">
-            <div class="p-3">Woordenlijst</div>
-        </div>
+
     </div>
 </body>
