@@ -4,7 +4,9 @@
 <head>
     @vite('resources/css/app.css')
 
-
+    <script>
+        //Functies voor de knoppen maken en functie voor de gebruiker maken
+    </script>
 </head>
 
 <body>
@@ -25,8 +27,8 @@
             <ul class="space-y-2 font-medium">
 
                 <li>
-                    <a href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <button href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="w-6 h-6 text-gray-600">
                             <path fill-rule="evenodd"
@@ -37,12 +39,12 @@
 
 
 
-                        <span class="ms-3">[User Name]</span>
-                    </a>
+                        <span class="ms-3 text-left">[User Name]</span>
+                    </button>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <button href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full">
                         <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-600 group-hover:text-gray-900 dark:group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 22 21">
@@ -52,19 +54,19 @@
                                 d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                         </svg>
                         <span class="ms-3">Studenten</span>
-                    </a>
+                    </button>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <button href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-600 group-hover:text-gray-900 dark:group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 18">
                             <path
                                 d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
                         </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Woordenlijsten</span>
-                    </a>
+                        <span class="flex-1 ms-3 whitespace-nowrap text-left">Woordenlijsten</span>
+                    </button>
                 </li>
                 <li>
                     <a href="#"
@@ -84,5 +86,13 @@
         </div>
     </nav>
 
+    <div class="p-4 sm:ml-64">
+        <div id="studenten" class="text-black">
+            Studenten
+        </div>
+        <div id="woordenlijsten" class=" hidden text-black">
+            woordenlijsten
+        </div>
+    </div>
 
 </body>
