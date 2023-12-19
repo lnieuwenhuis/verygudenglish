@@ -27,6 +27,10 @@ Route::get("/docenten", function () {
     return view('docenten');
 });
 
+Route::get("/ageofwords", function () {
+    return view('ageofwords');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
