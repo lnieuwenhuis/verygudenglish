@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('words', function (Blueprint $table) {
             $table->id();
+            $table->string('words', 2000);
+            $table->unsignedBigInteger('list_id');
             $table->timestamps();
+
+            $table->foreign('list_id')->references('id')->on('lists');
         });
     }
 
