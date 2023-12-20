@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('list_test', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->unsignedBigInteger('list_id');
+            $table->unsignedBigInteger('test_id');
+
+            $table->foreign('list_id')->references('id')->on('lists');
+            $table->foreign('test_id')->references('id')->on('tests');
         });
     }
 
