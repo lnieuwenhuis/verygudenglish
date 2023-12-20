@@ -12,10 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('list_word', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('word_id');
+            $table->unsignedBigInteger('list_id');
+
+            $table->foreign('word_id')->references('id')->on('words');
+            $table->foreign('list_id')->references('id')->on('lists');
         });
     }
+
+
 
     /**
      * Reverse the migrations.
