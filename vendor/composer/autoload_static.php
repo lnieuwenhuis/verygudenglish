@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc489de7751e124a406a2edc0ecb6119a
+class ComposerStaticInit21772db18093c478028a1110011992fb
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -381,8 +381,8 @@ class ComposerStaticInitc489de7751e124a406a2edc0ecb6119a
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -2854,6 +2854,7 @@ class ComposerStaticInitc489de7751e124a406a2edc0ecb6119a
         'Illuminate\\View\\Compilers\\Concerns\\CompilesLayouts' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesLayouts.php',
         'Illuminate\\View\\Compilers\\Concerns\\CompilesLoops' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesLoops.php',
         'Illuminate\\View\\Compilers\\Concerns\\CompilesRawPhp' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesRawPhp.php',
+        'Illuminate\\View\\Compilers\\Concerns\\CompilesSessions' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesSessions.php',
         'Illuminate\\View\\Compilers\\Concerns\\CompilesStacks' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesStacks.php',
         'Illuminate\\View\\Compilers\\Concerns\\CompilesStyles' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesStyles.php',
         'Illuminate\\View\\Compilers\\Concerns\\CompilesTranslations' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesTranslations.php',
@@ -7076,9 +7077,9 @@ class ComposerStaticInitc489de7751e124a406a2edc0ecb6119a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc489de7751e124a406a2edc0ecb6119a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc489de7751e124a406a2edc0ecb6119a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc489de7751e124a406a2edc0ecb6119a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit21772db18093c478028a1110011992fb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit21772db18093c478028a1110011992fb::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit21772db18093c478028a1110011992fb::$classMap;
 
         }, null, ClassLoader::class);
     }

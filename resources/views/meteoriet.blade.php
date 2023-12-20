@@ -14,23 +14,23 @@
 
             this.load.image('sky', 'assets/skies/space3.png');
             this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-            this.load.image('red', 'assets/particles/red.png');
+            this.load.image('green', 'assets/particles/green.png');
         }
 
         create ()
         {
-            this.add.image(400, 300, 'sky');
+            this.add.image(700, 1500, 'sky');
 
-            const particles = this.add.particles(0, 0, 'red', {
-                speed: 100,
-                scale: { start: 1, end: 0 },
+            const particles = this.add.particles(0, 0, 'green', {
+                speed: 500,
+                scale: { start: 0.4, end: 5 },
                 blendMode: 'ADD'
             });
 
             const logo = this.physics.add.image(400, 100, 'logo');
 
             logo.setVelocity(100, 200);
-            logo.setBounce(1, 1);
+            logo.setBounce(450,405);
             logo.setCollideWorldBounds(true);
 
             particles.startFollow(logo);
@@ -39,8 +39,8 @@
 
     const config = {
         type: Phaser.AUTO,
-        width: 800,
-        height: 600,
+        width: 1500,
+        height: 700,
         scene: Example,
         physics: {
             default: 'arcade',

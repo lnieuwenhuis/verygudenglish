@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class wordsController extends Controller
+class periodController extends Controller
 {
     public function index(){
 
