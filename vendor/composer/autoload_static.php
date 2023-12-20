@@ -381,8 +381,8 @@ class ComposerStaticInit21772db18093c478028a1110011992fb
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -613,12 +613,6 @@ class ComposerStaticInit21772db18093c478028a1110011992fb
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
-        'App\\Http\\Controllers\\adminController' => __DIR__ . '/../..' . '/app/Http/Controllers/adminController.php',
-        'App\\Http\\Controllers\\periodController' => __DIR__ . '/../..' . '/app/Http/Controllers/periodController.php',
-        'App\\Http\\Controllers\\testController' => __DIR__ . '/../..' . '/app/Http/Controllers/testController.php',
-        'App\\Http\\Controllers\\userController' => __DIR__ . '/../..' . '/app/Http/Controllers/userController.php',
-        'App\\Http\\Controllers\\wordListController' => __DIR__ . '/../..' . '/app/Http/Controllers/wordListController.php',
-        'App\\Http\\Controllers\\wordsController' => __DIR__ . '/../..' . '/app/Http/Controllers/wordsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -636,8 +630,7 @@ class ComposerStaticInit21772db18093c478028a1110011992fb
         'App\\Models\\Profile' => __DIR__ . '/../..' . '/app/Models/Profile.php',
         'App\\Models\\Test' => __DIR__ . '/../..' . '/app/Models/Test.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-        'App\\Models\\Words' => __DIR__ . '/../..' . '/app/Models/Words.php',
-        'App\\Models\\wordList' => __DIR__ . '/../..' . '/app/Models/wordList.php',
+        'App\\Models\\Word' => __DIR__ . '/../..' . '/app/Models/Word.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
