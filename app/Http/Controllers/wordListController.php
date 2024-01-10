@@ -9,10 +9,11 @@ class wordListController extends Controller
 {
     public function index()
     {
-        return view("wordList");
+        return view("docenten.wordlists", ['wordlists' => WordList::all()]);
     }
     public function create()
     {
+        return view('docenten.wordlists.create');
     }
     public function store(Request $request)
     {
@@ -28,13 +29,32 @@ class wordListController extends Controller
 
         return redirect()->back()->with('message', 'Wordlist Stored in DB');
     }
-    public function edit()
+    public function edit(Request $id)
     {
+        return view('docent.edit', ['wordlist' => WordList::findOrFail($id)]);
     }
-    public function update()
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:100',
+        ]);
+
+        $wordList = WordList::findOrFail($id);
+        $wordList->title = $request->get('title');
+
+        $wordList->save();
+
+        $wordList->words()->detach();
+        $wordList->words()->attach($request->get('words'));
     }
-    public function delete()
+    public function delete($id)
     {
+        $wordList = new WordList;
+
+        $wordList = WordList::findOrFail($id);
+        $wordList->words()->detach();
+        $wordList->delete();
+
+        return redirect()->back()->with('message', 'Woordenlijst verwijderd');
     }
 }
