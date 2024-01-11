@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('words', 2000);
             $table->string('answers', 2000);
-            $table->unsignedBigInteger('list_id');
+            $table->unsignedBigInteger('list_id')->nullable();
             $table->timestamps();
 
             $table->foreign('list_id')->references('id')->on('lists');
