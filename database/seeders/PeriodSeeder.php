@@ -6,6 +6,7 @@ use App\Models\Period;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 
 class PeriodSeeder extends Seeder
@@ -16,10 +17,10 @@ class PeriodSeeder extends Seeder
     public function run(): void
     {
         $periods = [
-            ['title' => '1', 'is_locked' => '1'],
-            ['title' => '2', 'is_locked' => '0'],
-            ['title' => '3', 'is_locked' => '0'],
-            ['title' => '4', 'is_locked' => '1']
+            ['title' => Str::random('5'), 'is_locked' => '1'],
+            ['title' => Str::random('5'), 'is_locked' => '0'],
+            ['title' => Str::random('5'), 'is_locked' => '0'],
+            ['title' => Str::random('5'), 'is_locked' => '1']
         ];
 
         foreach ($periods as $period) {
