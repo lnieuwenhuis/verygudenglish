@@ -35,8 +35,8 @@ Route::get("/test", function () {
     return view('test');
 });
 
-Route::get("/meteoriet", function () {
-    return view('meteoriet');
+Route::get("/meteor", function () {
+    return view('meteoor/meteoriet');
 });
 
 Route::get('/dashboard', function () {
