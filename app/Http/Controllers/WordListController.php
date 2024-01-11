@@ -19,6 +19,8 @@ class wordListController extends Controller
     {
         $request->validate([
             'title' => 'required|max:100',
+            'period' => 'required|max:1',
+            'words' => 'required',
         ]);
 
         $wordList = new WordList;
@@ -26,6 +28,7 @@ class wordListController extends Controller
         $wordList->save();
 
         $wordList->words()->attach($request->get('words'));
+        $wordList->periods()->attach($request->get('period'));
 
         return redirect()->back()->with('message', 'Wordlist Stored in DB');
     }

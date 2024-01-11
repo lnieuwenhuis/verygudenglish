@@ -2,33 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Period;
 use Illuminate\Http\Request;
 
 class periodController extends Controller
 {
-    public function index(){
-
-
+    public function index()
+    {
     }
-    public function create(){
-
-
+    public function create()
+    {
     }
-    public function store(){
+    public function store(Request $request, $id)
+    {
+        $request->validate([
+            'period' => 'required|max:1',
+        ]);
 
+        $period = new Period;
+        $period->title = $request->get('period');
+        $period->save();
 
+        return redirect()->back()->with('message', 'Period Stored in DB');
     }
-    public function edit(){
-
-
+    public function edit()
+    {
     }
-    public function update(){
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'period' => 'required|max:1',
+        ]);
 
+        $period = Period::findOrFail($id);
+        $period->period = $request->get('period');
 
+        $period->save();
     }
-    public function delete(){
+    public function delete($id)
+    {
+        $period = new Period;
 
+        $period = Period::findOrFail($id);
+        $period->wordlist()->detach();
+        $period->delete();
 
+        return redirect()->back()->with('message', 'Periode verwijderd');
     }
-
 }
