@@ -17,10 +17,10 @@ class PeriodSeeder extends Seeder
     public function run(): void
     {
         $periods = [
-            ['title' => Str::random('5'), 'is_locked' => '1'],
-            ['title' => Str::random('5'), 'is_locked' => '0'],
-            ['title' => Str::random('5'), 'is_locked' => '0'],
-            ['title' => Str::random('5'), 'is_locked' => '1']
+            ['title' => 'Periode 1', 'is_locked' => '1'],
+            ['title' => 'Periode 2', 'is_locked' => '0'],
+            ['title' => 'Periode 3', 'is_locked' => '0'],
+            ['title' => 'Periode 4', 'is_locked' => '1']
         ];
 
         foreach ($periods as $period) {
