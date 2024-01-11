@@ -9,9 +9,11 @@ class periodController extends Controller
 {
     public function index()
     {
+        return view("docenten.periods", ['periods' => Period::all()]);
     }
     public function create()
     {
+        return view('docenten.periods.create');
     }
     public function store(Request $request, $id)
     {
@@ -25,8 +27,9 @@ class periodController extends Controller
 
         return redirect()->back()->with('message', 'Period Stored in DB');
     }
-    public function edit()
+    public function edit($id)
     {
+        return view('docent.period.edit', ['period' => Period::findOrFail($id)]);
     }
     public function update(Request $request, $id)
     {
