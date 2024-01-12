@@ -31,10 +31,6 @@ Route::get("/ageofwords", function () {
     return view('ageofwords');
 });
 
-Route::get("/test", function () {
-    return view('test');
-});
-
 Route::get("/meteor", function () {
     return view('meteoor/meteoriet');
 });
