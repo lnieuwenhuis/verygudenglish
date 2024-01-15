@@ -17,15 +17,14 @@
         </nav>
 
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
-            <div class="p-3">
-                <button href="#" class="pl-0">Toetsen
-                </button>
+            <div class="p-3 text-lg">
+                <a href="{{ route('studenten_toetsen') }}">Toetsen</a>
             </div>
-            <div class="ml-auto mr-auto p-3">
-                <button href="#">Oefeningen</button>
+            <div class="ml-auto mr-auto p-3 text-lg">
+                <a href="{{ route('studenten_resultaten') }}">Resultaten</a>
             </div>
-            <div class="p-3">
-                <button href="#">Woorden</button>
+            <div class="p-3 text-lg">
+                <a href="{{ route('studenten_periodes') }}">Periodes</a>
             </div>
         </div>
 
