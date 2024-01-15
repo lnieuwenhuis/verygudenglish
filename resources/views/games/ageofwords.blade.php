@@ -204,9 +204,10 @@
                 this.collider = this.scene.physics.add.collider(this, this.scene.troopGroup, (player, troop) => {
                     if (!troop.isDead()) {
                         troop.setPushable(false);
-                    } else {
-                        troop.setPushable(true);
-                        player.setPushable(false);
+                    }
+
+                    if (this.isDead()) {
+                        this.scene.physics.world.colliders.destroy();
                     }
                 }, null, this);
 
@@ -223,6 +224,84 @@
                     this.setVelocityX(40);
                 } else {
                     this.setVelocityX(0);
+                }
+
+                if (this.isDead() && !this.deathAnimation) {
+                    this.deathAnimation = true;
+                    this.play(this.deathAnimationKey);
+                    this.once('animationcomplete', () => {
+                        setTimeout(() => {
+                            this.destroy();
+                        }, 2000);
+                    });
+                }
+            }
+
+            isDead() {
+                return this.health <= 0
+            }
+        }
+
+        class EnemyTroopGameObject extends Phaser.Physics.Arcade.Sprite
+        {
+            constructor (scene, x, y, troopType)
+            {
+                super(scene, x, y, troopType);
+
+                this.newAnimation = true;
+                this.flipX = true;
+
+                this.setScale(0.45);
+                this.troopType = troopType;
+                this.deathAnimationKey = troopType + 'DeathAnimation';
+                if (this.deathAnimationKey === 'tankTroopDeathAnimation') {
+                    this.setScale(0.6);
+                }
+
+                this.inZone = false;
+
+                scene.physics.add.existing(this);
+
+                scene.physics.world.enable(this)
+
+                this.setCollideWorldBounds(true);
+
+                scene.add.existing(this);
+                this.isColliding = false;
+                console.log(this.scene.EnemytroopGroup)
+                this.collider = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player, troop) => {
+                    if (!troop.isDead()) {
+                        troop.setPushable(false);
+                        player.setVelocityX(0);
+                        troop.isColliding = true;
+                        troop.newAnimation = true;
+                    }
+
+                    if (this.isDead()) {
+                        troop.isColliding = false;
+                        troop.setVelocityX(-200);
+                        this.scene.physics.world.colliders.destroy();
+                    }
+                }, null, this);
+
+            }
+
+            update() {
+                setTimeout(() => {
+                    this.health -= 0.1;
+                }, 10000);
+
+                if (!this.isDead() && !this.isColliding) {
+                    this.setVelocityX(-200);
+                    if (this.newAnimation) {
+                        this.newAnimation = false;
+                        this.play(this.troopType + 'Animation');
+                    }
+                } else {
+                    if (this.newAnimation && this.isColliding) {
+                        this.newAnimation = false;
+                        this.play(this.troopType + 'IdleAnimation');
+                    }
                 }
 
                 if (this.isDead() && !this.deathAnimation) {
@@ -297,11 +376,11 @@
             },
             coins: {
                 player: 2000,
-                ai: 400
+                enemy: 400
             },
             troopsInQueue: {
                 player: 0,
-                ai: 0
+                enemy: 0
             }
         };
 
@@ -317,6 +396,7 @@
             this.load.image('rangedTroopBuy', 'storage/images/ageofwords/buttons/rangedTroop.png');
             this.load.image('tankTroopBuy', 'storage/images/ageofwords/buttons/tankTroop.png');
             this.load.spritesheet('meleeTroop', 'storage/images/ageofwords/sprites/troops/meleeTroop.png', { frameWidth: 103, frameHeight: 135, endFrame: 43 });
+            this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 73, frameHeight: 131, endFrame: 43 });
             this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', { frameWidth: 168, frameHeight: 162, endFrame: 24 });
             this.load.spritesheet('rangedTroop', 'storage/images/ageofwords/sprites/troops/rangedTroop.png', { frameWidth: 84, frameHeight: 135, endFrame: 43 });
             this.load.spritesheet('rangedTroopDeath', 'storage/images/ageofwords/sprites/troops/death/rangedDeath.png', { frameWidth: 163, frameHeight: 162, endFrame: 24 });
@@ -332,6 +412,7 @@
 
             const troopConfigurations = [
                 { key: 'meleeTroop', frameRate: 43, frameNumbers: { start: 0, end: 42, first: 0 }, repeat: -1 },
+                { key: 'meleeTroopIdle', frameRate: 43, frameNumbers: { start: 0, end: 50, first: 0 }, repeat: -1 },
                 { key: 'meleeTroopDeath', frameRate: 43, frameNumbers: { start: 0, end: 23, first: 0 }, repeat: 0 },
 
                 { key: 'rangedTroop', frameRate: 43, frameNumbers: { start: 0, end: 43, first: 0 }, repeat: -1 },
@@ -357,7 +438,21 @@
                 collideWorldBounds: true
             });
 
+            this.EnemytroopGroup = this.physics.add.group({
+                defaultKey: 'Enemytroop',
+                maxSize: -1,
+                runChildUpdate: true,
+                collideWorldBounds: true
+            });
+
             this.troops = [];
+            this.Enemytroops = [];
+
+            this.spelling = this.add.text(670, 510, "Let op je spelling", {
+                color: "#ffffff",
+                fontSize: '20px',
+                fontStyle: "bold",
+            }).setOrigin(0.5, 7);
 
             this.question = this.add.text(755, 250, "", {
                 color: "#ff0000",
@@ -395,10 +490,10 @@
                 console.log(gameConfig.coins.player);
 
                 if (gameConfig.coins.player >= 25) {
-                    gameConfig.coins.player -= 25;
                     console.log(gameConfig.troopsInQueue.player);
 
                     if (gameConfig.troopsInQueue.player < 5) {
+                        gameConfig.coins.player -= 25;
                         gameConfig.troopsInQueue.player += 1;
 
                         const delay = gameConfig.troopsInQueue.player * 3000;
@@ -420,10 +515,10 @@
                 console.log(gameConfig.coins.player);
 
                 if (gameConfig.coins.player >= 25) {
-                    gameConfig.coins.player -= 25;
                     console.log(gameConfig.troopsInQueue.player);
 
                     if (gameConfig.troopsInQueue.player < 5) {
+                        gameConfig.coins.player -= 25;
                         gameConfig.troopsInQueue.player += 1;
 
                         const delay = gameConfig.troopsInQueue.player * 3000;
@@ -445,10 +540,10 @@
                 console.log(gameConfig.coins.player);
 
                 if (gameConfig.coins.player >= 25) {
-                    gameConfig.coins.player -= 25;
                     console.log(gameConfig.troopsInQueue.player);
 
                     if (gameConfig.troopsInQueue.player < 5) {
+                        gameConfig.coins.player -= 25;
                         gameConfig.troopsInQueue.player += 1;
 
                         const delay = gameConfig.troopsInQueue.player * 3000;
@@ -460,6 +555,31 @@
                             this.troops.push(troop);
                             this.troopGroup.add(troop);
                             gameConfig.troopsInQueue.player -= 1;
+                        }, delay);
+                    }
+                }
+            }, this);
+
+            const enemyMeleeBuyButton = this.add.image(1450, 50, 'meleeTroopBuy').setInteractive();
+            enemyMeleeBuyButton.on('pointerdown', () => {
+                console.log(gameConfig.coins.enemy);
+
+                if (gameConfig.coins.enemy >= 25) {
+                    gameConfig.coins.enemy -= 25;
+                    console.log(gameConfig.troopsInQueue.player);
+
+                    if (gameConfig.troopsInQueue.enemy < 5) {
+                        gameConfig.troopsInQueue.enemy += 1;
+
+                        const delay = gameConfig.troopsInQueue.enemy * 3000;
+
+                        setTimeout(() => {
+                            const troop = new EnemyTroopGameObject(this, 1500, 300, 'meleeTroop');
+                            troop.health = 100;
+                            troop.deathAnimation = false;
+                            this.Enemytroops.push(troop);
+                            this.EnemytroopGroup.add(troop);
+                            gameConfig.troopsInQueue.enemy -= 1;
                         }, delay);
                     }
                 }
@@ -477,6 +597,7 @@
             this.returnKey.on("down", event => { // als enter word ingedrukt
                 let name = this.nameInput.getChildByName("name");
                 if (name.value !== "") {
+                    this.spelling.alpha = 0;
                     this.message.setText(sanitize(name.value));
                     var similarity = stringSimilarity.compareTwoStrings(randomPair.translation,name.value.toLowerCase());
                     if (similarity > 0.98) {
@@ -494,6 +615,12 @@
 
         function updateScene() {
             this.troops.forEach(troop => {
+                if (troop.health >= 0) {
+                    troop.update();
+                }
+            });
+
+            this.Enemytroops.forEach(troop => {
                 if (troop.health >= 0) {
                     troop.update();
                 }
