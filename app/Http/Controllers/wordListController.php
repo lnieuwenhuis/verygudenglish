@@ -34,7 +34,7 @@ class wordListController extends Controller
     }
     public function edit(Request $id)
     {
-        return view('docent.edit', ['wordlist' => WordList::findOrFail($id)]);
+        return view('docenten.wordlists.edit', ['wordlist' => WordList::findOrFail($id)]);
     }
     public function update(Request $request, $id)
     {
@@ -50,7 +50,7 @@ class wordListController extends Controller
         $wordList->words()->detach();
         $wordList->words()->attach($request->get('words'));
     }
-    public function delete($id)
+    public function delete(Request $id)
     {
         $wordList = new WordList;
 
