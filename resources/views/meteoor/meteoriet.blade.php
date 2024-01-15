@@ -6,6 +6,8 @@
 <body>
 
 <script>
+    let exploding = false
+    let maxMeteorsToShow = 1
     class Example extends Phaser.Scene
     {
         preload ()
@@ -27,23 +29,45 @@
             //     blendMode: 'ADD'
             // });
             //
-
             this.anims.create({
                 key: 'explode',
                 frames: this.anims.generateFrameNumbers('meteoor', { frames: [ 0, 1, 2, 3 , 4, 5 ,6 ] }),
-                frameRate: 5,
+                frameRate: 10,
                 repeat: 0,
-                hideOnComplete: true,
             });
-            const meteoor = this.physics.add.sprite(75, 76, 'meteoor');
-            meteoor.setScale(7);
-            meteoor.play('explode');
 
-            meteoor.setVelocity(100, 200);
-            meteoor.setBounce(1,1);
-            meteoor.setCollideWorldBounds(true);
+            for(let idx = 0; idx < maxMeteorsToShow; idx++) {
+                const x = Phaser.Math.Between(1500, config.width - 1500);
+                this.meteoor = this.physics.add.sprite(x, 1, 'meteoor');
+                this.meteoor.setScale(7);
+                this.meteoor.setSize(50, 40, true);
 
-            // particles.startFollow(logo);
+
+                // particles.startFollow(logo);
+                //meteoor.setVelocity(100, 200);
+                //meteoor.setBounce(1,1);
+                this.meteoor.setCollideWorldBounds(true);
+            }
+
+
+
+        }
+
+        update () {
+
+                if(exploding == false){
+                    if (this.meteoor.y >= 500){
+
+                        exploding = true
+                        this.meteoor.play('explode');
+                        this.meteoor.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+                            this.meteoor.destroy();
+                        }, this);
+
+                    }
+                }
+
+
         }
     }
 
