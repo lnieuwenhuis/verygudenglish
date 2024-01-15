@@ -27,17 +27,17 @@ Route::get("/studenten", function () {
 Route::get("/studenten/toetsen", function () {
     return view('studenten.toetsen');
 })->name('studenten_toetsen');
-// ->middleware(['auth', 'verified'])->name('studenten');
+// ->middleware(['auth', 'verified'])->name('studenten_toetsen');
 
 Route::get("/studenten/resultaten", function () {
     return view('studenten.resultaten');
 })->name('studenten_resultaten');
-// ->middleware(['auth', 'verified'])->name('studenten');
+// ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
 Route::get("/studenten/periods", function () {
     return view('studenten.periodes');
 })->name('studenten_periodes');
-// ->middleware(['auth', 'verified'])->name('studenten');
+// ->middleware(['auth', 'verified'])->name('studenten_periodes');
 
 
 //Routes voor docenten
@@ -61,12 +61,12 @@ Route::get('/docenten/woordenlijsten', function () {
 Route::get("/ageofwords", function () {
     return view('games.ageofwords');
 })->name('ageofwords');
-// ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
+// ->middleware(['auth', 'verified'])->name('ageofwords');
 
 Route::get("/meteor", function () {
     return view('games.meteoriet');
 })->name('meteoriet');
-// ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
+// ->middleware(['auth', 'verified'])->name('meteoriet');
 
 
 
