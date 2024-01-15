@@ -16,16 +16,46 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
+//Routes voor studenten
 Route::get("/studenten", function () {
-    return view('studenten');
-});
+    return view('studenten.index');
+})->name('studenten');
+// ->middleware(['auth', 'verified'])->name('studenten');
+
+Route::get("/studenten/toetsen", function () {
+    return view('studenten.toetsen');
+})->name('studenten_toetsen');
+// ->middleware(['auth', 'verified'])->name('studenten');
+
+Route::get("/studenten/resultaten", function () {
+    return view('studenten.resultaten');
+})->name('studenten_resultaten');
+// ->middleware(['auth', 'verified'])->name('studenten');
+
+Route::get("/studenten/periods", function () {
+    return view('studenten.periodes');
+})->name('studenten_periodes');
+// ->middleware(['auth', 'verified'])->name('studenten');
 
 
+//Routes voor docenten
 Route::get("/docenten", function () {
-    return view('docenten');
-});
+    return view('docenten.index');
+})->name('docenten');
+// ->middleware(['auth', 'verified'])->name('docenten');
+
+Route::get('/docenten/studenten', function () {
+    return view('docenten.studenten');
+})->name('docenten_studenten');
+// ->middleware(['auth', 'verified'])->name('docenten_studenten');
+
+Route::get('/docenten/woordenlijsten', function () {
+    return view('docenten.woordenlijsten');
+})->name('docenten_woordenlijsten');
+// ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
+
 
 Route::get("/ageofwords", function () {
     return view('ageofwords');
@@ -35,9 +65,6 @@ Route::get("/meteor", function () {
     return view('meteoor/meteoriet');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
