@@ -184,9 +184,12 @@
             {
                 super(scene, x, y, troopType);
 
+                this.playerNewAnimation = true;
+                this.attacking = false;
+
                 this.setScale(0.45);
-                this.play(troopType + 'Animation');
-                this.deathAnimationKey = troopType + 'DeathAnimation'
+                this.troopType = troopType;
+                this.deathAnimationKey = troopType + 'DeathAnimation';
                 if (this.deathAnimationKey === 'tankTroopDeathAnimation') {
                     this.setScale(0.6);
                 }
@@ -200,13 +203,34 @@
                 this.setCollideWorldBounds(true);
 
                 scene.add.existing(this);
-
+                this.isColliding = false;
                 this.collider = this.scene.physics.add.collider(this, this.scene.troopGroup, (player, troop) => {
                     if (!troop.isDead()) {
                         troop.setPushable(false);
+                        player.setVelocityX(0);
+                        troop.isColliding = true;
+                        troop.playerNewAnimation = true;
                     }
 
                     if (this.isDead()) {
+                        troop.isColliding = false;
+                        troop.setVelocityX(40);
+                        this.scene.physics.world.colliders.destroy();
+                    }
+                }, null, this);
+
+                this.colliderEnemy = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player, troop) => {
+                    if (!troop.isDead()) {
+                        troop.setPushable(false);
+                        player.setVelocityX(0);
+                        player.isColliding = true;
+                        player.playerNewAnimation = true;
+                        this.attacking = true;
+                    }
+
+                    if (this.isDead()) {
+                        player.isColliding = false;
+                        player.setVelocityX(40);
                         this.scene.physics.world.colliders.destroy();
                     }
                 }, null, this);
@@ -214,16 +238,25 @@
             }
 
             update() {
-                setTimeout(() => {
-                    this.health -= 0.1;
-                }, 3000);
 
-               //this.scene.physics.overlap(this, this.scene.troopGroup, this.handleTroopOverlap, null, this);
-
-                if (!this.isDead()) {
+                if (!this.isDead() && !this.isColliding) {
                     this.setVelocityX(40);
+                    if (this.playerNewAnimation) {
+                        this.playerNewAnimation = false;
+                        this.play(this.troopType + 'Animation');
+                    }
                 } else {
-                    this.setVelocityX(0);
+                    if (this.playerNewAnimation && this.isColliding) {
+                        this.playerNewAnimation = false;
+                        this.play(this.troopType + 'IdleAnimation');
+                    }
+                }
+
+                if (this.attacking && !this.isDead()) {
+                    if (this.newAnimation && this.isColliding) {
+                        this.newAnimation = false;
+                        this.play(this.troopType + 'AttackAnimation');
+                    }
                 }
 
                 if (this.isDead() && !this.deathAnimation) {
@@ -264,11 +297,13 @@
 
                 scene.physics.world.enable(this)
 
+                this.attacking = false;
+
                 this.setCollideWorldBounds(true);
 
                 scene.add.existing(this);
                 this.isColliding = false;
-                console.log(this.scene.EnemytroopGroup)
+
                 this.collider = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player, troop) => {
                     if (!troop.isDead()) {
                         troop.setPushable(false);
@@ -279,7 +314,23 @@
 
                     if (this.isDead()) {
                         troop.isColliding = false;
-                        troop.setVelocityX(-200);
+                        troop.setVelocityX(-40);
+                        this.scene.physics.world.colliders.destroy();
+                    }
+                }, null, this);
+
+                this.colliderEnemy = this.scene.physics.add.collider(this, this.scene.troopGroup, (player, troop) => {
+                    if (!troop.isDead()) {
+                        troop.setPushable(false);
+                        player.setVelocityX(0);
+                        player.isColliding = true;
+                        player.newAnimation = true;
+                        player.attacking = true;
+                    }
+
+                    if (this.isDead()) {
+                        player.isColliding = false;
+                        player.setVelocityX(-80);
                         this.scene.physics.world.colliders.destroy();
                     }
                 }, null, this);
@@ -287,20 +338,24 @@
             }
 
             update() {
-                setTimeout(() => {
-                    this.health -= 0.1;
-                }, 10000);
 
-                if (!this.isDead() && !this.isColliding) {
-                    this.setVelocityX(-200);
+                if (!this.isDead() && !this.isColliding && !this.attacking) {
+                    this.setVelocityX(-80);
                     if (this.newAnimation) {
                         this.newAnimation = false;
                         this.play(this.troopType + 'Animation');
                     }
                 } else {
-                    if (this.newAnimation && this.isColliding) {
+                    if (this.newAnimation && this.isColliding && !this.attacking) {
                         this.newAnimation = false;
                         this.play(this.troopType + 'IdleAnimation');
+                    }
+                }
+
+                if (this.attacking && !this.isDead()) {
+                    if (this.newAnimation && this.isColliding) {
+                        this.newAnimation = false;
+                        this.play(this.troopType + 'AttackAnimation');
                     }
                 }
 
@@ -396,8 +451,9 @@
             this.load.image('rangedTroopBuy', 'storage/images/ageofwords/buttons/rangedTroop.png');
             this.load.image('tankTroopBuy', 'storage/images/ageofwords/buttons/tankTroop.png');
             this.load.spritesheet('meleeTroop', 'storage/images/ageofwords/sprites/troops/meleeTroop.png', { frameWidth: 103, frameHeight: 135, endFrame: 43 });
-            this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 73, frameHeight: 131, endFrame: 43 });
+            this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 73, frameHeight: 131, endFrame: 50 });
             this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', { frameWidth: 168, frameHeight: 162, endFrame: 24 });
+            this.load.spritesheet('meleeTroopAttack', 'storage/images/ageofwords/sprites/troops/attack/meleeTroop.png', { frameWidth: 113, frameHeight: 131, endFrame: 40 });
             this.load.spritesheet('rangedTroop', 'storage/images/ageofwords/sprites/troops/rangedTroop.png', { frameWidth: 84, frameHeight: 135, endFrame: 43 });
             this.load.spritesheet('rangedTroopDeath', 'storage/images/ageofwords/sprites/troops/death/rangedDeath.png', { frameWidth: 163, frameHeight: 162, endFrame: 24 });
             this.load.spritesheet('tankTroop', 'storage/images/ageofwords/sprites/troops/tankTroop.png', { frameWidth: 180, frameHeight: 133, endFrame: 40 });
@@ -414,6 +470,7 @@
                 { key: 'meleeTroop', frameRate: 43, frameNumbers: { start: 0, end: 42, first: 0 }, repeat: -1 },
                 { key: 'meleeTroopIdle', frameRate: 43, frameNumbers: { start: 0, end: 50, first: 0 }, repeat: -1 },
                 { key: 'meleeTroopDeath', frameRate: 43, frameNumbers: { start: 0, end: 23, first: 0 }, repeat: 0 },
+                { key: 'meleeTroopAttack', frameRate: 43, frameNumbers: { start: 0, end: 40, first: 0 }, repeat: -1 },
 
                 { key: 'rangedTroop', frameRate: 43, frameNumbers: { start: 0, end: 43, first: 0 }, repeat: -1 },
                 { key: 'rangedTroopDeath', frameRate: 43, frameNumbers: { start: 0, end: 23, first: 0 }, repeat: 0 },
@@ -512,10 +569,8 @@
 
             const rangedBuyButton = this.add.image(1350, 50, 'rangedTroopBuy').setInteractive();
             rangedBuyButton.on('pointerdown', () => {
-                console.log(gameConfig.coins.player);
 
                 if (gameConfig.coins.player >= 25) {
-                    console.log(gameConfig.troopsInQueue.player);
 
                     if (gameConfig.troopsInQueue.player < 5) {
                         gameConfig.coins.player -= 25;
@@ -537,10 +592,8 @@
 
             const tankBuyButton = this.add.image(1400, 50, 'tankTroopBuy').setInteractive();
             tankBuyButton.on('pointerdown', () => {
-                console.log(gameConfig.coins.player);
 
                 if (gameConfig.coins.player >= 25) {
-                    console.log(gameConfig.troopsInQueue.player);
 
                     if (gameConfig.troopsInQueue.player < 5) {
                         gameConfig.coins.player -= 25;
@@ -565,10 +618,10 @@
                 console.log(gameConfig.coins.enemy);
 
                 if (gameConfig.coins.enemy >= 25) {
-                    gameConfig.coins.enemy -= 25;
                     console.log(gameConfig.troopsInQueue.player);
 
                     if (gameConfig.troopsInQueue.enemy < 5) {
+                        gameConfig.coins.enemy -= 25;
                         gameConfig.troopsInQueue.enemy += 1;
 
                         const delay = gameConfig.troopsInQueue.enemy * 3000;
