@@ -57,13 +57,17 @@ Route::get('/docenten/woordenlijsten', function () {
 // ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
 
 
+//Routes voor de games
 Route::get("/ageofwords", function () {
-    return view('ageofwords');
-});
+    return view('games.ageofwords');
+})->name('ageofwords');
+// ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
 
 Route::get("/meteor", function () {
-    return view('meteoor/meteoriet');
-});
+    return view('games.meteoriet');
+})->name('meteoriet');
+// ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
+
 
 
 Route::middleware('auth')->group(function () {
