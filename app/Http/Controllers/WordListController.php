@@ -42,6 +42,7 @@ class wordListController extends Controller
             'title' => 'required|max:100',
         ]);
 
+        $wordList = new WordList;
         $wordList = WordList::findOrFail($id);
         $wordList->title = $request->get('title');
 
