@@ -13,7 +13,6 @@
             <div class="h-full p-3">Logo</div>
             <div class="h-full p-3">Woordenschat-Game</div>
             <div class="ml-auto p-3">[student naam]</div>
-            <button class="flex p-3">Login</button>
             <button class="flex p-3">Logout</button>
         </nav>
 
