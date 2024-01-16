@@ -4,6 +4,9 @@
 <head>
     @vite('resources/css/app.css')
 
+    <title>Studenten Panel</title>
+
+    <script></script>
 </head>
 
 <body>
