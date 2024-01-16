@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <link rel="icon" type="image/x-icon" href="https://imgur.com/dUJsQ8V.png">
     @vite('resources/css/app.css')
 
     <title>Docenten Panel</title>
