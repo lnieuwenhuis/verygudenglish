@@ -7,6 +7,20 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    function render($request, Throwable $exception)
+    {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getCode() == 404) {
+                return response()->view('errors.404', [], 404);
+            }
+            if ($exception->getCode() == 500) {
+                return response()->view('errors.500', [], 500);
+            }
+        }
+        return parent::render($request, $exception);
+    }
+
+
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
