@@ -10,16 +10,9 @@
     <script></script>
 </head>
 
-<body>
+<x-app-layout>
 
     <div>
-        <nav class="bg-blue-600 h-fit flex flex-row pb-1">
-            <div class="h-full p-3">Logo</div>
-            <div class="h-full p-3">Landstede Engels</div>
-            <div class="ml-auto p-3">[student naam]</div>
-            <button class="p-3">Logout</button>
-        </nav>
-
         <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
             <div class="ml-auto mr-auto p-3 text-2xl">
                 Welkom [student naam]
@@ -40,4 +33,4 @@
         </div>
 
     </div>
-</body>
+</x-app-layout>

@@ -18,7 +18,7 @@
                 "/": '',
             };
             const reg = /[&<>"'/]/ig;
-            return string.replace(reg, (match)=>(map[match]));
+            return string.replace(reg, (match) => (map[match]));
         }
 
         let translationObject = {
@@ -171,17 +171,15 @@
             };
         }
 
-        function isObjEmpty (obj) { // check of object leeg is
+        function isObjEmpty(obj) { // check of object leeg is
             return Object.keys(obj).length === 0;
         }
 
         let randomPair = getRandomKeyValuePair(); // random key & value pakken
 
-        class PlayerTroopGameObject extends Phaser.Physics.Arcade.Sprite
-        {
+        class PlayerTroopGameObject extends Phaser.Physics.Arcade.Sprite {
 
-            constructor (scene, x, y, troopType)
-            {
+            constructor(scene, x, y, troopType) {
                 super(scene, x, y, troopType);
 
                 this.playerNewAnimation = true;
@@ -219,7 +217,8 @@
                     }
                 }, null, this);
 
-                this.colliderEnemy = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player, troop) => {
+                this.colliderEnemy = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player,
+                    troop) => {
                     if (!troop.isDead()) {
                         troop.setPushable(false);
                         player.setVelocityX(0);
@@ -275,10 +274,8 @@
             }
         }
 
-        class EnemyTroopGameObject extends Phaser.Physics.Arcade.Sprite
-        {
-            constructor (scene, x, y, troopType)
-            {
+        class EnemyTroopGameObject extends Phaser.Physics.Arcade.Sprite {
+            constructor(scene, x, y, troopType) {
                 super(scene, x, y, troopType);
 
                 this.newAnimation = true;
@@ -304,7 +301,8 @@
                 scene.add.existing(this);
                 this.isColliding = false;
 
-                this.collider = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player, troop) => {
+                this.collider = this.scene.physics.add.collider(this, this.scene.EnemytroopGroup, (player,
+                troop) => {
                     if (!troop.isDead()) {
                         troop.setPushable(false);
                         player.setVelocityX(0);
@@ -319,7 +317,8 @@
                     }
                 }, null, this);
 
-                this.colliderEnemy = this.scene.physics.add.collider(this, this.scene.troopGroup, (player, troop) => {
+                this.colliderEnemy = this.scene.physics.add.collider(this, this.scene.troopGroup, (player,
+                troop) => {
                     if (!troop.isDead()) {
                         troop.setPushable(false);
                         player.setVelocityX(0);
@@ -387,7 +386,9 @@
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 300 },
+                    gravity: {
+                        y: 300
+                    },
                     debug: true
                 }
             },
@@ -396,7 +397,7 @@
             },
             scale: {
                 mode: Phaser.Scale.FIT,
-           },
+            },
             scene: {
                 preload: preloadScene,
                 create: createScene,
@@ -450,14 +451,46 @@
             this.load.image('meleeTroopBuy', 'storage/images/ageofwords/buttons/meleeTroop.png');
             this.load.image('rangedTroopBuy', 'storage/images/ageofwords/buttons/rangedTroop.png');
             this.load.image('tankTroopBuy', 'storage/images/ageofwords/buttons/tankTroop.png');
-            this.load.spritesheet('meleeTroop', 'storage/images/ageofwords/sprites/troops/meleeTroop.png', { frameWidth: 103, frameHeight: 135, endFrame: 43 });
-            this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 73, frameHeight: 131, endFrame: 50 });
-            this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', { frameWidth: 168, frameHeight: 162, endFrame: 24 });
-            this.load.spritesheet('meleeTroopAttack', 'storage/images/ageofwords/sprites/troops/attack/meleeTroop.png', { frameWidth: 113, frameHeight: 131, endFrame: 40 });
-            this.load.spritesheet('rangedTroop', 'storage/images/ageofwords/sprites/troops/rangedTroop.png', { frameWidth: 84, frameHeight: 135, endFrame: 43 });
-            this.load.spritesheet('rangedTroopDeath', 'storage/images/ageofwords/sprites/troops/death/rangedDeath.png', { frameWidth: 163, frameHeight: 162, endFrame: 24 });
-            this.load.spritesheet('tankTroop', 'storage/images/ageofwords/sprites/troops/tankTroop.png', { frameWidth: 180, frameHeight: 133, endFrame: 40 });
-            this.load.spritesheet('tankTroopDeath', 'storage/images/ageofwords/sprites/troops/death/tankDeath.png', { frameWidth: 280, frameHeight: 148, endFrame: 50 });
+            this.load.spritesheet('meleeTroop', 'storage/images/ageofwords/sprites/troops/meleeTroop.png', {
+                frameWidth: 103,
+                frameHeight: 135,
+                endFrame: 43
+            });
+            this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', {
+                frameWidth: 73,
+                frameHeight: 131,
+                endFrame: 50
+            });
+            this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', {
+                frameWidth: 168,
+                frameHeight: 162,
+                endFrame: 24
+            });
+            this.load.spritesheet('meleeTroopAttack', 'storage/images/ageofwords/sprites/troops/attack/meleeTroop.png', {
+                frameWidth: 113,
+                frameHeight: 131,
+                endFrame: 40
+            });
+            this.load.spritesheet('rangedTroop', 'storage/images/ageofwords/sprites/troops/rangedTroop.png', {
+                frameWidth: 84,
+                frameHeight: 135,
+                endFrame: 43
+            });
+            this.load.spritesheet('rangedTroopDeath', 'storage/images/ageofwords/sprites/troops/death/rangedDeath.png', {
+                frameWidth: 163,
+                frameHeight: 162,
+                endFrame: 24
+            });
+            this.load.spritesheet('tankTroop', 'storage/images/ageofwords/sprites/troops/tankTroop.png', {
+                frameWidth: 180,
+                frameHeight: 133,
+                endFrame: 40
+            });
+            this.load.spritesheet('tankTroopDeath', 'storage/images/ageofwords/sprites/troops/death/tankDeath.png', {
+                frameWidth: 280,
+                frameHeight: 148,
+                endFrame: 50
+            });
         }
 
         function createScene() {
@@ -466,20 +499,97 @@
 
             this.physics.world.setBounds(32, 115, 1500, 240);
 
-            const troopConfigurations = [
-                { key: 'meleeTroop', frameRate: 43, frameNumbers: { start: 0, end: 42, first: 0 }, repeat: -1 },
-                { key: 'meleeTroopIdle', frameRate: 43, frameNumbers: { start: 0, end: 50, first: 0 }, repeat: -1 },
-                { key: 'meleeTroopDeath', frameRate: 43, frameNumbers: { start: 0, end: 23, first: 0 }, repeat: 0 },
-                { key: 'meleeTroopAttack', frameRate: 43, frameNumbers: { start: 0, end: 40, first: 0 }, repeat: -1 },
+            const troopConfigurations = [{
+                    key: 'meleeTroop',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 42,
+                        first: 0
+                    },
+                    repeat: -1
+                },
+                {
+                    key: 'meleeTroopIdle',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 50,
+                        first: 0
+                    },
+                    repeat: -1
+                },
+                {
+                    key: 'meleeTroopDeath',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 23,
+                        first: 0
+                    },
+                    repeat: 0
+                },
+                {
+                    key: 'meleeTroopAttack',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 40,
+                        first: 0
+                    },
+                    repeat: -1
+                },
 
-                { key: 'rangedTroop', frameRate: 43, frameNumbers: { start: 0, end: 43, first: 0 }, repeat: -1 },
-                { key: 'rangedTroopDeath', frameRate: 43, frameNumbers: { start: 0, end: 23, first: 0 }, repeat: 0 },
+                {
+                    key: 'rangedTroop',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 43,
+                        first: 0
+                    },
+                    repeat: -1
+                },
+                {
+                    key: 'rangedTroopDeath',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 23,
+                        first: 0
+                    },
+                    repeat: 0
+                },
 
-                { key: 'tankTroop', frameRate: 43, frameNumbers: { start: 0, end: 40, first: 0 }, repeat: -1 },
-                { key: 'tankTroopDeath', frameRate: 43, frameNumbers: { start: 0, end: 49, first: 0 }, repeat: 0 }
+                {
+                    key: 'tankTroop',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 40,
+                        first: 0
+                    },
+                    repeat: -1
+                },
+                {
+                    key: 'tankTroopDeath',
+                    frameRate: 43,
+                    frameNumbers: {
+                        start: 0,
+                        end: 49,
+                        first: 0
+                    },
+                    repeat: 0
+                }
             ];
 
-            for (const { key, frameRate, frameNumbers, repeat } of troopConfigurations) {
+            for (const {
+                    key,
+                    frameRate,
+                    frameNumbers,
+                    repeat
+                }
+                of troopConfigurations) {
                 this.anims.create({
                     key: key + 'Animation',
                     frames: this.anims.generateFrameNumbers(key, frameNumbers),
@@ -533,9 +643,15 @@
                 fontStyle: "bold",
             }).setOrigin(0.5, 8);
 
-            this.timedEvent = new Phaser.Time.TimerEvent({ delay: 4000 });
+            this.timedEvent = new Phaser.Time.TimerEvent({
+                delay: 4000
+            });
 
-            const skipButton = this.add.text(975, 410, 'Skip', {fontSize: '35px',  backgroundColor: '#9900ff' , fill: '#FFFFFF' });
+            const skipButton = this.add.text(975, 410, 'Skip', {
+                fontSize: '35px',
+                backgroundColor: '#9900ff',
+                fill: '#FFFFFF'
+            });
             skipButton.setInteractive();
             skipButton.on('pointerdown', () => {
                 randomPair = getRandomKeyValuePair();
@@ -652,7 +768,8 @@
                 if (name.value !== "") {
                     this.spelling.alpha = 0;
                     this.message.setText(sanitize(name.value));
-                    var similarity = stringSimilarity.compareTwoStrings(randomPair.translation,name.value.toLowerCase());
+                    var similarity = stringSimilarity.compareTwoStrings(randomPair.translation, name.value
+                        .toLowerCase());
                     if (similarity > 0.98) {
                         gameConfig.coins.player += 25;
                         this.correct.alpha = 100;
