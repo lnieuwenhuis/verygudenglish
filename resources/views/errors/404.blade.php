@@ -91,11 +91,15 @@
         .notfound h2 {
             font-family: cabin, sans-serif;
             font-size: 20px;
-            font-weight: 400;
-            text-transform: uppercase;
+            font-weight: 550;
             color: #000;
             margin-top: 0;
             margin-bottom: 25px
+        }
+
+        a {
+            font-family: cabin, sans-serif;
+            color: #000;
         }
 
         @media only screen and (max-width: 767px) {
@@ -135,6 +139,7 @@
                 <h1><span>4</span><span>0</span><span>4</span></h1>
             </div>
             <h2>Heb je het juiste adres ingetypt?</h2>
+            <a href="{{ route('home') }}">Terug naar Homepagina</a>
         </div>
     </div>
 </body>
