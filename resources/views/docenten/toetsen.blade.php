@@ -30,7 +30,7 @@
 
     <!-- TODO: Woordenlijsten importeren uit database en neerzetten in een lijst -->
 
-    {{-- @foreach ($tests as $test)
+    @foreach ($tests as $test)
         <div class="text-white">{{ $test['title'] }}</div>
-    @endforeach --}}
+    @endforeach
 </x-app-layout>

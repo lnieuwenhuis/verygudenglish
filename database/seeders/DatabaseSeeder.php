@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PeriodSeeder::class);
         $this->call(WordSeeder::class);
         $this->call(ListSeeder::class);
+        $this->call(TestSeeder::class);
     }
 }
