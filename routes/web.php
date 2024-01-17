@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\wordListController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,10 +53,9 @@ Route::get('/docenten/studenten', function () {
 })->name('docenten_studenten');
 // ->middleware(['auth', 'verified'])->name('docenten_studenten');
 
-Route::get('/docenten/woordenlijsten', function () {
-    return view('docenten.woordenlijsten');
-})->name('docenten_woordenlijsten');
+Route::get('/docenten/woordenlijsten', [wordListController::class, 'index']);
 // ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
+
 
 
 //Routes voor de games
