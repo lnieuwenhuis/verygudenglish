@@ -6,10 +6,14 @@
 
     <title>Woordenlijsten</title>
 
-    <script>
-        // TODO: Functies voor de knoppen maken en functie voor de gebruiker maken
-    </script>
+    <script></script>
 </head>
 
 <x-app-layout>
+
+    <!-- TODO: Woordenlijsten importeren uit database en neerzetten in een lijst -->
+
+    @foreach ($wordlists as $wordlist)
+        <div class="text-white">{{ $wordlist['title'] }}</div>
+    @endforeach
 </x-app-layout>

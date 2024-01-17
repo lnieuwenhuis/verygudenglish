@@ -9,7 +9,7 @@ class wordListController extends Controller
 {
     public function index()
     {
-        return view("docenten.wordlists", ['wordlists' => WordList::all()]);
+        return view("docenten.woordenlijsten", ['wordlists' => WordList::all()]);
     }
     public function create()
     {
