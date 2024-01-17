@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\wordListController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -49,13 +50,14 @@ Route::get("/docenten", function () {
 })->name('docenten');
 // ->middleware(['auth', 'verified'])->name('docenten');
 
-Route::get('/docenten/studenten', [userController::class, 'index']);
-// ->middleware(['auth', 'verified'])->name('docenten_studenten');
+Route::resource('docenten/studenten', UserController::class)->name('', 'docenten_studenten');
+// ->middleware(['auth', 'verified'])
 
 Route::get('/docenten/woordenlijsten', [wordListController::class, 'index']);
 // ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
 
-
+Route::resource('docenten/periodes', PeriodController::class)->name('', 'docenten_periodes');
+// ->middleware(['auth', 'verified'])->name('docenten_periodes');
 
 //Routes voor de games
 Route::get("/ageofwords", function () {

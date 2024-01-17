@@ -9,7 +9,7 @@ class periodController extends Controller
 {
     public function index()
     {
-        return view("docenten.periods", ['periods' => Period::all()]);
+        return view("docenten.periodes", ['periods' => Period::all()]);
     }
     public function create()
     {
