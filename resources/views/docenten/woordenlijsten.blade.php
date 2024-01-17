@@ -4,7 +4,7 @@
 <head>
     @vite('resources/css/app.css')
 
-    <title>Woordenlijsten</title>
+    <title>Woordenlijsten - VeryGood</title>
 
     <script></script>
 </head>
@@ -16,6 +16,9 @@
         </div>
         <div class="p-3 text-lg">
             <a href="{{ route('periodes.index') }}">Periodes</a>
+        </div>
+        <div class="p-3 text-lg">
+            <a href="{{ route('docenten') }}">Home</a>
         </div>
         <div class="p-3 text-lg">
             <a href="{{ route('studenten.index') }}">Studenten</a>

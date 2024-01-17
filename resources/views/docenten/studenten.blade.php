@@ -4,7 +4,7 @@
 <head>
     @vite('resources/css/app.css')
 
-    <title>Studenten</title>
+    <title>Studenten - VeryGood</title>
 
     <script>
         // TODO: Functies voor de knoppen maken en functie voor de gebruiker maken
@@ -18,6 +18,9 @@
         </div>
         <div class="p-3 text-lg">
             <a href="{{ route('periodes.index') }}">Periodes</a>
+        </div>
+        <div class="p-3 text-lg">
+            <a href="{{ route('docenten') }}">Home</a>
         </div>
         <div class="p-3 text-lg">
             <a href="{{ route('studenten.index') }}">Studenten</a>
