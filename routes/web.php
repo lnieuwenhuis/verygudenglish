@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -30,17 +31,17 @@ Route::get("/studenten", function () {
 
 Route::get("/studenten/toetsen", function () {
     return view('studenten.toetsen');
-})->name('studenten_toetsen');
+})->name('studenten.toetsen');
 // ->middleware(['auth', 'verified'])->name('studenten_toetsen');
 
 Route::get("/studenten/resultaten", function () {
     return view('studenten.resultaten');
-})->name('studenten_resultaten');
+})->name('studenten.resultaten');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
 Route::get("/studenten/periods", function () {
     return view('studenten.periodes');
-})->name('studenten_periodes');
+})->name('studenten.periodes');
 // ->middleware(['auth', 'verified'])->name('studenten_periodes');
 
 
@@ -50,14 +51,17 @@ Route::get("/docenten", function () {
 })->name('docenten');
 // ->middleware(['auth', 'verified'])->name('docenten');
 
-Route::resource('docenten/studenten', UserController::class)->name('', 'docenten_studenten');
-// ->middleware(['auth', 'verified'])
+Route::resource('/docenten/studenten', UserController::class);
+// ->middleware(['auth', 'verified']);
 
-Route::get('/docenten/woordenlijsten', [wordListController::class, 'index']);
-// ->middleware(['auth', 'verified'])->name('docenten_woordelijsten');
+Route::resource('/docenten/woordenlijsten', wordListController::class);
+// ->middleware(['auth', 'verified']);
 
-Route::resource('docenten/periodes', PeriodController::class)->name('', 'docenten_periodes');
-// ->middleware(['auth', 'verified'])->name('docenten_periodes');
+Route::resource('/docenten/periodes', PeriodController::class);
+// ->middleware(['auth', 'verified']);
+
+Route::resource('/docenten/toetsen', TestController::class);
+// ->middleware(['auth', 'verified']);
 
 //Routes voor de games
 Route::get("/ageofwords", function () {

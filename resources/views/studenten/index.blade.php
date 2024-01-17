@@ -22,13 +22,13 @@
 
         <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
             <div class="p-3 text-lg">
-                <a href="{{ route('studenten_toetsen') }}">Toetsen</a>
+                <a href="{{ route('studenten.toetsen') }}">Toetsen</a>
             </div>
             <div class="ml-auto mr-auto p-3 text-lg">
-                <a href="{{ route('studenten_resultaten') }}">Resultaten</a>
+                <a href="{{ route('studenten.resultaten') }}">Resultaten</a>
             </div>
             <div class="p-3 text-lg">
-                <a href="{{ route('studenten_periodes') }}">Periodes</a>
+                <a href="{{ route('studenten.periodes') }}">Periodes</a>
             </div>
         </div>
 
