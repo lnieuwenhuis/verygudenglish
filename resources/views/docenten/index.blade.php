@@ -12,10 +12,10 @@
     </script>
 </head>
 
-<x-app-layout>
+<div class="flex flex-row min-h-screen bg-gray-100 text-gray-800 w-full">
 
-    <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-500 text-gray-800">
-        akjdfhkas
-    </div>
+    <x-app-layout class="w-full">
+    </x-app-layout>
+    {{-- NIET IN DE X-APP-LAYOUT MAAR HIER ONDER, ANDERS BREEKT DE NAVIGATIE --}}
 
-</x-app-layout>
+</div>
