@@ -10,7 +10,7 @@
     <script></script>
 </head>
 
-<x-app-layout>
+<x-guest-layout>
 
     <div>
         <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
@@ -33,4 +33,4 @@
         </div>
 
     </div>
-</x-app-layout>
+</x-guest-layout>
