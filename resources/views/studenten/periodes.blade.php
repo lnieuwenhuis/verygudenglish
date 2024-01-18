@@ -9,7 +9,7 @@
     <script></script>
 </head>
 
-<x-app-layout>
+<x-guest-layout>
 
     <div>
 
@@ -53,4 +53,4 @@
         </div>
 
     </div>
-</x-app-layout>
+</x-guest-layout>
