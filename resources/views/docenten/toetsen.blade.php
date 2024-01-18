@@ -29,8 +29,9 @@
     </div>
 
     <!-- TODO: Woordenlijsten importeren uit database en neerzetten in een lijst -->
-
-    @foreach ($tests as $test)
-        <div class="text-white">{{ $test['title'] }}</div>
-    @endforeach
+    <div class="grid grid-cols-4 gap-3 w-3/4 ml-auto mr-auto">
+        @foreach ($tests as $test)
+            <div class="text-white text-center bg-gray-600 rounded-md w-52 ml-auto mr-auto">{{ $test['title'] }}</div>
+        @endforeach
+    </div>
 </x-app-layout>
