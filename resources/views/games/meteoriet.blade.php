@@ -225,6 +225,16 @@
                         name.value = "";
                     }
                 });
+                
+                document.addEventListener('visibilitychange',  () => {
+                    if (document.hidden && !this.isGameOver) {
+
+                        // The tab is hidden, pause your game or take necessary actions
+                        this.isGameOver = true;
+
+
+                    }
+                });
 
             };
 
