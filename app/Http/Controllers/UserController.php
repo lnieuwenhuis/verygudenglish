@@ -16,6 +16,7 @@ class userController extends Controller
     {
         return view('docenten.studenten', ['studenten' => User::all()]);
     }
+
     public function create()
     {
         return view('docenten.studenten.create');
