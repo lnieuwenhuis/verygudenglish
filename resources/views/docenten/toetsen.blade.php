@@ -10,8 +10,8 @@
 </head>
 
 <x-app-layout>
-    <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row justify-evenly">
-        <div class="p-3 text-lg">
+    <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row justify-evenly text-white">
+        <div class="p-2 text-lg bg-gray-600 rounded-lg m-1">
             <a href="{{ route('toetsen.index') }}">Toetsen</a>
         </div>
         <div class="p-3 text-lg">
