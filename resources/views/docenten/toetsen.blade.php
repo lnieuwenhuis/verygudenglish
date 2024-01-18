@@ -10,7 +10,7 @@
 </head>
 
 <x-app-layout>
-    <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row justify-evenly">
+    <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row justify-evenly">
         <div class="p-3 text-lg">
             <a href="{{ route('toetsen.index') }}">Toetsen</a>
         </div>
@@ -31,7 +31,15 @@
     <!-- TODO: Woordenlijsten importeren uit database en neerzetten in een lijst -->
     <div class="grid grid-cols-4 gap-3 w-3/4 ml-auto mr-auto">
         @foreach ($tests as $test)
-            <div class="text-white text-center bg-gray-600 rounded-md w-52 ml-auto mr-auto">{{ $test['title'] }}</div>
+            <div class="flex flex-col bg-gray-600 rounded-md w-52 ml-auto mr-auto h-20">
+                <div class="text-white text-center py-3">{{ $test['title'] }}
+                </div>
+                <div class="flex flex-row">
+                    <button class="text-white text-center bg-gray-500 rounded-md w-1/2 mx-2">Edit</button>
+                    <button class="text-white text-center bg-gray-500 rounded-md w-1/2 mx-2">Delete</button>
+                </div>
+
+            </div>
         @endforeach
     </div>
 </x-app-layout>
