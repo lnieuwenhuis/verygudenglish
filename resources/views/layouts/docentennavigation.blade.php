@@ -11,7 +11,7 @@
         <div class="sidebar-content px-4 py-6">
             <ul class="flex flex-col w-full">
                 <li class="my-px">
-                    <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Menu</span>
+                    <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Welkom [Docent]</span>
                 </li>
                 <li class="my-px">
                     <a href="#"
