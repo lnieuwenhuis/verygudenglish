@@ -171,6 +171,12 @@
         };
     }
 
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
     function isObjEmpty(obj) { // check of object leeg is
         return Object.keys(obj).length === 0;
     }
@@ -187,8 +193,9 @@
             this.units = this.scene.unitTroopGroup
             if (!this.isEnemy) {
                 this.movementSpeed = 40
+                this.health += 20;
             } else {
-                this.movementSpeed = -400
+                this.movementSpeed = -40
                 this.flipX = true;
             }
             this.playerNewAnimation = true;
@@ -212,8 +219,6 @@
 
             scene.add.existing(this);
 
-            this.isCollidingTroop = false;
-            this.isCollidingEnemy = false;
             this.isCollidingUnit = false;
 
             this.setupColliders();
@@ -231,6 +236,15 @@
             if (this.isDead()) {
                 this.handleDeadTroop(this);
             }
+
+            if (this.attacking && !this.isDead()) {
+                console.log(this.health)
+                console.log(this.isCollidingUnit)
+                if (this.playerNewAnimation) {
+                    this.playerNewAnimation = false;
+                    this.play(this.troopType + 'AttackAnimation');
+                }
+            }
         }
 
         setupColliders() {
@@ -239,11 +253,24 @@
 
         handleUnitCollision(me, other) {
             if (!me.isDead() && !me.isCollidingUnit && !other.isDead()) {
-                me.play(me.troopType + 'IdleAnimation');
+                console.log("test")
                 me.setPushable(false);
                 me.setVelocityX(0);
                 me.isCollidingUnit = true;
-                me.attacking = true;
+
+                if ((me.isEnemy && other.isEnemy) || ((!me.isEnemy  && !other.isEnemy))) {
+                    me.attacking = false;
+                } else {
+                    me.attacking = true;
+                    me.playerNewAnimation = true;
+                    me.once('animationcomplete', () => {
+                        other.health -= getRandomInt(10,20);
+                        me.playerNewAnimation = true;
+                        me.isCollidingUnit = false;
+                        me.attacking = false;
+                    });
+                }
+                me.play(me.troopType + 'IdleAnimation');
             }
         }
 
@@ -251,6 +278,7 @@
         handleDeadTroop(player) {
             console.log("dead")
             if (!player.deathAnimation) {
+                player.attacking = false;
                 player.deathAnimation = true;
                 player.play(player.deathAnimationKey);
                 player.once('animationcomplete', () => {
@@ -365,7 +393,7 @@
             {key: 'meleeTroop', frameRate: 43, frameNumbers: {start: 0, end: 42, first: 0}, repeat: -1},
             {key: 'meleeTroopIdle', frameRate: 43, frameNumbers: {start: 0, end: 50, first: 0}, repeat: -1},
             {key: 'meleeTroopDeath', frameRate: 43, frameNumbers: {start: 0, end: 23, first: 0}, repeat: 0},
-            {key: 'meleeTroopAttack', frameRate: 43, frameNumbers: {start: 0, end: 40, first: 0}, repeat: -1},
+            {key: 'meleeTroopAttack', frameRate: 43, frameNumbers: {start: 0, end: 40, first: 0}, repeat: 0},
 
             {key: 'rangedTroop', frameRate: 43, frameNumbers: {start: 0, end: 43, first: 0}, repeat: -1},
             {key: 'rangedTroopDeath', frameRate: 43, frameNumbers: {start: 0, end: 23, first: 0}, repeat: 0},
@@ -420,7 +448,7 @@
 
         this.add.image(1000, 50, "coins")
 
-        this.money = this.add.text(1020, 45, "1000", {
+        this.money = this.add.text(1020, 45, gameConfig.coins.player, {
             color: "#ffea00",
             fontSize: '20px',
             fontStyle: "bold",
@@ -480,7 +508,7 @@
             if (gameConfig.coins.player >= 25) {
 
                 if (gameConfig.troopsInQueue.player < 5) {
-                    gameConfig.coins.player -= 25;
+                    gameConfig.coins.player -= 50;
                     gameConfig.troopsInQueue.player += 1;
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
@@ -501,7 +529,7 @@
             if (gameConfig.coins.player >= 25) {
 
                 if (gameConfig.troopsInQueue.player < 5) {
-                    gameConfig.coins.player -= 25;
+                    gameConfig.coins.player -= 100;
                     gameConfig.troopsInQueue.player += 1;
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
@@ -582,6 +610,8 @@
                 troop.update();
             }
         });
+
+        this.money.setText(gameConfig.coins.player);
 
         for (let i = 0; i < rectangles.length; i++) {
             rectangles[i].setStrokeStyle(1, 0x000000);
