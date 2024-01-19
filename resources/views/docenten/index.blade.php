@@ -17,5 +17,6 @@
     <x-app-layout class="w-full">
     </x-app-layout>
     {{-- NIET IN DE X-APP-LAYOUT MAAR HIER ONDER, ANDERS BREEKT DE NAVIGATIE --}}
-
+    <div class="text-2xl p-4">Welkom bij het docenten paneel
+    </div>
 </div>

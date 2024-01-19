@@ -10,8 +10,8 @@
 
 </head>
 
-<x-app-layout>
-    <div class="bg-gray-900 h-screen">
+<x-guest-layout>
+    <div class="bg-gray-800 h-screen">
         <div class="w-3/4 ml-auto mr-auto bg-gray-500 h-full">
             <div class="text-center text-2xl font-semibold pt-5 dark:text-gray-800">Leer hier eenvoudig jouw Engelse
                 Woordenschat!
@@ -19,6 +19,6 @@
         </div>
     </div>
 
-</x-app-layout>
+</x-guest-layout>
 
 </html>
