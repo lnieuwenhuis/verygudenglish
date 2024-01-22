@@ -63,7 +63,7 @@ class userController extends Controller
         $user = new User;
         $user = User::findOrFail($id);
 
-        $user->delete();
+        $user->$user->delete();
 
         return redirect()->back()->with('message', 'User Deleted');
     }

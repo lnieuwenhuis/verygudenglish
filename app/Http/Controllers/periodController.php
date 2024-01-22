@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Period;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class periodController extends Controller
 {
     public function index()
     {
-        return view("docenten.periodes", ['periods' => Period::all()]);
+        return view("docenten.periodes", ['periods' => Period::all(), 'toetsen' => Test::all()]);
     }
     public function create()
     {

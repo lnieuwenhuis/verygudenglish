@@ -19,7 +19,6 @@ class TestController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request);
         $request->validate([
             'title' => 'required',
             'period_id' => 'required',
