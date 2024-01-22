@@ -10,36 +10,33 @@
 </head>
 
 <x-app-layout>
-    <div class="bg-gray-500 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row justify-evenly text-white">
-        <div class="p-2 text-lg bg-gray-600 rounded-lg m-1">
-            <a href="{{ route('toetsen.index') }}">Toetsen</a>
-        </div>
-        <div class="p-3 text-lg">
-            <a href="{{ route('periodes.index') }}">Periodes</a>
-        </div>
-        <div class="p-3 text-lg">
-            <a href="{{ route('docenten') }}">Home</a>
-        </div>
-        <div class="p-3 text-lg">
-            <a href="{{ route('studenten.index') }}">Studenten</a>
-        </div>
-        <div class="p-3 text-lg">
-            <a href="{{ route('woordenlijsten.index') }}">Woordenlijsten</a>
-        </div>
+    <div class="flex flex-row">
+        <h1 class="text-2xl font-extrabold p-5">Toetsen</h1>
+        <a href="{{ route('toetsen.create') }}" class="p-5 px-0 -ml-2"><svg xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </a>
     </div>
+    <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
+        <div class="flex flex-row border-b-gray-400 border-b-2">
+            <div class="">Naam</div>
+            <div class="ml-auto">Periode</div>
+            <div class="ml-auto">Actions</div>
+        </div>
 
-    <!-- TODO: Woordenlijsten importeren uit database en neerzetten in een lijst -->
-    <div class="grid grid-cols-4 gap-3 w-3/4 ml-auto mr-auto">
-        @foreach ($tests as $test)
-            <div class="flex flex-col bg-gray-600 rounded-md w-52 ml-auto mr-auto h-20">
-                <div class="text-white text-center py-3">{{ $test['title'] }}
+        <div class="grid grid-cols-3 gap-x-44">
+            @foreach ($toetsen as $toets)
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $toets['title'] }}</div>
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $toets['period_id'] }}
                 </div>
-                <div class="flex flex-row">
-                    <button class="text-white text-center bg-gray-500 rounded-md w-1/2 mx-2">Edit</button>
-                    <button class="text-white text-center bg-gray-500 rounded-md w-1/2 mx-2">Delete</button>
-                </div>
-
-            </div>
-        @endforeach
+                <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST" class=" ml-auto">
+                    @csrf
+                    @method('delete')
+                    <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                </form>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>

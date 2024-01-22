@@ -58,7 +58,7 @@ class userController extends Controller
 
         $user->save();
     }
-    public function delete(Request $id)
+    public function destroy($id)
     {
         $user = new User;
         $user = User::findOrFail($id);

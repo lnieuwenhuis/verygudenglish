@@ -24,7 +24,11 @@
                 <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $student['name'] }}</div>
                 <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $student['type'] }}
                 </div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto">Delete</div>
+                <form action="{{ route('studenten.destroy', $student->id) }}" method="POST" class=" ml-auto">
+                    @csrf
+                    @method('delete')
+                    <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                </form>
             @endforeach
         </div>
     </div>
