@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Period;
 use App\Models\Test;
+use App\Models\WordList;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -11,8 +13,13 @@ class TestController extends Controller
     {
         return view('docenten.toetsen', ['toetsen' => Test::all()]);
     }
+    public function create()
+    {
+        return view('docenten.create.toets', ['woordenlijsten' => WordList::all(), 'periodes' => Period::all()]);
+    }
     public function store(Request $request)
     {
+        dd($request);
         $request->validate([
             'title' => 'required',
             'period_id' => 'required',
