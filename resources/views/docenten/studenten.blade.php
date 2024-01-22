@@ -13,7 +13,7 @@
 
 <x-app-layout>
     <h1 class="text-2xl font-extrabold p-5">Studenten</h1>
-    <div class="flex flex-col pl-5">
+    <div class="flex flex-col pl-5 min-w-60 ">
         <div class="flex flex-row border-b-gray-400 border-b-2">
             <div class="">Naam</div>
             <div class="ml-auto">Type</div>
