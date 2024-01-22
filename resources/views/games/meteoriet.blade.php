@@ -9,6 +9,7 @@
 
 <script>
 
+
     let translationObject = {
         "network administrator": "netwerkbeheerder",
         "ICT administrator / IT administrator": "ict-beheerder",
@@ -153,6 +154,7 @@
 
         class Example extends Phaser.Scene {
 
+
             preload() {
 
                 this.load.html("htmlForm", "/storage/html/ageofwords/form.html");
@@ -163,7 +165,7 @@
                     frameWidth: 75,
                     frameHeight: 76
                 });
-                this.load.image('green', 'assets/particles/green.png');
+                //this.load.image('green', 'assets/particles/green.png');
             }
 
 
@@ -174,7 +176,6 @@
                     this.hearts = this.add.image(1350, 50, 'hearts');
                     this.hearts.setScale(3);
                     this.nameInput = this.add.dom(755, 700).createFromCache("htmlForm");
-                    console.log(this.nameInput);
                     this.maxMeteorsToShow = 1;
                     this.idx = 0;
                     this.health = 3;
@@ -202,8 +203,14 @@
                     fontSize: '200px',
                     fontStyle: "bold",
                 })
+                this.tryAgain = this.add.text(150, 450, "Click anywhere on the screen to try again", {
+                    color: "#ffffff",
+                    fontSize: '50px',
+                    fontStyle: "bold",
+                })
 
                 this.gameOverText.alpha = 0;
+                this.tryAgain.alpha = 0;
 
                 this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
@@ -225,7 +232,7 @@
                         name.value = "";
                     }
                 });
-                
+
                 document.addEventListener('visibilitychange',  () => {
                     if (document.hidden && !this.isGameOver) {
 
@@ -239,11 +246,7 @@
             };
 
             update() {
-
-
-
                 if(!this.isGameOver) {
-                    console.log(this.isGameOver)
                     //Meteoor opniew inspawnen als hij kapot is
                     if (this.idx < this.maxMeteorsToShow) {
                         const x = Phaser.Math.Between(1500, config.width - 1500);
@@ -286,7 +289,9 @@
 
                 } else {
                     this.gameOverText.alpha = 100;
+                    this.tryAgain.alpha = 100;
                     this.meteoor.destroy();
+                    this.input.on('pointerdown', () => this.scene.restart())
                 }
             }
 
@@ -314,6 +319,8 @@
             mode: Phaser.Scale.FIT,
         },
     };
+
+
 
     const game = new Phaser.Game(config);
 </script>
