@@ -41,37 +41,41 @@ if (isset($_GET['periodList'])) {
             <div class="ml-auto mt-4">Actions</div>
         </div>
 
-        <div class="grid grid-cols-4 gap-x-44">
+        <div class="grid grid-cols-3 gap-x-44">
             @foreach ($toetsen as $toets)
                 @if ($periodValue === 0)
                     <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $toets['title'] }}</div>
                     <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
                         Periode {{ $toets['period_id'] }}
                     </div>
-                    <form action="{{ route('toetsen.edit', $toets->id) }}" method="POST" class=" ml-auto">
-                        @csrf
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
-                    </form>
-                    <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST" class=" ml-auto">
-                        @csrf
-                        @method('delete')
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
-                    </form>
+                    <div class="flex flex-row">
+                        <form action="{{ route('toetsen.edit', $toets->id) }}" method="POST" class="ml-auto">
+                            @csrf
+                            <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
+                        </form>
+                        <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                        </form>
+                    </div>
                 @endif
                 @if ($toets['period_id'] === $periodValue)
                     <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $toets['title'] }}</div>
                     <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
                         Periode {{ $toets['period_id'] }}
                     </div>
-                    <form action="{{ route('toetsen.edit', $toets->id) }}" method="POST" class=" ml-auto">
-                        @csrf
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
-                    </form>
-                    <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST" class=" ml-auto">
-                        @csrf
-                        @method('delete')
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
-                    </form>
+                    <div class="flex flex-row">
+                        <form action="{{ route('toetsen.edit', $toets->id) }}" method="POST" class="ml-auto">
+                            @csrf
+                            <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
+                        </form>
+                        <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                        </form>
+                    </div>
                 @endif
             @endforeach
 
