@@ -13,17 +13,19 @@
 
 <x-app-layout>
     <h1 class="text-2xl font-extrabold p-5">Studenten</h1>
-    <div class="flex flex-col pl-5 min-w-60 ">
+    <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
         <div class="flex flex-row border-b-gray-400 border-b-2">
             <div class="">Naam</div>
             <div class="ml-auto">Type</div>
+            <div class="ml-auto">Actions</div>
         </div>
-
-        @foreach ($studenten as $student)
-            <div class="flex flex-row">
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg">{{ $student['name'] }}</div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg ml-auto">{{ $student['type'] }}</div>
-            </div>
-        @endforeach
+        <div class="grid grid-cols-3 gap-x-44">
+            @foreach ($studenten as $student)
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $student['name'] }}</div>
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $student['type'] }}
+                </div>
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto">Delete</div>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>
