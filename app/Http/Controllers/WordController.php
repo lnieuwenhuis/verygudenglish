@@ -9,11 +9,11 @@ class wordController extends Controller
 {
     public function index()
     {
-        return view('docenten.wordlists.words', ['words' => Word::all()]);
+        return view('docenten.woorden', ['words' => Word::all()]);
     }
     public function create()
     {
-        return view('docenten.words.create');
+        return view('docenten.create.woorden');
     }
     public function store(Request $request)
     {
@@ -33,7 +33,7 @@ class wordController extends Controller
     }
     public function edit(Request $id)
     {
-        return view('docenten.words.edit', ['word' => Word::findOrFail($id)]);
+        return view('docenten.edit.woorden', ['word' => Word::findOrFail($id)]);
     }
     public function update(Request $request, $id)
     {

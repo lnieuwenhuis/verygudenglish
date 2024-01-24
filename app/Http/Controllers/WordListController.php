@@ -13,13 +13,13 @@ class wordListController extends Controller
     }
     public function create()
     {
-        return view('docenten.wordlists.create');
+        return view('docenten.create.woordenlijsten');
     }
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|max:100',
-            'period' => 'required|max:1',
+            'test' => 'required',
             'words' => 'required',
         ]);
 
@@ -34,7 +34,7 @@ class wordListController extends Controller
     }
     public function edit(Request $id)
     {
-        return view('docenten.wordlists.edit', ['wordlist' => WordList::findOrFail($id)]);
+        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail($id)]);
     }
     public function update(Request $request, $id)
     {

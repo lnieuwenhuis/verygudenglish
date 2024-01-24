@@ -4,6 +4,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\wordController;
 use App\Http\Controllers\wordListController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +62,9 @@ Route::resource('/docenten/periodes', PeriodController::class);
 // ->middleware(['auth', 'verified']);
 
 Route::resource('/docenten/toetsen', TestController::class);
+// ->middleware(['auth', 'verified']);
+
+Route::resource('/docenten/woorden', wordController::class);
 // ->middleware(['auth', 'verified']);
 
 //Routes voor de games
