@@ -21,18 +21,22 @@ class TestController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'period_id' => 'required',
-            'wordlist' => 'required',
+            'periode' => 'required',
+            'woordenlijst' => 'required',
         ]);
+
+        $period_id = (int)$request->get('period_id');
+        $wordlist = (int)$request->get('wordlist');
+
 
         $test = new Test;
         $test->title = $request->get('title');
-        $test->period_id = $request->get('period_id');
-        $test->wordlist = $request->get('wordlist');
+        $test->period_id = $period_id;
+        $test->wordlist_id = $wordlist;
 
         $test->save();
 
-        return redirect()->back()->with('message', 'Test Stored');
+        return redirect()->route('toetsen.index')->with('message', 'Test Stored');
     }
     public function edit($id)
     {

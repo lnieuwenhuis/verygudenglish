@@ -18,12 +18,12 @@
             <input type="text" name="title" id="title">
             <select name="periode" id="periode">
                 @foreach ($periodes as $periode)
-                    <option value=`{{ $periode['id'] }}`>{{ $periode['title'] }}</option>
+                    <option value='{{ $periode['id'] }}'>{{ $periode['title'] }}</option>
                 @endforeach
             </select>
             <select name="woordenlijst" id="woordenlijst">
                 @foreach ($woordenlijsten as $woordenlijst)
-                    <option value=`{{ $woordenlijst['id'] }}`>{{ $woordenlijst['title'] }}</option>
+                    <option value='{{ $woordenlijst['id'] }}'>{{ $woordenlijst['title'] }}</option>
                 @endforeach
             </select>
             <button type="submit">Submit</button>

@@ -21,6 +21,12 @@ if (isset($_GET['periodList'])) {
 <x-app-layout>
     <div class="flex flex-row">
         <h1 class="text-2xl font-extrabold p-5">Periodes</h1>
+        <a href="{{ route('periodes.create') }}" class="p-5 px-0 -ml-2"><svg xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </a>
     </div>
     <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
         <div class="flex flex-row border-b-gray-400 border-b-2">

@@ -14,19 +14,24 @@ class periodController extends Controller
     }
     public function create()
     {
-        return view('docenten.periods.create');
+        return view('docenten.create.periode');
     }
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
-            'period' => 'required|max:1',
+            'periode' => 'required',
+            'is_locked' => 'required'
         ]);
 
+        $islocked = (int) $request->get('is_locked');
+
         $period = new Period;
-        $period->title = $request->get('period');
+        $period->title = $request->get('periode');
+        $period->is_locked = $islocked;
+
         $period->save();
 
-        return redirect()->back()->with('message', 'Period Stored in DB');
+        return redirect()->route('periodes.index')->with('message', 'Period Stored in DB');
     }
     public function edit($id)
     {
