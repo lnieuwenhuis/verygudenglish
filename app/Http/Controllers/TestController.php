@@ -25,8 +25,8 @@ class TestController extends Controller
             'woordenlijst' => 'required',
         ]);
 
-        $period_id = (int)$request->get('period_id');
-        $wordlist = (int)$request->get('wordlist');
+        $period_id = (int)$request->get('periode');
+        $wordlist = (int)$request->get('woordenlijst');
 
 
         $test = new Test;
