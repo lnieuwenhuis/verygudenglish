@@ -183,6 +183,7 @@
                     this.forcedUpdateMoment = 0;
                     this.isRunningUpdateFirstTime = true;
                     this.isGameOver = false;
+                    this.pointer = false;
                     this.exploding = false;
                     // const particles = this.add.particles(0, 0, 'green', {
                     //     speed: 500,
@@ -288,10 +289,14 @@
                     }
 
                 } else {
-                    this.gameOverText.alpha = 100;
-                    this.tryAgain.alpha = 100;
-                    this.meteoor.destroy();
-                    this.input.on('pointerdown', () => this.scene.restart())
+
+                    if (!this.pointer){
+                        this.input.on('pointerdown', () => this.scene.restart())
+                        this.gameOverText.alpha = 100;
+                        this.tryAgain.alpha = 100;
+                        this.meteoor.destroy();
+                        this.pointer = true;
+                    }
                 }
             }
 
