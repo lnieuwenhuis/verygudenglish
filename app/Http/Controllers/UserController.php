@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Period;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +16,11 @@ class userController extends Controller
     public function index()
     {
         return view('docenten.studenten', ['studenten' => User::all()]);
+    }
+
+    public function studentPeriodes()
+    {
+        return view('studenten.periodes', ['periodes' => Period::all()]);
     }
 
     public function create()
