@@ -31,7 +31,7 @@ if (isset($_GET['periodList'])) {
     <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
         <div class="flex flex-row border-b-gray-400 border-b-2">
             <div class="mt-4">Toets</div>
-            <div class="ml-auto">
+            <div class="ml-auto flex flex-row justify-between">
                 <form action="" name="periodes" method="GET">
                     @csrf
                     <select project="periodList" name="periodList" id="periodList"
@@ -42,6 +42,11 @@ if (isset($_GET['periodList'])) {
                     </select>
                     <input type="submit" name="submit" id="submit" value="Submit"
                         class="bg-gray-300 rounded-lg p-1 border-gray-500 border-2 -ml-2">
+                </form>
+                <form action="{{ route('periodes.index') }}" name="periodes" method="GET" class="m-0.5">
+                    @csrf
+                    <input type="submit" name="reset" id="reset" value="Reset"
+                        class="bg-gray-300 rounded-lg p-1 border-gray-500 border-2">
                 </form>
             </div>
             <div class="ml-auto mt-4">Actions</div>
