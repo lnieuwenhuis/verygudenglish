@@ -32,9 +32,9 @@ class wordListController extends Controller
 
         return redirect()->back()->with('message', 'Wordlist Stored in DB');
     }
-    public function edit(Request $id)
+    public function edit($id)
     {
-        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail($id)]);
+        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail((int)$id)]);
     }
     public function update(Request $request, $id)
     {

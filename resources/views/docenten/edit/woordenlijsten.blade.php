@@ -10,8 +10,8 @@
 </head>
 
 <x-app-layout>
-    <h1 class="text-2xl font-extrabold p-5">Woordenlijst Bewerken</h1>
-    <form action="{{ route('woordenlijsten.update') }}" method="POST">
+    <h1 class="text-2xl font-extrabold p-5">Woordenlijst{{ $wordlist->id }} Bewerken</h1>
+    {{-- <form action="{{ route('woordenlijsten.update') }}" method="POST">
         @csrf
         <div class="px-5 flex flex-col">
 
@@ -20,6 +20,6 @@
             <button type="submit">Submit</button>
         </div>
 
-    </form>
+    </form> --}}
 
 </x-app-layout>
