@@ -379,7 +379,7 @@
     function preloadScene() { // images & html laden
         this.load.html("htmlForm", "storage/html/ageofwords/form.html");
         this.load.image('background', 'storage/images/ageofwords/shapes/background/background3.png');
-        this.load.image('building', 'storage/images/ageofwords/shapes/building/castle.png');
+        this.load.image('cave', 'storage/images/ageofwords/shapes/building/cave.png');
         this.load.image('coins', 'storage/images/ageofwords/shapes/money/coins.png');
         this.load.image('meleeTroopBuy', 'storage/images/ageofwords/buttons/meleeTroop.png');
         this.load.image('rangedTroopBuy', 'storage/images/ageofwords/buttons/rangedTroop.png');
@@ -431,6 +431,10 @@
 
             });
         }
+
+        this.playerCave = this.add.image(50, 270, 'cave').setScale(0.4);
+
+        this.enemyCave = this.add.image(1450, 270, 'cave').setScale(0.4).setFlipX(true);
 
         this.unitTroopGroup = this.physics.add.group({
             defaultKey: 'unitTroop',
@@ -512,7 +516,7 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 0, 300, 'meleeTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 110, 320, 'meleeTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 20;
                         this.unitTroopGroup.add(troop);
@@ -536,7 +540,7 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 0, 300, 'rangedTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 110, 320, 'rangedTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 15;
                         this.unitTroopGroup.add(troop);
@@ -560,7 +564,7 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 0, 300, 'tankTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 110, 320, 'tankTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 30;
                         this.unitTroopGroup.add(troop);
@@ -585,7 +589,7 @@
                     const delay = gameConfig.troopsInQueue.enemy * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 1500, 300, 'meleeTroop', true);
+                        const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
 
                         troop.deathAnimation = false;
                         troop.attackDamage = 20;
