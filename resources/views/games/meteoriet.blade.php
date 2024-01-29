@@ -243,6 +243,7 @@
 
                 this.question.setText(randomPair.questionToAnswer);
                 this.question.depth = 1
+                this.question.alpha = 100;
 
 
                 this.spelling = this.add.text(670, 510, "Let op je spelling!!!", {
@@ -300,10 +301,13 @@
                             this.question.setText(randomPair.questionToAnswer);
                             this.exploding = true;
                             this.meteoor.play('explode');
+                            this.question.alpha = 0;
+
                             this.meteoor.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
                                 this.meteoor.destroy();
                                 this.idx--;
                                 this.exploding = false;
+                                this.question.alpha = 100;
                             }, this);
                         }
                         name.value = "";
@@ -347,12 +351,14 @@
                     if (!this.exploding) {
                         if (this.meteoor.y >= 650) {
                             this.exploding = true;
+                            this.question.alpha = 0;
                             this.meteoor.play('explode');
                             this.meteoor.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
                                 this.meteoor.destroy();
                                 this.idx--;
                                 this.health--;
                                 this.exploding = false;
+                                this.question.alpha = 100;
                                 randomPair = getRandomKeyValuePair();
                                 this.question.setText(randomPair.questionToAnswer);
                             }, this);
@@ -380,6 +386,7 @@
                         this.tryAgain.alpha = 100;
                         this.meteoor.destroy();
                         this.pointer = true;
+                        this.question.alpha = 0;
                     }
                 }
                 const progress = this.timedEvent.getProgress();
@@ -412,7 +419,7 @@
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 25 }
+                gravity: { y: 15 }
             }
         },
         dom: {

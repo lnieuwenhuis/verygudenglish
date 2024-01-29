@@ -18,22 +18,24 @@ class wordController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'word' => 'required',
-            'wordlist' => 'required'
+            'words' => 'required',
+            'answers' => 'required',
+            'list_id' => 'required'
         ]);
 
         $word = new Word;
-        $word->word = $request->get('word');
-        $word->wordlist = $request->get('wordlist');
+        $word->words = $request->get('words');
+        $word->answers = $request->get('answers');
+        $word->list_id = (int)$request->get('list_id');
         $word->save();
-
-        $word->wordlist()->attach($request->get('wordlist'));
 
         return redirect()->back()->with('message', 'Words Stored in Word List');
     }
     public function edit(Request $id)
     {
-        return view('docenten.edit.woorden', ['word' => Word::findOrFail($id)]);
+        dd($id);
+        return view('docenten.edit.woorden', ['words' => Word::where('list_id', $id)->findOrFail()]);
+
     }
     public function update(Request $request, $id)
     {

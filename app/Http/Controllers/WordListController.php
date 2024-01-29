@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Word;
 use App\Models\WordList;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class wordListController extends Controller
     }
     public function edit($id)
     {
-        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail((int)$id)]);
+        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail((int)$id)], ['words' => Word::where('list_id', $id)->get()]);
     }
     public function update(Request $request, $id)
     {
