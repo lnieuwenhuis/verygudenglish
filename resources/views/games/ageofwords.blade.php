@@ -20,145 +20,149 @@
         const reg = /[&<>"'/]/ig;
         return string.replace(reg, (match) => (map[match]));
     }
-
     let translationObject = {
-        "network administrator": "netwerkbeheerder",
-        "ICT administrator / IT administrator": "ict-beheerder",
-        "ICT assistant / IT assistant": "ict-medewerker",
-        "application developer": "applicatieontwikkelaar",
-        "visit a company": "een bedrijf bezoeken",
-        "take a seat": "plaatsnemen",
-        "fill in a form / complete a form": "een formulier invullen",
-        "department": "afdeling",
-        "reception desk": "receptiebalie",
-        "foreign visitor/guest": "buitenlandse gast",
-        "folder": "map",
-        "answer questions": "vragen beantwoorden",
-        "make an appointment": "een afspraak maken",
-        "offer help / offer assistance": "hulp aanbieden",
-        "receive visitors": "bezoekers ontvangen",
-        "show somebody the way / show someone the way": "iemand de weg wijzen",
-        "contact somebody": "contact met iemand opnemen",
-        "recognise": "herkennen",
-        "main entrance": "hoofdingang",
-        "invitation": "uitnodiging",
-        "confirm an appointment": "een afspraak bevestigen",
-        "send a confirmation": "een bevestiging sturen",
-        "cancel a meeting": "een vergadering afzeggen",
-        "disassemble / dismantle": "demonteren",
-        "assemble": "monteren",
-        "implement": "implementeren",
-        "testing environment": "testomgeving",
-        "user": "gebruiker",
-        "parts": "onderdelen",
-        "functional design": "functioneel ontwerp",
-        "careful": "voorzichtig",
-        "certainly / sure": "zeker",
-        "invoice / bill": "rekening",
-        "colleague": "collega",
-        "customer / client": "klant",
-        "lately": "de laatste tijd",
-        "for example": "bijvoorbeeld",
-        "instructions": "instructie",
-        "install": "installeren",
-        "unfortunately": "helaas",
-        "perhaps / maybe": "misschien",
-        "polite": "beleefd",
-        "estimation / estimate": "schatting",
-        "employee": "werknemer",
-        "employer": "werkgever",
-        "meanwhile / in the meantime": "ondertussen",
-        "impression": "indruk",
-        "branch": "vestiging",
-        "cancellation": "annulering",
-        "user friendly": "gebruiksvriendelijk",
-        "template": "sjabloon",
-        "working project based": "projectmatig werken",
-        "have access / get access": "toegang krijgen",
-        "urgent": "dringend",
-        "flow chart": "diagram",
-        "attention": "aandacht",
-        "available": "beschikbaar",
-        "compare to": "vergelijken met",
-        "compete": "concurreren",
-        "competitive": "concurrerend",
-        "considerable": "flink",
-        "attachment": "bijlage",
-        "forward": "doorsturen",
-        "content": "inhoud",
-        "table of contents": "inhoudsopgave",
-        "continue": "doorgaan",
-        "contribute to": "bijdragen aan",
-        "guidelines": "richtlijnen",
-        "decide": "beslissen",
-        "operating system": "besturingssysteem",
-        "exchange": "uitwisselen",
-        "demand": "eisen",
-        "depend on": "afhankelijk zijn van",
-        "device": "apparaat",
-        "distance": "afstand",
-        "additional": "aanvullend",
-        "invalid": "ongeldig",
-        "double": "verdubbelen",
-        "solve a problem": "oplossen van een probleem",
-        "usually": "meestal",
-        "the computer froze": "de computer liep vast",
-        "expand": "uitbreiden",
-        "expansion": "uitbreiding",
-        "familiar with": "bekend met",
-        "figures / numbers": "cijfers",
-        "gradually": "langzamerhand",
-        "issue / matter": "kwestie",
-        "objective / goal": "doel",
-        "prepare": "voorbereiden",
-        "profit": "winst",
-        "recover": "herstellen",
-        "recovery": "herstel",
-        "report": "verslag",
-        "screen": "scherm",
-        "security": "veiligheid",
-        "password": "wachtwoord",
-        "select / choose": "kiezen",
-        "present / current": "huidig",
-        "previous": "vorige",
-        "put through": "doorverbinden",
-        "surname": "achternaam",
-        "peripheral devices / peripherals": "randapparatuur",
-        "step-by-step": "stapsgewijs",
-        "general manager": "algemeen directeur",
-        "department manager": "afdelingshoofd",
-        "impolite": "onbeleefd",
-        "registration form": "registratieformulier",
-        "master the English language": "de Engelse taal beheersen",
-        "Dear Sir or Madam": "Geachte heer of mevrouw",
-        "Yours faithfully/sincerely": "Hoogachtend",
-        "Kind regards": "Met vriendelijke groet",
-        "receiver": "ontvanger",
-        "sender": "afzender",
-        "typing error": "typfout",
-        "rude": "onbeschoft",
-        "VAT": "BTW",
-        "automatic signature": "automatische handtekening",
-        "first impression": "eerste indruk",
-        "appearance": "uiterlijk",
-        "client delivery": "klantoplevering",
-        "client meeting": "klantgesprek",
-        "client request/demand": "klantvraag",
-        "resources": "hulpmiddelen",
-        "error notification": "foutmelding",
-        "clean up": "opschonen",
-        "configure": "configureren",
-        "notification form": "meldingsformulier",
-        "switch on / turn on": "aanzetten",
-        "switch off / turn off": "uitzetten",
-        "battery": "accu",
-        "power outlet": "stopcontact",
-        "ink cartridge": "inktpatroon",
-        "power supply": "voeding",
-        "complaint": "klacht",
-        "complain": "klagen",
-        "outdated": "verouderd"
+       "a": "a",
+       "k": "k",
     };
+
+    // let translationObject = {
+    //     "network administrator": "netwerkbeheerder",
+    //     "ICT administrator / IT administrator": "ict-beheerder",
+    //     "ICT assistant / IT assistant": "ict-medewerker",
+    //     "application developer": "applicatieontwikkelaar",
+    //     "visit a company": "een bedrijf bezoeken",
+    //     "take a seat": "plaatsnemen",
+    //     "fill in a form / complete a form": "een formulier invullen",
+    //     "department": "afdeling",
+    //     "reception desk": "receptiebalie",
+    //     "foreign visitor/guest": "buitenlandse gast",
+    //     "folder": "map",
+    //     "answer questions": "vragen beantwoorden",
+    //     "make an appointment": "een afspraak maken",
+    //     "offer help / offer assistance": "hulp aanbieden",
+    //     "receive visitors": "bezoekers ontvangen",
+    //     "show somebody the way / show someone the way": "iemand de weg wijzen",
+    //     "contact somebody": "contact met iemand opnemen",
+    //     "recognise": "herkennen",
+    //     "main entrance": "hoofdingang",
+    //     "invitation": "uitnodiging",
+    //     "confirm an appointment": "een afspraak bevestigen",
+    //     "send a confirmation": "een bevestiging sturen",
+    //     "cancel a meeting": "een vergadering afzeggen",
+    //     "disassemble / dismantle": "demonteren",
+    //     "assemble": "monteren",
+    //     "implement": "implementeren",
+    //     "testing environment": "testomgeving",
+    //     "user": "gebruiker",
+    //     "parts": "onderdelen",
+    //     "functional design": "functioneel ontwerp",
+    //     "careful": "voorzichtig",
+    //     "certainly / sure": "zeker",
+    //     "invoice / bill": "rekening",
+    //     "colleague": "collega",
+    //     "customer / client": "klant",
+    //     "lately": "de laatste tijd",
+    //     "for example": "bijvoorbeeld",
+    //     "instructions": "instructie",
+    //     "install": "installeren",
+    //     "unfortunately": "helaas",
+    //     "perhaps / maybe": "misschien",
+    //     "polite": "beleefd",
+    //     "estimation / estimate": "schatting",
+    //     "employee": "werknemer",
+    //     "employer": "werkgever",
+    //     "meanwhile / in the meantime": "ondertussen",
+    //     "impression": "indruk",
+    //     "branch": "vestiging",
+    //     "cancellation": "annulering",
+    //     "user friendly": "gebruiksvriendelijk",
+    //     "template": "sjabloon",
+    //     "working project based": "projectmatig werken",
+    //     "have access / get access": "toegang krijgen",
+    //     "urgent": "dringend",
+    //     "flow chart": "diagram",
+    //     "attention": "aandacht",
+    //     "available": "beschikbaar",
+    //     "compare to": "vergelijken met",
+    //     "compete": "concurreren",
+    //     "competitive": "concurrerend",
+    //     "considerable": "flink",
+    //     "attachment": "bijlage",
+    //     "forward": "doorsturen",
+    //     "content": "inhoud",
+    //     "table of contents": "inhoudsopgave",
+    //     "continue": "doorgaan",
+    //     "contribute to": "bijdragen aan",
+    //     "guidelines": "richtlijnen",
+    //     "decide": "beslissen",
+    //     "operating system": "besturingssysteem",
+    //     "exchange": "uitwisselen",
+    //     "demand": "eisen",
+    //     "depend on": "afhankelijk zijn van",
+    //     "device": "apparaat",
+    //     "distance": "afstand",
+    //     "additional": "aanvullend",
+    //     "invalid": "ongeldig",
+    //     "double": "verdubbelen",
+    //     "solve a problem": "oplossen van een probleem",
+    //     "usually": "meestal",
+    //     "the computer froze": "de computer liep vast",
+    //     "expand": "uitbreiden",
+    //     "expansion": "uitbreiding",
+    //     "familiar with": "bekend met",
+    //     "figures / numbers": "cijfers",
+    //     "gradually": "langzamerhand",
+    //     "issue / matter": "kwestie",
+    //     "objective / goal": "doel",
+    //     "prepare": "voorbereiden",
+    //     "profit": "winst",
+    //     "recover": "herstellen",
+    //     "recovery": "herstel",
+    //     "report": "verslag",
+    //     "screen": "scherm",
+    //     "security": "veiligheid",
+    //     "password": "wachtwoord",
+    //     "select / choose": "kiezen",
+    //     "present / current": "huidig",
+    //     "previous": "vorige",
+    //     "put through": "doorverbinden",
+    //     "surname": "achternaam",
+    //     "peripheral devices / peripherals": "randapparatuur",
+    //     "step-by-step": "stapsgewijs",
+    //     "general manager": "algemeen directeur",
+    //     "department manager": "afdelingshoofd",
+    //     "impolite": "onbeleefd",
+    //     "registration form": "registratieformulier",
+    //     "master the English language": "de Engelse taal beheersen",
+    //     "Dear Sir or Madam": "Geachte heer of mevrouw",
+    //     "Yours faithfully/sincerely": "Hoogachtend",
+    //     "Kind regards": "Met vriendelijke groet",
+    //     "receiver": "ontvanger",
+    //     "sender": "afzender",
+    //     "typing error": "typfout",
+    //     "rude": "onbeschoft",
+    //     "VAT": "BTW",
+    //     "automatic signature": "automatische handtekening",
+    //     "first impression": "eerste indruk",
+    //     "appearance": "uiterlijk",
+    //     "client delivery": "klantoplevering",
+    //     "client meeting": "klantgesprek",
+    //     "client request/demand": "klantvraag",
+    //     "resources": "hulpmiddelen",
+    //     "error notification": "foutmelding",
+    //     "clean up": "opschonen",
+    //     "configure": "configureren",
+    //     "notification form": "meldingsformulier",
+    //     "switch on / turn on": "aanzetten",
+    //     "switch off / turn off": "uitzetten",
+    //     "battery": "accu",
+    //     "power outlet": "stopcontact",
+    //     "ink cartridge": "inktpatroon",
+    //     "power supply": "voeding",
+    //     "complaint": "klacht",
+    //     "complain": "klagen",
+    //     "outdated": "verouderd"
+    // };
 
     function getRandomKeyValuePair() { // pak random key & value
         const keysArray = Object.keys(translationObject);
@@ -202,14 +206,12 @@
             this.attacking = false;
             this.isColliding = false;
 
-            this.setScale(0.45);
+            this.setScale(0.35);
             this.troopType = troopType;
             this.deathAnimationKey = troopType + 'DeathAnimation';
             if (this.deathAnimationKey === 'tankTroopDeathAnimation') {
                 this.setScale(0.6);
             }
-
-            this.inZone = false;
 
             scene.physics.add.existing(this);
 
@@ -225,6 +227,13 @@
         }
 
         update() {
+            if (this.attacking && this.troopType === "meleeTroop") {
+                this.setScale(0.45);
+            } else {
+                if (this.troopType === "meleeTroop") {
+                    this.setScale(0.35);
+                }
+            }
             if (!this.isDead() && !this.isCollidingUnit) {
                 this.setVelocityX(this.movementSpeed);
                 if (this.playerNewAnimation) {
@@ -237,9 +246,8 @@
                 this.handleDeadTroop(this);
             }
 
-            if (this.attacking && !this.isDead()) {
+            if (!this.isDead() && this.attacking) {
                 console.log(this.health)
-                console.log(this.isCollidingUnit)
                 if (this.playerNewAnimation) {
                     this.playerNewAnimation = false;
                     this.play(this.troopType + 'AttackAnimation');
@@ -253,7 +261,6 @@
 
         handleUnitCollision(me, other) {
             if (!me.isDead() && !me.isCollidingUnit && !other.isDead()) {
-                console.log("test")
                 me.setPushable(false);
                 me.setVelocityX(0);
                 me.isCollidingUnit = true;
@@ -264,7 +271,8 @@
                     me.attacking = true;
                     me.playerNewAnimation = true;
                     me.once('animationcomplete', () => {
-                        other.health -= getRandomInt(10,20);
+                        console.log(me.attackDamage)
+                        other.health -= getRandomInt(me.attackDamage - 10, me.attackDamage);
                         me.playerNewAnimation = true;
                         me.isCollidingUnit = false;
                         me.attacking = false;
@@ -272,16 +280,19 @@
                 }
                 me.play(me.troopType + 'IdleAnimation');
             }
+
         }
 
 
         handleDeadTroop(player) {
-            console.log("dead")
             if (!player.deathAnimation) {
                 player.attacking = false;
                 player.deathAnimation = true;
                 player.play(player.deathAnimationKey);
                 player.once('animationcomplete', () => {
+                    this.units.getChildren().forEach(child => {
+                        child.isCollidingUnit = false;
+                    })
                     setTimeout(() => {
                         player.destroy();
                     }, 2000);
@@ -373,15 +384,16 @@
         this.load.image('meleeTroopBuy', 'storage/images/ageofwords/buttons/meleeTroop.png');
         this.load.image('rangedTroopBuy', 'storage/images/ageofwords/buttons/rangedTroop.png');
         this.load.image('tankTroopBuy', 'storage/images/ageofwords/buttons/tankTroop.png');
-        this.load.spritesheet('meleeTroop', 'storage/images/ageofwords/sprites/troops/meleeTroop.png', { frameWidth: 103, frameHeight: 135, endFrame: 43 });
-        this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 73, frameHeight: 131, endFrame: 50 });
-        this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', { frameWidth: 168, frameHeight: 162, endFrame: 24 });
+        this.load.spritesheet('meleeTroop', 'storage/images/ageofwords/sprites/troops/meleeTroop.png', { frameWidth: 137, frameHeight: 180, endFrame: 43 });
+        this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 97, frameHeight: 174, endFrame: 50 });
+        this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', { frameWidth: 225, frameHeight: 180, endFrame: 24 });
         this.load.spritesheet('meleeTroopAttack', 'storage/images/ageofwords/sprites/troops/attack/meleeTroop.png', { frameWidth: 170, frameHeight: 175, endFrame: 40 });
         this.load.spritesheet('rangedTroop', 'storage/images/ageofwords/sprites/troops/rangedTroop.png', { frameWidth: 84, frameHeight: 135, endFrame: 43 });
         this.load.spritesheet('rangedTroopDeath', 'storage/images/ageofwords/sprites/troops/death/rangedDeath.png', { frameWidth: 163, frameHeight: 162, endFrame: 24 });
         this.load.spritesheet('tankTroop', 'storage/images/ageofwords/sprites/troops/tankTroop.png', { frameWidth: 180, frameHeight: 133, endFrame: 40 });
         this.load.spritesheet('tankTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/tankTroop.png', { frameWidth: 178, frameHeight: 131, endFrame: 48 });
         this.load.spritesheet('tankTroopDeath', 'storage/images/ageofwords/sprites/troops/death/tankDeath.png', { frameWidth: 280, frameHeight: 148, endFrame: 50 });
+        this.load.spritesheet('tankTroopAttack', 'storage/images/ageofwords/sprites/troops/attack/tankAttack.png', { frameWidth: 218, frameHeight: 134, endFrame: 45 });
     }
 
     function createScene() {
@@ -400,6 +412,7 @@
 
             {key: 'tankTroop', frameRate: 43, frameNumbers: {start: 0, end: 40, first: 0}, repeat: -1},
             {key: 'tankTroopIdle', frameRate: 43, frameNumbers: {start: 0, end: 48, first: 0}, repeat: -1},
+            {key: 'tankTroopAttack', frameRate: 44, frameNumbers: {start: 0, end: 45, first: 0}, repeat: 0},
             {key: 'tankTroopDeath', frameRate: 43, frameNumbers: {start: 0, end: 49, first: 0}, repeat: 0},
         ];
 
@@ -415,6 +428,7 @@
                 frames: this.anims.generateFrameNumbers(key, frameNumbers),
                 frameRate,
                 repeat: repeat
+
             });
         }
 
@@ -468,6 +482,10 @@
             delay: 4000
         });
 
+        this.timedEventProgressBar = new Phaser.Time.TimerEvent({
+            delay: 3000
+        });
+
         const skipButton = this.add.text(975, 410, 'Skip', {
             fontSize: '35px',
             backgroundColor: '#9900ff',
@@ -489,14 +507,17 @@
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 25;
                     gameConfig.troopsInQueue.player += 1;
+                    this.time.addEvent(this.timedEventProgressBar);
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
                         const troop = new PlayerTroopGameObject(this, 0, 300, 'meleeTroop', false);
                         troop.deathAnimation = false;
+                        troop.attackDamage = 20;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
+                        this.progressFill.width = 0;
                     }, delay);
                 }
             }
@@ -510,14 +531,17 @@
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 50;
                     gameConfig.troopsInQueue.player += 1;
+                    this.time.addEvent(this.timedEventProgressBar);
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
                         const troop = new PlayerTroopGameObject(this, 0, 300, 'rangedTroop', false);
                         troop.deathAnimation = false;
+                        troop.attackDamage = 15;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
+                        this.progressFill.width = 0;
                     }, delay);
                 }
             }
@@ -531,14 +555,17 @@
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 100;
                     gameConfig.troopsInQueue.player += 1;
+                    this.time.addEvent(this.timedEventProgressBar);
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
                         const troop = new PlayerTroopGameObject(this, 0, 300, 'tankTroop', false);
                         troop.deathAnimation = false;
+                        troop.attackDamage = 30;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
+                        this.progressFill.width = 0;
                     }, delay);
                 }
             }
@@ -561,7 +588,7 @@
                         const troop = new PlayerTroopGameObject(this, 1500, 300, 'meleeTroop', true);
 
                         troop.deathAnimation = false;
-                        troop.isPlayer = true;
+                        troop.attackDamage = 20;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.enemy -= 1;
                     }, delay);
@@ -575,6 +602,13 @@
             rectangles.push(r);
         }
 
+        this.progress = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
+        this.progressFill = this.add.rectangle(200, 50, 200, 11, 0xF70000);
+
+        this.progressFill.width = 0.1;
+
+        this.progress.isFilled = false;
+        this.progress.setStrokeStyle(1, 0x000000);
 
         this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
@@ -583,8 +617,7 @@
             if (name.value !== "") {
                 this.spelling.alpha = 0;
                 this.message.setText(sanitize(name.value));
-                var similarity = stringSimilarity.compareTwoStrings(randomPair.translation, name.value
-                    .toLowerCase());
+                var similarity = stringSimilarity.compareTwoStrings(randomPair.translation, name.value.toLowerCase());
                 if (similarity > 0.98) {
                     gameConfig.coins.player += 25;
                     this.correct.alpha = 100;
@@ -623,12 +656,22 @@
         }
 
         const progress = this.timedEvent.getProgress();
+        const progressBar = this.timedEventProgressBar.getProgress();
+
+        if (progressBar >= 0.01 && this.progressFill.width >= 0 && this.progressFill.width < 200 && progressBar < 1) {
+            const decreaseStep = () => {
+                if (this.progressFill.width <= 200) {
+                    this.progressFill.width += 0.04;
+                    setTimeout(decreaseStep, 100);
+                }
+            };
+            decreaseStep();
+        }
 
         if (progress >= 0.5 && this.correct.alpha > 0) {
             const decreaseStep = () => {
                 if (this.correct.alpha > 0) {
                     this.correct.alpha -= 0.1;
-
                     setTimeout(decreaseStep, 100);
                 } else {
                     this.correct.alpha = 0;
