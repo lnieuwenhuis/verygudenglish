@@ -55,7 +55,7 @@ Route::resource('/docenten/studenten', UserController::class);
 // ->middleware(['auth', 'verified']);
 
 Route::resource('/docenten/woordenlijsten', wordListController::class);
-// ->middleware(['auth', 'verified']);
+// ->middleware(['auth', 'verified']);]
 
 Route::resource('/docenten/periodes', PeriodController::class);
 // ->middleware(['auth', 'verified']);

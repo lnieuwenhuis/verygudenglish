@@ -33,10 +33,10 @@
                 <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">*Preview van woorden*
                 </div>
                 <div class="flex flex-row">
-                    <form action="{{ route('woordenlijsten.edit', $wordlist->id) }}" method="POST" class=" ml-auto">
+                    <a href="{{ route('woordenlijsten.edit', $wordlist->id) }}"class=" ml-auto">
                         @csrf
                         <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
-                    </form>
+                    </a>
                     <form action="{{ route('woordenlijsten.destroy', $wordlist->id) }}" method="POST" class="">
                         @csrf
                         @method('delete')
