@@ -40,6 +40,11 @@ Route::get("/studenten/resultaten", function () {
 })->name('studenten.resultaten');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
+Route::get("/studenten/toets", function () {
+    return view('studenten.toets');
+})->name('studenten.toets');
+// ->middleware(['auth', 'verified'])->name('studenten_resultaten');
+
 
 Route::get("/studenten/periodes", [UserController::class, 'studentPeriodes'])->name('studenten.periodes');
 // ->middleware(['auth', 'verified'])->name('studenten_periodes');
