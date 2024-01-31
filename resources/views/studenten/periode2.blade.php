@@ -15,44 +15,40 @@
 
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
             <div class="p-3 text-lg">
-                <a href="{{ route('studenten.toetsen') }}">Toetsen</a>
+                <a href="{{ route('studenten.periode1') }}">Periode 1</a>
             </div>
             <div class="ml-auto mr-auto p-3 text-lg">
-                <a href="{{ route('studenten.resultaten') }}">Resultaten</a>
+                <a href="{{ route('studenten.periode2') }}">Periode 2</a>
             </div>
             <div class="p-3 text-lg">
-                <a href="{{ route('studenten.periodes') }}">Periodes</a>
+                <a href="{{ route('studenten.periode3') }}">Periode 3</a>
+            </div>
+            <div class="p-3 text-lg">
+                <a href="{{ route('studenten.periode4') }}">Periode 4</a>
             </div>
         </div>
 
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded">
             <div class="flex flex-col">
-                {{-- Later Foreach toets toevoegen --}}
+                {{-- Later Foreach periode toevoegen --}}
                 <div class="flex flex-row m-3">
                     <div class="mr-3">
-                        {{-- percentage --}} 83%
+                        {{-- percentage --}}70%
                     </div>
-                    Toets 1
+                    Meteor Slash
                 </div>
                 <div class="flex flex-row m-4">
                     <div class="mr-3">
-                        {{-- percentage --}} 12%
+                        {{-- percentage --}} 50%
                     </div>
-                    Toets 2
+                    Age of Words
                 </div>
                 <div class="flex flex-row m-4">
                     <div class="mr-3">
-                        {{-- percentage --}} 64%
+                        {{-- percentage --}} 80%
                     </div>
-                    Toets 3
+                    Periode Toets
                 </div>
-                <div class="flex flex-row m-4">
-                    <div class="mr-3">
-                        {{-- percentage --}} 74%
-                    </div>
-                    Toets 4
-                </div>
-
             </div>
         </div>
 

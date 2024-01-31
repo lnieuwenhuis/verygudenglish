@@ -32,7 +32,7 @@
                 <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $toets['period_id'] }}
                 </div>
                 <div class="flex flex-row">
-                    <form action="{{ route('toetsen.edit', $toets->id) }}" method="POST" class=" ml-auto">
+                    <form action="{{ route('toetsen.edit', $toets->id) }}" method="GET" class=" ml-auto">
                         @csrf
                         <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
                     </form>

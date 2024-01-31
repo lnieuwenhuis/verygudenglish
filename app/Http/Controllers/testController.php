@@ -40,7 +40,7 @@ class TestController extends Controller
     }
     public function edit($id)
     {
-        return view('docenten.toetsen.edit', ['toets' => Test::findOrFail($id)]);
+        return view('toetsen.edit', ['toets' => Test::findOrFail($id)]);
     }
     public function update(Request $request, $id)
     {
