@@ -48,16 +48,12 @@ class wordController extends Controller
         $word->wordlist = $request->get('wordlist');
 
         $word->save();
-
-        $word->wordlist()->detach();
-        $word->wordlist()->attach($request->get('wordlist'));
     }
-    public function delete(Request $id)
+    public function destroy($id)
     {
-        $word = new Word;
+
         $word = Word::findOrFail($id);
 
-        $word->wordlist()->detach();
         $word->delete();
 
         return redirect()->back()->with('message', 'Word Deleted');

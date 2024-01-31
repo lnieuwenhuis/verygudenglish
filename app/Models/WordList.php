@@ -9,7 +9,13 @@ class WordList extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
     protected $table = 'lists';
 
     public $timestamps = false;
+
+    public function words()
+    {
+        return $this->hasMany(Word::class, 'list_id');
+    }
 }

@@ -40,7 +40,7 @@
                     <form action="{{ route('woordenlijsten.destroy', $wordlist->id) }}" method="POST" class="">
                         @csrf
                         @method('delete')
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                        <button type="submit" class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
                     </form>
                 </div>
             @endforeach

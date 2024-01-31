@@ -11,6 +11,6 @@ class Word extends Model
 
     public function list()
     {
-        return $this->belongsToMany(WordList::class);
+        return $this->belongsTo(WordList::class, 'id', 'list_id');
     }
 }

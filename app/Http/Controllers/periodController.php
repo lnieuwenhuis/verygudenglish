@@ -10,7 +10,7 @@ class periodController extends Controller
 {
     public function index()
     {
-        return view("docenten.periodes", ['periods' => Period::all(), 'toetsen' => Test::all()]);
+        return view("docenten.periodes", ['periods' => Period::all()]);
     }
     public function create()
     {
@@ -18,6 +18,7 @@ class periodController extends Controller
     }
     public function store(Request $request)
     {
+-
         $request->validate([
             'periode' => 'required',
             'is_locked' => 'required'

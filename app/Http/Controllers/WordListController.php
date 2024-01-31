@@ -28,7 +28,6 @@ class wordListController extends Controller
         $wordList->title = $request->get('title');
         $wordList->save();
 
-        $wordList->words()->attach($request->get('words'));
         $wordList->periods()->attach($request->get('period'));
 
         return redirect()->back()->with('message', 'Wordlist Stored in DB');
@@ -48,16 +47,12 @@ class wordListController extends Controller
         $wordList->title = $request->get('title');
 
         $wordList->save();
-
-        $wordList->words()->detach();
-        $wordList->words()->attach($request->get('words'));
     }
-    public function delete(Request $id)
+    public function destroy($id)
     {
-        $wordList = new WordList;
-
         $wordList = WordList::findOrFail($id);
-        $wordList->words()->detach();
+
+        $wordList->words()->delete();
         $wordList->delete();
 
         return redirect()->back()->with('message', 'Woordenlijst verwijderd');
