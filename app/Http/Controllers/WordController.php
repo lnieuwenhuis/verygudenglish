@@ -33,7 +33,6 @@ class wordController extends Controller
     }
     public function edit(Request $id)
     {
-        dd($id);
         return view('docenten.edit.woorden', ['words' => Word::where('list_id', $id)->findOrFail()]);
 
     }
