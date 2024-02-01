@@ -66,10 +66,10 @@ class userController extends Controller
     }
     public function destroy($id)
     {
-        $user = new User;
+
         $user = User::findOrFail($id);
 
-        $user->$user->delete();
+        $user->delete();
 
         return redirect()->back()->with('message', 'User Deleted');
     }
