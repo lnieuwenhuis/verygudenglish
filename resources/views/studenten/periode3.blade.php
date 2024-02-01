@@ -20,7 +20,7 @@
             <div class="ml-auto mr-auto p-3 text-lg">
                 <a href="{{ route('studenten.periode2') }}">Periode 2</a>
             </div>
-            <div class="p-3 text-lg">
+            <div class="ml-auto mr-auto p-3 text-lg">
                 <a href="{{ route('studenten.periode3') }}">Periode 3</a>
             </div>
             <div class="p-3 text-lg">

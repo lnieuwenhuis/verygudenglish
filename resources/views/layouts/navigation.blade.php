@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo href="https://imgur.com/a/bOGkqPU" />
+                        <x-application-logo href="https://imgur.com/a/bOGkqPU.jpg" />
                     </a>
                 </div>
             </div>
