@@ -14,17 +14,44 @@
     <div>
 
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
-            <div class="p-3 text-lg">
-                <a href="{{ route('studenten.periode1') }}">Periode 1</a>
+
+
+            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
+                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
+                   href="{{ route('studenten.periode1') }}">Periode 1
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                </a>
             </div>
-            <div class="ml-auto mr-auto p-3 text-lg">
-                <a href="{{ route('studenten.periode2') }}">Periode 2</a>
+
+            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
+                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
+                   href="{{ route('studenten.periode2') }}">Periode 2
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                </a>
             </div>
-            <div class="ml-auto mr-auto p-3 text-lg">
-                <a href="{{ route('studenten.periode3') }}">Periode 3</a>
+
+
+            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
+                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
+                   href="{{ route('studenten.periode3') }}">Periode 3
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                </a>
             </div>
-            <div class="p-3 text-lg">
-                <a href="{{ route('studenten.periode4') }}">Periode 4</a>
+
+
+            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
+                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
+                   href="{{ route('studenten.periode4') }}">Periode 4
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                </a>
             </div>
         </div>
 

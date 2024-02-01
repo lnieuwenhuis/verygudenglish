@@ -15,12 +15,13 @@ class userController extends Controller
 {
     public function index()
     {
-        return view('docenten.studenten', ['studenten' => User::all()]);
-    }
+
+      return view('docenten.studenten', ['studenten' => User::all()]);
+   }
 
     public function studentPeriodes()
     {
-        return view('studenten.periodes', ['periodes' => Period::all()]);
+        return view('studenten.index', ['periodes' => Period::all()]);
     }
 
     public function create()

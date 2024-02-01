@@ -25,9 +25,7 @@ Route::get('/', function () {
 })->name('home');
 
 //Routes voor studenten
-Route::get("/studenten", function () {
-    return view('studenten.index');
-})->name('studenten');
+Route::get("/studenten", [userController::class,'studentPeriodes'])->name('studenten.periode');
 // ->middleware(['auth', 'verified'])->name('studenten');
 
 Route::get("/studenten/periode1", function () {

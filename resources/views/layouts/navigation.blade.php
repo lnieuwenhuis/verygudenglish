@@ -28,7 +28,7 @@
                     </a>
                 @endif
                 <a class="hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-3xl"
-                    href="{{ route('studenten') }}">
+                    href="{{ route('studenten.periode') }}">
                     Studenten
                 </a>
                 <a class="hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 -ml-3 rounded-3xl"
@@ -112,9 +112,9 @@
             <x-responsive-nav-link href="{{ route('docenten') }}">
                 Docenten
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('studenten') }}">
-                Studenten
-            </x-responsive-nav-link>
+{{--            <x-responsive-nav-link href="{{ route('studenten') }}">--}}
+{{--                Studenten--}}
+{{--            </x-responsive-nav-link>--}}
         </div>
 
         <!-- Responsive Settings Options -->
