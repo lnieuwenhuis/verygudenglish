@@ -10,6 +10,7 @@
 </head>
 
 <x-app-layout>
+
     <h1 class="text-2xl font-extrabold p-5">Woordenlijst{{ $wordlist->id }} Bewerken</h1>
     <form action="{{ route('woorden.store') }}" method="POST">
         @csrf
@@ -21,25 +22,25 @@
             </div>
             <button class="pt-2 pb-2 pr-4 pl-4 bg-blue-600 text-xl text-sky-50" type="submit">+</button>
         </div>
-        <div>
-            <div class="grid grid-cols-3 gap-x-10">
-                @foreach ($words as $word)
-
-                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $word['words'] }}</div>
-                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $word['answers'] }}</div>
-                    <form action="{{ route('woorden.destroy', $word->id) }}" method="POST" class=" ml-auto">
-                        @csrf
-                        @method('delete')
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
-                    </form>
-                @endforeach
-            </div>
-        </div>
 
 
 
 
 
     </form>
+    <div>
+        <div class="grid grid-cols-3 gap-x-10">
+            @foreach ($words as $word)
+
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $word['words'] }}</div>
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $word['answers'] }}</div>
+                <form action="{{ route('woorden.destroy', $word->id) }}" method="POST" class=" ml-auto">
+                    @csrf
+                    @method('delete')
+                    <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                </form>
+            @endforeach
+        </div>
+    </div>
 
 </x-app-layout>

@@ -36,18 +36,17 @@ class periodController extends Controller
     }
     public function edit($id)
     {
-        return view('docent.period.edit', ['period' => Period::findOrFail($id)]);
-    }
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'period' => 'required|max:1',
-        ]);
-
         $period = Period::findOrFail($id);
-        $period->period = $request->get('period');
+
+        return $this->update($period);
+    }
+    public function update($period)
+    {
+        $islocked = !(bool)$period->is_locked;
+        $period->is_locked = (int)$islocked;
 
         $period->save();
+        return redirect()->back();
     }
     public function delete($id)
     {
@@ -59,4 +58,5 @@ class periodController extends Controller
 
         return redirect()->back()->with('message', 'Periode verwijderd');
     }
+
 }

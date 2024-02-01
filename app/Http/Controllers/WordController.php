@@ -58,4 +58,5 @@ class wordController extends Controller
 
         return redirect()->back()->with('message', 'Word Deleted');
     }
+
 }
