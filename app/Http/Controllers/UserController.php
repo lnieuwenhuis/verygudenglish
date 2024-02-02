@@ -11,13 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
-class userController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
 
-      return view('docenten.studenten', ['studenten' => User::all()]);
-   }
+        return view('docenten.studenten', ['studenten' => User::all()]);
+    }
 
     public function studentPeriodes()
     {

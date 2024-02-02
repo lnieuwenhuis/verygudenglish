@@ -6,7 +6,7 @@ use App\Models\Period;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
-class periodController extends Controller
+class PeriodController extends Controller
 {
     public function index()
     {
@@ -18,8 +18,7 @@ class periodController extends Controller
     }
     public function store(Request $request)
     {
--
-        $request->validate([
+        -$request->validate([
             'periode' => 'required',
             'is_locked' => 'required'
         ]);
@@ -58,5 +57,4 @@ class periodController extends Controller
 
         return redirect()->back()->with('message', 'Periode verwijderd');
     }
-
 }

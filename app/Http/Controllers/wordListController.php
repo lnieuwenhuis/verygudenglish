@@ -6,7 +6,7 @@ use App\Models\Word;
 use App\Models\WordList;
 use Illuminate\Http\Request;
 
-class wordListController extends Controller
+class WordListController extends Controller
 {
     public function index()
     {

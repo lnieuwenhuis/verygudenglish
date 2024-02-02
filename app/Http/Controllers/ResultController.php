@@ -53,8 +53,8 @@ class ResultController extends Controller
 
     //studenten gedeelte
 
-    public function student_index()
+    public function student_index(Request $student_id)
     {
-        return view('studenten.resultaten');
+        return view('studenten.resultaten', ['results' => Result::where('student_id', $student_id)->findOrFail()]);
     }
 }

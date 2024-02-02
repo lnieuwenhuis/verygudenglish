@@ -33,28 +33,27 @@ if (isset($_GET['periodList'])) {
 
         <div class="grid grid-cols-4 gap-x-10">
             @foreach ($periods as $period)
-                    <div class="grid grid-cols-1">
-                    <div class="text-white m-1 p-5 bg-gray-600 rounded-lg min-w-fit h-[60px]">{{ $period['title'] }}</div>
-{{--                        Deze manier is goor --}}
-                        <form action="{{ route('periodes.edit', $period->id) }}" method="GET">
-                        @if( $period->is_locked == 1)
-
-                                @csrf
-                                <div class="px-5 flex flex-col">
-                                    <button type="submit" class="text-white m-1 p-1 bg-red-600 rounded-lg w-fit">Locked</button>
-                                </div>
-
-                        @endif
-                        @if( $period->is_locked == 0)
-                                @csrf
-                                <div class="px-5 flex flex-col">
-                                    <button type="submit" class="text-white m-1 p-1 bg-green-600 rounded-lg w-fit">Unlocked</button>
-                                </div>
-
-
-                        @endif
-                        </form>
+                <div class="grid grid-cols-1">
+                    <div class="text-white m-1 p-5 bg-gray-600 rounded-lg min-w-fit h-[60px]">{{ $period['title'] }}
                     </div>
+                    {{-- Deze manier is goor --}}
+                    <form action="{{ route('periodes.edit', $period->id) }}" method="GET">
+                        @if ($period->is_locked == 1)
+                            @csrf
+                            <div class="px-5 flex flex-col">
+                                <button type="submit"
+                                    class="text-white m-1 p-1 bg-red-600 rounded-lg w-fit">Locked</button>
+                            </div>
+                        @endif
+                        @if ($period->is_locked == 0)
+                            @csrf
+                            <div class="px-5 flex flex-col">
+                                <button type="submit"
+                                    class="text-white m-1 p-1 bg-green-600 rounded-lg w-fit">Unlocked</button>
+                            </div>
+                        @endif
+                    </form>
+                </div>
             @endforeach
 
         </div>

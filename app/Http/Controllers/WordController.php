@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Word;
 use Illuminate\Http\Request;
 
-class wordController extends Controller
+class WordController extends Controller
 {
     public function index()
     {
@@ -34,7 +34,6 @@ class wordController extends Controller
     public function edit(Request $id)
     {
         return view('docenten.edit.woorden', ['words' => Word::where('list_id', $id)->findOrFail()]);
-
     }
     public function update(Request $request, $id)
     {
@@ -58,5 +57,4 @@ class wordController extends Controller
 
         return redirect()->back()->with('message', 'Word Deleted');
     }
-
 }
