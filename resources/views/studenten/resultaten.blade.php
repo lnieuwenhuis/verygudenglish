@@ -10,83 +10,39 @@
 </head>
 
 <x-guest-layout>
-
     <div>
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
+            <div class="grid grid-cols-5 gap-x-44">
+                <div class="p-2">Toets</div>
+                <div class="p-2">Periode</div>
+                <div class="p-2">Woordenlijst</div>
+                <div class="p-2">Resultaat</div>
+                <div class="ml-auto p-2">Fouten</div>
 
-            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
-                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
-                    href="{{ route('studenten.periode1') }}">Periode 1
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                </a>
-            </div>
-
-
-            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
-                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
-                    href="{{ route('studenten.periode2') }}">Periode 2
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                </a>
-            </div>
-
-
-
-            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
-                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
-                    href="{{ route('studenten.periode3') }}">Periode 3
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                </a>
-            </div>
-
-
-            <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg">
-                <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
-                    href="{{ route('studenten.periode4') }}">Periode 4
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded">
-            <div class="flex flex-col">
-                {{-- Later Foreach toets toevoegen --}}
-                <div class="flex flex-row m-3">
-                    <div class="mr-3">
-                        {{-- percentage --}} 100%
-                    </div>
-                    Meteor Slash
-                </div>
-                <div class="flex flex-row m-4">
-                    <div class="mr-3">
-                        {{-- percentage --}} 80%
-                    </div>
-                    Age of Words
-                </div>
-                <div class="flex flex-row m-4">
-                    <div class="mr-3">
-                        {{-- percentage --}} 64%
-                    </div>
-                    Periode Toets
-                </div>
+                @foreach ($results as $result)
+                    @if ($result->student_id == $student->id)
+                        <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['title'] }}</div>
+                        <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
+                            {{ $result['period_id'] }}
+                        </div>
+                        <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
+                            {{ $result['wordlist_id'] }}
+                        </div>
+                        <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
+                            {{ $result['result'] }}
+                        </div>
+                        <form action="{{ route('studenten.results.mistakes', $result->id) }}" method="POST"
+                            class=" ml-auto">
+                            @csrf
+                            <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Fouten</button>
+                        </form>
+                    @else
+                        <div></div>
+                    @endif
+                @endforeach
             </div>
         </div>
+
 
     </div>
 </x-guest-layout>

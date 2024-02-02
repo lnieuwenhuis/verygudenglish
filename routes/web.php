@@ -55,7 +55,9 @@ Route::get("/studenten/toets", function () {
 })->name('studenten.toets');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
-Route::get("/studenten/resultaten", [ResultController::class, 'student_index', 1])->name('studenten.resultaten');
+Route::get("/studenten/resultaten", [ResultController::class, "student_index"])->name('studenten.resultaten');
+
+Route::get('/studenten/resultaten/fouten', [ResultController::class, 'student_mistakes'])->name('studenten.results.mistakes');
 
 
 //Routes voor docenten
@@ -78,6 +80,7 @@ Route::resource('/docenten/toetsen', TestController::class);
 
 Route::resource('/docenten/resultaten', ResultController::class);
 // ->middleware(['auth', 'verified']);
+Route::get('/docenten/resultaten/{}/fouten', [ResultController::class, 'ResultController@docent_fouten'])->name('resultaten.mistakes');
 
 Route::resource('/docenten/woorden', wordController::class);
 // ->middleware(['auth', 'verified']);

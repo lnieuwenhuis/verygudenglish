@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -10,7 +11,12 @@ class ResultController extends Controller
     //docenten gedeelte
     public function index()
     {
-        return view('docenten.resultaten');
+        return view('docenten.resultaten', ['results' => Result::all(), 'students' => Student::all()]);
+    }
+
+    public function docent_fouten(Request $id)
+    {
+        return view('docenten.fouten', ['results' => Result::findOrFail($id)]);
     }
 
     public function store(Request $request)
@@ -53,8 +59,8 @@ class ResultController extends Controller
 
     //studenten gedeelte
 
-    public function student_index(Request $student_id)
+    public function student_index()
     {
-        return view('studenten.resultaten', ['results' => Result::where('student_id', $student_id)->findOrFail()]);
+        return view('studenten.resultaten', ['results' => Result::all(), 'student' => Student::findOrFail(1)]);
     }
 }
