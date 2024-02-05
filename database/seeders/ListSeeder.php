@@ -14,11 +14,11 @@ class ListSeeder extends Seeder
     public function run(): void
     {
         $lists = [
-            ['title' => 'lijst1'],
-            ['title' => 'lijst2'],
-            ['title' => 'lijst3'],
-            ['title' => 'lijst4'],
-            ['title' => 'lijst5'],
+            ['title' => 'lijst1', 'period_id' => 1],
+            ['title' => 'lijst2', 'period_id' => 1],
+            ['title' => 'lijst3', 'period_id' => 2],
+            ['title' => 'lijst4', 'period_id' => 3],
+            ['title' => 'lijst5', 'period_id' => 4],
         ];
 
         foreach ($lists as $list) {
