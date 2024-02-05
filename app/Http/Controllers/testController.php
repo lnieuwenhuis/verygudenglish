@@ -46,7 +46,7 @@ class TestController extends Controller
     }
     public function edit($id)
     {
-        return view('toetsen.edit', ['toets' => Test::findOrFail($id)]);
+        return view('docenten.edit.toetsen', ['toets' => Test::findOrFail($id), 'periodes' => Period::all(), 'wordlists' => WordList::all()]);
     }
     public function update(Request $request, $id)
     {
