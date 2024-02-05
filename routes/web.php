@@ -51,7 +51,7 @@ Route::get("/studenten/periode4", function () {
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
 Route::get("/studenten/toets", function () {
-    return view('studenten.toets');
+    return view('test.index');
 })->name('studenten.toets');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
