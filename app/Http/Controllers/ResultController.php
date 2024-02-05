@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Period;
 use App\Models\Result;
 use App\Models\Student;
+use App\Models\WordList;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -11,7 +13,7 @@ class ResultController extends Controller
     //docenten gedeelte
     public function index()
     {
-        return view('docenten.resultaten', ['results' => Result::all(), 'students' => Student::all()]);
+        return view('docenten.resultaten', ['results' => Result::all(), 'students' => Student::all(), 'wordlists' => WordList::all(), 'periods' => Period::all()]);
     }
 
     public function docent_fouten(Request $id)

@@ -11,7 +11,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        return view('docenten.toetsen', ['toetsen' => Test::all()]);
+        return view('docenten.toetsen', ['toetsen' => Test::all(), 'periodes' => Period::all()]);
     }
     public function create()
     {

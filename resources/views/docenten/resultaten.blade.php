@@ -1,3 +1,8 @@
+<?php
+$student_id = $_GET['student_id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -11,7 +16,7 @@
 
 <x-app-layout>
     <div class="flex flex-row">
-        <h1 class="text-2xl font-extrabold p-5">Woordenlijsten</h1>
+        <h1 class="text-2xl font-extrabold p-5">Resultaten</h1>
         <a href="{{ route('woordenlijsten.create') }}" class="p-5 px-0 -ml-2"><svg xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,19 +34,35 @@
             <div class="ml-auto">Fouten</div>
             <div class="ml-auto">Student</div>
 
+
             @foreach ($results as $result)
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['title'] }}</div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $result['period_id'] }}
-                </div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['wordlist_id'] }}</div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['result'] }}</div>
+                @if ($student_id == $result->student_id)
+                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['title'] }}</div>
+                    @foreach ($periods as $period)
+                        @if ($period->id == $result->period_id)
+                            <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
+                                {{ $period->title }}
+                            </div>
+                        @endif
+                    @endforeach
+                    @foreach ($wordlists as $wordlist)
+                        @if ($wordlist->id == $result->wordlist_id)
+                            <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $wordlist->title }}</div>
+                        @endif
+                    @endforeach
+                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['result'] }}</div>
 
-                <a href="{{ route('resultaten.mistakes', $result->id) }}"class=" ml-auto">
-                    @csrf
-                    <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Fouten</button>
-                </a>
+                    <a href="{{ route('resultaten.mistakes', $result->id) }}"class=" ml-auto">
+                        @csrf
+                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Fouten</button>
+                    </a>
 
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $result['student_id'] }}</div>
+                    @foreach ($students as $student)
+                        @if ($student->id == $result->student_id)
+                            <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $student->name }}</div>
+                        @endif
+                    @endforeach
+                @endif
             @endforeach
         </div>
     </div>
