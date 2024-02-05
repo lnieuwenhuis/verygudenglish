@@ -237,7 +237,6 @@
     class PlayerTroopGameObject extends Phaser.Physics.Arcade.Sprite {
         constructor(scene, x, y, troopType, group) {
             super(scene, x, y, troopType, group);
-            this.health = 100;
             this.isEnemy = group;
 
             this.movementSpeed = 0
@@ -323,6 +322,7 @@
                 if ((me.isEnemy && other.isEnemy) || ((!me.isEnemy  && !other.isEnemy))) {
                     me.attacking = false;
                     me.isCollidingUnit = false;
+                    me.playerNewAnimation = true;
                 } else {
                     me.attacking = true;
                     me.playerNewAnimation = true;
@@ -348,6 +348,7 @@
                 if (player.isEnemy) {
                     gameConfig.alive.enemy -= 1
                 }
+                this.scene.physics.world.colliders.destroy();
                 player.once('animationcomplete', () => {
                     this.units.getChildren().forEach(child => {
                         child.isCollidingUnit = false;
@@ -586,9 +587,10 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 150, 320, 'meleeTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 200, 320, 'meleeTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 20;
+                        troop.health = 100;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
                         this.progressFill.width = 0;
@@ -610,9 +612,10 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 110, 320, 'rangedTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 200, 320, 'rangedTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 15;
+                        troop.health = 100;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
                         this.progressFill.width = 0;
@@ -634,9 +637,10 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 110, 320, 'tankTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 200, 320, 'tankTroop', false);
                         troop.deathAnimation = false;
-                        troop.attackDamage = 30;
+                        troop.attackDamage = 75;
+                        troop.health = 300;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
                         this.progressFill.width = 0;
@@ -657,10 +661,11 @@
                     const delay = gameConfig.troopsInQueue.enemy * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
+                        const troop = new PlayerTroopGameObject(this, 1300, 320, 'meleeTroop', true);
 
                         troop.deathAnimation = false;
                         troop.attackDamage = 20;
+                        troop.health = 100;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.enemy -= 1;
                     }, delay);
