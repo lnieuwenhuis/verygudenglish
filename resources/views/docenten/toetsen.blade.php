@@ -29,14 +29,20 @@
         <div class="grid grid-cols-3 gap-x-44">
             @foreach ($toetsen as $toets)
                 <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $toets['title'] }}</div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $toets['period_id'] }}
+
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
+                    @foreach ($periodes as $periode)
+                        @if ($periode->id == $toets->period_id)
+                            <div>{{ $periode->title }}</div>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="flex flex-row">
                     <form action="{{ route('toetsen.edit', $toets->id) }}" method="GET" class=" ml-auto">
                         @csrf
                         <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
                     </form>
-                    <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST" class=" ml-auto">
+                    <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST" class="">
                         @csrf
                         @method('delete')
                         <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>

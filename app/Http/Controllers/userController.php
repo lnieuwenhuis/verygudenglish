@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Period;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -15,8 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-
-        return view('docenten.studenten', ['studenten' => User::all()]);
+        return view('docenten.studenten', ['studenten' => Student::all()]);
     }
 
     public function studentPeriodes()

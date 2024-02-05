@@ -30,29 +30,9 @@ Route::get('/', function () {
 Route::get("/studenten", [UserController::class, 'studentPeriodes'])->name('studenten.periode');
 // ->middleware(['auth', 'verified'])->name('studenten');
 
-Route::get("/studenten/periode1", function () {
-    return view('studenten.periode1');
-})->name('studenten.periode1');
-// ->middleware(['auth', 'verified'])->name('studenten_toetsen');
+Route::get('/studenten/periode/{toetsen}', [PeriodController::class, 'student_periode'])->name('studenten.period');
 
-Route::get("/studenten/periode2", function () {
-    return view('studenten.periode2');
-})->name('studenten.periode2');
-// ->middleware(['auth', 'verified'])->name('studenten_resultaten');
-
-Route::get("/studenten/periode3", function () {
-    return view('studenten.periode3');
-})->name('studenten.periode3');
-// ->middleware(['auth', 'verified'])->name('studenten_resultaten');
-
-Route::get("/studenten/periode4", function () {
-    return view('studenten.periode4');
-})->name('studenten.periode4');
-// ->middleware(['auth', 'verified'])->name('studenten_resultaten');
-
-Route::get("/studenten/toets", function () {
-    return view('studenten.toets');
-})->name('studenten.toets');
+Route::get("/studenten/toets", [TestController::class, 'student_test'])->name('test.index');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
 Route::get("/studenten/resultaten", [ResultController::class, "student_index"])->name('studenten.resultaten');
@@ -70,7 +50,7 @@ Route::resource('/docenten/studenten', UserController::class);
 // ->middleware(['auth', 'verified']);
 
 Route::resource('/docenten/woordenlijsten', WordListController::class);
-// ->middleware(['auth', 'verified']);]
+// ->middleware(['auth', 'verified']);
 
 Route::resource('/docenten/periodes', PeriodController::class);
 // ->middleware(['auth', 'verified']);

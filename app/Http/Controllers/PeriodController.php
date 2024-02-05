@@ -16,6 +16,11 @@ class PeriodController extends Controller
     {
         return view('docenten.create.periode');
     }
+
+    public function student_periode($id)
+    {
+        return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'tests' => Test::all(), 'periodes' => Period::all()]);
+    }
     public function store(Request $request)
     {
         -$request->validate([

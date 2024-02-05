@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Period;
+use App\Models\Student;
 use App\Models\Test;
 use App\Models\WordList;
 use Illuminate\Http\Request;
@@ -11,11 +12,16 @@ class TestController extends Controller
 {
     public function index()
     {
-        return view('docenten.toetsen', ['toetsen' => Test::all()]);
+        return view('docenten.toetsen', ['toetsen' => Test::all(), 'periodes' => Period::all()]);
     }
     public function create()
     {
         return view('docenten.create.toets', ['woordenlijsten' => WordList::all(), 'periodes' => Period::all()]);
+    }
+
+    public function student_test()
+    {
+        return view('test.index', ['tests' => Test::all(), 'students' => Student::all()]);
     }
     public function store(Request $request)
     {
