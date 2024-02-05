@@ -50,7 +50,7 @@ Route::get("/studenten/periode4", function () {
 })->name('studenten.periode4');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
-Route::get("/studenten/toets", [TestController::class, 'student_test'])->name('studenten.toets');
+Route::get("/studenten/toets", [TestController::class, 'student_test'])->name('test.index');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
 Route::get("/studenten/resultaten", [ResultController::class, "student_index"])->name('studenten.resultaten');

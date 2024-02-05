@@ -21,7 +21,7 @@ class TestController extends Controller
 
     public function student_test()
     {
-        return view('toets.index', ['tests' => Test::all(), 'students' => Student::all()]);
+        return view('test.index', ['tests' => Test::all(), 'students' => Student::all()]);
     }
     public function store(Request $request)
     {
