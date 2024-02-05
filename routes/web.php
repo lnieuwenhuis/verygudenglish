@@ -50,9 +50,7 @@ Route::get("/studenten/periode4", function () {
 })->name('studenten.periode4');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
-Route::get("/studenten/toets", function () {
-    return view('studenten.toets');
-})->name('studenten.toets');
+Route::get("/studenten/toets", [TestController::class, 'student_test'])->name('test.index');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
 Route::get("/studenten/resultaten", [ResultController::class, "student_index"])->name('studenten.resultaten');
@@ -70,7 +68,7 @@ Route::resource('/docenten/studenten', UserController::class);
 // ->middleware(['auth', 'verified']);
 
 Route::resource('/docenten/woordenlijsten', WordListController::class);
-// ->middleware(['auth', 'verified']);]
+// ->middleware(['auth', 'verified']);
 
 Route::resource('/docenten/periodes', PeriodController::class);
 // ->middleware(['auth', 'verified']);
