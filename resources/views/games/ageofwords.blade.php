@@ -187,6 +187,53 @@
 
     let randomPair = getRandomKeyValuePair(); // random key & value pakken
 
+    class BuildingGameObject extends Phaser.Physics.Arcade.Sprite {
+        constructor(scene, x, y, troopType, group) {
+            super(scene, x, y, troopType, group);
+            this.health = 500;
+            this.isEnemy = group;
+            this.units = this.scene.unitTroopGroup
+
+            this.setScale(0.4);
+
+            if (this.isEnemy) {
+                this.flipX = true;
+            }
+
+            scene.physics.add.existing(this);
+
+            scene.physics.world.enable(this);
+
+            this.setCollideWorldBounds(true);
+
+            scene.add.existing(this);
+
+            this.isCollidingUnit = false;
+
+            // this.setupColliders();
+        }
+
+        update() {
+            this.setVelocity(0);
+
+            if (this.isDead()) {
+                this.handleDeadBuilding(this);
+            }
+        }
+
+        setupColliders() {
+            this.overlap = this.scene.physics.add.overlap(this.units,this.units,this.handleUnitCollision, null, this)
+        }
+
+        handleDeadBuilding(player) {
+
+        }
+
+        isDead() {
+            return this.health <= 0;
+        }
+    }
+
     class PlayerTroopGameObject extends Phaser.Physics.Arcade.Sprite {
         constructor(scene, x, y, troopType, group) {
             super(scene, x, y, troopType, group);
@@ -196,10 +243,10 @@
             this.movementSpeed = 0
             this.units = this.scene.unitTroopGroup
             if (!this.isEnemy) {
-                this.movementSpeed = 40
-                this.health += 20;
+                this.movementSpeed = 80
+                // this.health += 20;
             } else {
-                this.movementSpeed = -40
+                this.movementSpeed = -80
                 this.flipX = true;
             }
             this.playerNewAnimation = true;
@@ -227,6 +274,11 @@
         }
 
         update() {
+            this.once('animationcomplete', () => {
+                this.isCollidingUnit = false;
+                this.playerNewAnimation = true;
+            });
+
             if (this.attacking && this.troopType === "meleeTroop") {
                 this.setScale(0.45);
             } else {
@@ -234,7 +286,11 @@
                     this.setScale(0.35);
                 }
             }
+
             if (!this.isDead() && !this.isCollidingUnit) {
+                if (this.troopType === "meleeTroop") {
+                    this.setScale(0.35);
+                }
                 this.setVelocityX(this.movementSpeed);
                 if (this.playerNewAnimation) {
                     this.playerNewAnimation = false;
@@ -247,7 +303,6 @@
             }
 
             if (!this.isDead() && this.attacking) {
-                console.log(this.health)
                 if (this.playerNewAnimation) {
                     this.playerNewAnimation = false;
                     this.play(this.troopType + 'AttackAnimation');
@@ -260,35 +315,39 @@
         }
 
         handleUnitCollision(me, other) {
-            if (!me.isDead() && !me.isCollidingUnit && !other.isDead()) {
+            if (!me.isDead() && !me.isCollidingUnit) {
                 me.setPushable(false);
                 me.setVelocityX(0);
                 me.isCollidingUnit = true;
 
                 if ((me.isEnemy && other.isEnemy) || ((!me.isEnemy  && !other.isEnemy))) {
                     me.attacking = false;
+                    me.isCollidingUnit = false;
                 } else {
                     me.attacking = true;
                     me.playerNewAnimation = true;
-                    me.once('animationcomplete', () => {
-                        console.log(me.attackDamage)
-                        other.health -= getRandomInt(me.attackDamage - 10, me.attackDamage);
-                        me.playerNewAnimation = true;
-                        me.isCollidingUnit = false;
-                        me.attacking = false;
-                    });
+                    if (!other.isDead()) {
+                        me.once('animationcomplete', () => {
+                            other.health -= getRandomInt(me.attackDamage - 10, me.attackDamage);
+                            me.playerNewAnimation = true;
+                            me.isCollidingUnit = false;
+                            me.attacking = false;
+                        });
+                    }
+
                 }
                 me.play(me.troopType + 'IdleAnimation');
             }
-
         }
-
 
         handleDeadTroop(player) {
             if (!player.deathAnimation) {
                 player.attacking = false;
                 player.deathAnimation = true;
                 player.play(player.deathAnimationKey);
+                if (player.isEnemy) {
+                    gameConfig.alive.enemy -= 1
+                }
                 player.once('animationcomplete', () => {
                     this.units.getChildren().forEach(child => {
                         child.isCollidingUnit = false;
@@ -340,36 +399,39 @@
     const gameConfig = { // game values
         structureHealth: {
             playerStructure: 1250,
-            aiStructure: 1250
+            aiStructure: 1250,
         },
         troopDamage: {
             meleeTroop: 50,
             rangedTroop: 25,
-            tankTroop: 100
+            tankTroop: 100,
         },
         troopRange: {
             meleeTroop: 20,
             rangedTroop: 40,
-            tankTroop: 50
+            tankTroop: 50,
         },
         troopSpeed: {
             meleeTroop: 2,
             rangedTroop: 2,
-            tankTroop: 1
+            tankTroop: 1,
         },
         queueTime: {
             meleeTroop: 2,
             rangedTroop: 2,
-            tankTroop: 3
+            tankTroop: 3,
         },
         coins: {
             player: 2000,
-            enemy: 400
+            enemy: 100,
         },
         troopsInQueue: {
             player: 0,
-            enemy: 0
-        }
+            enemy: 0,
+        },
+        alive: {
+            enemy: 0,
+        },
     };
 
     const game = new Phaser.Game(phaserConfig);
@@ -403,7 +465,7 @@
 
         const troopConfigurations = [
             {key: 'meleeTroop', frameRate: 43, frameNumbers: {start: 0, end: 42, first: 0}, repeat: -1},
-            {key: 'meleeTroopIdle', frameRate: 43, frameNumbers: {start: 0, end: 50, first: 0}, repeat: -1},
+            {key: 'meleeTroopIdle', frameRate: 43, frameNumbers: {start: 0, end: 50, first: 0}, repeat: 0},
             {key: 'meleeTroopDeath', frameRate: 43, frameNumbers: {start: 0, end: 23, first: 0}, repeat: 0},
             {key: 'meleeTroopAttack', frameRate: 43, frameNumbers: {start: 0, end: 40, first: 0}, repeat: 0},
 
@@ -432,11 +494,21 @@
             });
         }
 
-        this.playerCave = this.add.image(50, 270, 'cave').setScale(0.4);
+        //this.playerCave = this.add.image(50, 270, 'cave').setScale(0.4);
 
-        this.enemyCave = this.add.image(1450, 270, 'cave').setScale(0.4).setFlipX(true);
+        new BuildingGameObject(this, 50, 270, 'cave', false);
+
+        //this.enemyCave = this.add.image(1450, 270, 'cave').setScale(0.4).setFlipX(true);
+
+        new BuildingGameObject(this, 1380, 270, 'cave', true);
 
         this.unitTroopGroup = this.physics.add.group({
+            defaultKey: 'unitTroop',
+            maxSize: -1,
+            runChildUpdate: true,
+            collideWorldBounds: true
+        });
+        this.enemyTroopGroup = this.physics.add.group({
             defaultKey: 'unitTroop',
             maxSize: -1,
             runChildUpdate: true,
@@ -503,10 +575,8 @@
 
         const meleeBuyButton = this.add.image(1300, 50, 'meleeTroopBuy').setInteractive();
         meleeBuyButton.on('pointerdown', () => {
-            console.log(gameConfig.coins.player);
 
             if (gameConfig.coins.player >= 25) {
-                console.log(gameConfig.troopsInQueue.player);
 
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 25;
@@ -516,7 +586,7 @@
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
                     setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 110, 320, 'meleeTroop', false);
+                        const troop = new PlayerTroopGameObject(this, 150, 320, 'meleeTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 20;
                         this.unitTroopGroup.add(troop);
@@ -577,10 +647,8 @@
 
         const enemyMeleeBuyButton = this.add.image(1450, 50, 'meleeTroopBuy').setInteractive();
         enemyMeleeBuyButton.on('pointerdown', () => {
-            console.log(gameConfig.coins.enemy);
 
             if (gameConfig.coins.enemy >= 25) {
-                console.log(gameConfig.troopsInQueue.enemy);
 
                 if (gameConfig.troopsInQueue.enemy < 5) {
                     gameConfig.coins.enemy -= 25;
@@ -642,11 +710,25 @@
             }
         });
 
-        this.Enemytroops.forEach(troop => {
-            if (troop.health >= 0) {
-                troop.update();
-            }
-        });
+        // if (gameConfig.coins.enemy >= 25 && gameConfig.alive.enemy < 3) {
+        //     if (gameConfig.troopsInQueue.enemy < 5) {
+        //         gameConfig.coins.enemy -= 25;
+        //         gameConfig.alive.enemy += 1;
+        //         gameConfig.troopsInQueue.enemy += 1;
+        //
+        //         const delay = gameConfig.troopsInQueue.enemy * 3000;
+        //
+        //         setTimeout(() => {
+        //             const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
+        //
+        //             troop.deathAnimation = false;
+        //             troop.attackDamage = 20;
+        //             troop.isEnemy = true;
+        //             this.unitTroopGroup.add(troop);
+        //             gameConfig.troopsInQueue.enemy -= 1;
+        //         }, delay);
+        //     }
+        // }
 
         this.money.setText(gameConfig.coins.player);
 
