@@ -15,6 +15,8 @@
     <h1 class="text-2xl font-extrabold p-5">Toets Bewerken</h1>
     <form action="{{ route('toetsen.update', $toets->id) }}" method="POST">
         @csrf
+        @method('patch')
+
         <div class="px-5 flex flex-col">
 
             <input type="text" name="title" id="title" placeholder="{{ $toets->title }}">

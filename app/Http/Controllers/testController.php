@@ -18,7 +18,6 @@ class TestController extends Controller
     {
         return view('docenten.create.toets', ['woordenlijsten' => WordList::all(), 'periodes' => Period::all()]);
     }
-
     public function student_test()
     {
         return view('test.index', ['tests' => Test::all(), 'students' => Student::all()]);
@@ -52,13 +51,18 @@ class TestController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'wordlist' => 'required',
+            'period_id' => 'required',
+            'wordlist_id' => 'required',
         ]);
 
         $test = Test::findOrFail($id);
         $test->title = $request->get('title');
+        $test->period_id = $request->get('period_id');
+        $test->wordlist_id = $request->get('wordlist_id');
 
         $test->save();
+
+        return redirect()->route('toetsen.index');
     }
     public function destroy($id)
     {
