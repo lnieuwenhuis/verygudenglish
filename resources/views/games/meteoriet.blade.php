@@ -4,16 +4,18 @@
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"/>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/string-similarity@4.0.4/umd/string-similarity.min.js"></script>
+    <meta name="_token" content="{{ csrf_token() }}">
     @vite('resources/css/app.css')
 </head>
 <body  class="bg-blue-900 m-2">
 
 <script>
-    async function getWordlist() {
-        const response = await fetch("http://127.0.0.1:8000/api/products");
-        const words = await response.json();
-        return words.products;
-    }
+    // async function getWordlist() {
+    //     const response = await fetch("http://127.0.0.1:8000/api/products");
+    //     const words = await response.json();
+    //     return words.products;
+    // }
+
 
     function sanitize(string) {
         const map = {
@@ -29,19 +31,23 @@
     }
 
     let translationObject = {!! $words->toJson() !!};
-  //  if(words != undefined) {
-        function getRandomKeyValuePair() { // pak random key & value
-            const keysArray = Object.keys(translationObject);
-            const randomIndex = Math.floor(Math.random() * keysArray.length);
-            const randomKey = keysArray[randomIndex];
-            const question = translationObject[randomKey].words;
-            const answer = translationObject[randomKey].answers;
-            return {
-                questionToAnswer: question,
-                translation: answer
-            };
-        }
- //   }
+
+    function getRandomKeyValuePair() { // pak random key & value
+        if(translationObject.length === 0) return null
+
+        const keysArray = Object.keys(translationObject);
+        const randomIndex = Math.floor(Math.random() * keysArray.length);
+        const randomKey = keysArray[randomIndex];
+        const question = translationObject[randomKey].words;
+        const answer = translationObject[randomKey].answers;
+
+        return {
+            key: randomKey,
+            questionToAnswer: question,
+            translation: answer
+        };
+    }
+
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -62,11 +68,11 @@
 
             preload() {
 
-                fetch("http://127.0.0.1:8000/api/products").then(res => {
-                    res.json().then(data => {
-                        translationObject = data.products
-                    })
-                });
+                // fetch("http://127.0.0.1:8000/api/products").then(res => {
+                //     res.json().then(data => {
+                //         translationObject = data.products
+                //     })
+                // });
                 this.load.html("htmlForm", "../storage/html/ageofwords/form.html");
                 this.load.image('sky', '../storage/images/meteoor/background.png');
                 this.load.image('hearts', '../storage/images/meteoor/Heart.png');
@@ -81,7 +87,7 @@
 
             create() {
 
-
+                 this.qKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
                 this.add.image(750, 370, 'sky');
                     this.hearts = this.add.image(1350, 50, 'hearts');
@@ -96,6 +102,8 @@
                     this.isGameOver = false;
                     this.pointer = false;
                     this.exploding = false;
+                    this.hasSent = false;
+
                     // const particles = this.add.particles(0, 0, 'green', {
                     //     speed: 500,
                     //     scale: { start: 0.4, end: 5 },
@@ -139,6 +147,11 @@
                     fontSize: '200px',
                     fontStyle: "bold",
                 })
+                this.victoryText = this.add.text(200, 200,  "Victory!", {
+                    color: "#ffffff",
+                    fontSize: '200px',
+                    fontStyle: "bold",
+                })
                 this.tryAgain = this.add.text(150, 450, "Click anywhere on the screen to try again", {
                     color: "#ffffff",
                     fontSize: '50px',
@@ -156,6 +169,8 @@
                 });
 
                 this.gameOverText.alpha = 0;
+                this.victoryText.alpha = 0;
+                this.victoryText.depth = 1
                 this.tryAgain.alpha = 0;
 
                 this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -170,8 +185,11 @@
                         if (similarity > 0.98) {
                             this.correct.alpha = 100;
                             this.time.addEvent(this.timedEvent);
-                            delete translationObject[randomPair.questionToAnswer];
-                            randomPair = getRandomKeyValuePair();
+
+
+                            translationObject.splice(randomPair.key, 1)
+
+
                             this.question.setText(randomPair.questionToAnswer);
                             this.exploding = true;
                             this.meteoor.play('explode');
@@ -180,8 +198,40 @@
                             this.meteoor.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
                                 this.meteoor.destroy();
                                 this.idx--;
+                                this.health--;
                                 this.exploding = false;
                                 this.question.alpha = 100;
+                                randomPair = getRandomKeyValuePair();
+                                if(randomPair == null){
+                                    this.victoryText.alpha = 100;
+                                    if(this.qkey.on('down', listener))
+                                    {
+                                        if(translationObject.length === 0 && !this.hasSent){
+                                            fetch("{!! route('resultaten.store') !!}", {
+                                                method: "POST",
+                                                body: JSON.stringify({
+                                                    userId: 1,
+                                                    title: "Fix my bugs",
+                                                    period_id: "Fix my bugs",
+                                                    wordlist_id: "Fix my bugs",
+                                                    student_id: "Fix my bugs",
+                                                    result: "Fix my bugs",
+                                                    completed: false
+                                                }),
+                                                headers: {
+                                                    "X-CSRF-Token": document.querySelector('meta[name="_token"]').content,
+                                                    "Content-type": "application/json; charset=UTF-8"
+                                                }
+                                            }).then(data => {
+                                                console.log(data.text())
+                                            });
+
+                                            this.hasSent = true
+                                        }
+                                    }
+                                    return
+                                }
+                                this.question.setText(randomPair.questionToAnswer);
                             }, this);
                         }
                         name.value = "";
@@ -189,7 +239,7 @@
                 });
 
                 document.addEventListener('visibilitychange',  () => {
-                    if (document.hidden && !this.isGameOver) {
+                    if (document.hidden && !this.isGameOver && translationObject.length > 0) {
 
                         // The tab is hidden, pause your game or take necessary actions
                         this.isGameOver = true;
@@ -201,9 +251,11 @@
             };
 
             update() {
+
+
                 if(!this.isGameOver) {
                     //Meteoor opniew inspawnen als hij kapot is
-                    if (this.idx < this.maxMeteorsToShow) {
+                    if (this.idx < this.maxMeteorsToShow && translationObject.length > 0) {
                         const x = Phaser.Math.Between(1500, config.width - 1500);
 
                         this.meteoor = this.physics.add.sprite(x, 1, 'meteoor');

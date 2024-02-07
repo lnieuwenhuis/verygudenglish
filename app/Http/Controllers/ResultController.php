@@ -45,7 +45,7 @@ class ResultController extends Controller
 
         $result->save();
 
-        return redirect()->back();
+        return redirect()->route('studenten.periodes');
     }
 
     public function destroy($id)
