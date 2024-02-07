@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Period;
 use App\Models\Word;
 use App\Models\WordList;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class WordListController extends Controller
 {
     public function index()
     {
-        return view("docenten.woordenlijsten", ['wordlists' => WordList::all()]);
+        return view("docenten.woordenlijsten", ['wordlists' => WordList::all(), 'periods' => Period::all()]);
     }
     public function create()
     {
