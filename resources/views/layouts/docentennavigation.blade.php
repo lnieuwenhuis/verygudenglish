@@ -12,7 +12,7 @@
             </a>
         </div>
     </div>
-    <div class="sidebar-content px-4 py-6">
+    <div class="sidebar-content px-4 py-6 flex flex-col h-fit">
         <ul class="flex flex-col w-full">
             <li class="my-px">
                 <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Welkom [Docent]</span>
@@ -86,4 +86,7 @@
             </li>
         </ul>
     </div>
+    <h1 class="text-xs text-gray-300 pt-auto text-center">
+        Copyright © 2024 Landstede ICT Harderwijk
+    </h1>
 </aside>
