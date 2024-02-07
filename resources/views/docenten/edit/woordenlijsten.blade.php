@@ -24,7 +24,7 @@
 
         <h1 class="text-2xl font-extrabold m-7 ml-0 text-white">Woordenlijst '{{ $wordlist->title }}' Bewerken</h1>
     </div>
-    <div class="flex flex-col m-5 w-full">
+    <div class="flex flex-col m-5">
         <form action="{{ route('woorden.store') }}" method="POST">
             @csrf
             <div class="flex flex-row">
@@ -36,7 +36,7 @@
             </div>
         </form>
         <div class="mt-4">
-            <div class="grid grid-cols-3 gap-x-10 border-b-gray-400 border-b-2">
+            <div class=" grid grid-cols-3 gap-x-10 border-b-gray-400 border-b-2">
                 <div>
                     Woord
                 </div>
