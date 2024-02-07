@@ -16,6 +16,11 @@
         <div class="px-5 flex flex-col">
 
             <input type="text" name="title" id="title" placeholder="Titel">
+            <select name="period_id" id="period_id">
+                @foreach ($periods as $period)
+                    <option value="{{ $period->id }}">{{ $period->title }}</option>
+                @endforeach
+            </select>
 
             <button type="submit">Submit</button>
         </div>

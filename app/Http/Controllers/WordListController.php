@@ -15,23 +15,21 @@ class WordListController extends Controller
     }
     public function create()
     {
-        return view('docenten.create.woordenlijsten');
+        return view('docenten.create.woordenlijsten', ['periods' => Period::all()]);
     }
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|max:100',
-            'test' => 'required',
-            'words' => 'required',
+            'period_id' => 'required'
         ]);
 
         $wordList = new WordList;
         $wordList->title = $request->get('title');
+        $wordList->period_id = $request->get('period_id');
         $wordList->save();
 
-        $wordList->periods()->attach($request->get('period'));
-
-        return redirect()->back()->with('message', 'Wordlist Stored in DB');
+        return redirect()->route('woordenlijsten.index')->with('message', 'Woordenlijst opgeslagen');
     }
     public function edit($id)
     {
