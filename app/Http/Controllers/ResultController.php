@@ -28,7 +28,6 @@ class ResultController extends Controller
             'period_id' => 'required',
             'wordlist_id' => 'required',
             'student_id' => 'required',
-            'result' => 'required',
             'mistakes' => 'required',
         ]);
 
