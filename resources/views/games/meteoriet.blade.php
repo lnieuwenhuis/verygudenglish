@@ -28,20 +28,20 @@
         return string.replace(reg, (match) => (map[match]));
     }
 
-    let translationObject = {};
-    if(words != undefined) {
+    let translationObject = {!! $words->toJson() !!};
+  //  if(words != undefined) {
         function getRandomKeyValuePair() { // pak random key & value
             const keysArray = Object.keys(translationObject);
             const randomIndex = Math.floor(Math.random() * keysArray.length);
             const randomKey = keysArray[randomIndex];
-            const randomValue = translationObject[randomKey].words;
-            console.log(translationObject)
+            const question = translationObject[randomKey].words;
+            const answer = translationObject[randomKey].answers;
             return {
-                questionToAnswer: randomKey,
-                translation: randomValue
+                questionToAnswer: question,
+                translation: answer
             };
         }
-    }
+ //   }
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -67,11 +67,11 @@
                         translationObject = data.products
                     })
                 });
-                this.load.html("htmlForm", "/storage/html/ageofwords/form.html");
-                this.load.image('sky', 'storage/images/meteoor/background.png');
-                this.load.image('hearts', 'storage/images/meteoor/Heart.png');
+                this.load.html("htmlForm", "../storage/html/ageofwords/form.html");
+                this.load.image('sky', '../storage/images/meteoor/background.png');
+                this.load.image('hearts', '../storage/images/meteoor/Heart.png');
                 //this.load.spritesheet('hearts', 'storage/images/meteoor/Heart.png', { frameWidth: 63 , frameHeight: 18 });
-                this.load.spritesheet('meteoor', 'storage/images/meteoor/meteoor.png', {
+                this.load.spritesheet('meteoor', '../storage/images/meteoor/meteoor.png', {
                     frameWidth: 75,
                     frameHeight: 76
                 });
@@ -292,7 +292,7 @@
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 15 }
+                gravity: { y: 5 }
             }
         },
         dom: {

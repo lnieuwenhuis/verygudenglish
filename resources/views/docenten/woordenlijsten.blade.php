@@ -10,27 +10,49 @@
 </head>
 
 <x-app-layout>
-    <div class="flex flex-row">
-        <h1 class="text-2xl font-extrabold p-5">Woordenlijsten</h1>
-        <a href="{{ route('woordenlijsten.create') }}" class="p-5 px-0 -ml-2"><svg xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
+    <div class="flex flex-row bg-indigo-500">
+        <a href="{{ route('docenten') }}" class="w-fit h-fit">
+            <button class="p-3 bg-white rounded-full m-4 border flex flex-row"><svg xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                </svg>
+                <h1 class="text-lg">
+                    Terug
+                </h1>
+            </button></a>
+        <h1 class="text-2xl font-extrabold m-7 ml-0 text-white">Woordenlijsten</h1>
+
+        <a href="{{ route('woordenlijsten.create') }}" class="w-fit h-fit ml-auto">
+            <button class="p-3 bg-white rounded-full m-4 border flex flex-row ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2"
+                    stroke="currentColor" class="w-7 h-7 mr-1">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <h1 class="text-lg ">Toevoegen</h1>
+            </button>
         </a>
+
+
     </div>
 
-    <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
+    <div class="flex flex-col px-5 min-w-60 mt-4"">
         <div class="flex flex-row border-b-gray-400 border-b-2">
             <div class="">Titel</div>
-            <div class="ml-auto">Preview</div>
+            <div class="ml-auto">Periode</div>
             <div class="ml-auto">Actions</div>
         </div>
 
         <div class="grid grid-cols-3 gap-x-44">
             @foreach ($wordlists as $wordlist)
                 <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $wordlist['title'] }}</div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">*Preview van woorden*
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
+                    @foreach ($periods as $period)
+                        @if ($period->id == $wordlist->period_id)
+                            <div>{{ $period->title }}</div>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="flex flex-row">
                     <a href="{{ route('woordenlijsten.edit', $wordlist->id) }}"class=" ml-auto">

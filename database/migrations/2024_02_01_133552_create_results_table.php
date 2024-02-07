@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('wordlist_id');
             $table->unsignedBigInteger('student_id');
             $table->integer('result');
-            $table->string('mistakes');
+            $table->string('mistakes')->default('');
 
             $table->timestamps();
 
