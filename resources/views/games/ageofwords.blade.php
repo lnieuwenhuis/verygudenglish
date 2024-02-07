@@ -192,7 +192,8 @@
             super(scene, x, y, troopType, group);
             this.health = 500;
             this.isEnemy = group;
-            this.units = this.scene.unitTroopGroup
+            this.buildings = this.scene.BuildingGroup;
+            this.troops = this.scene.BuildingGroup;
 
             this.setScale(0.4);
 
@@ -214,6 +215,7 @@
         }
 
         update() {
+            console.log(this.health);
             this.setVelocity(0);
 
             if (this.isDead()) {
@@ -221,12 +223,26 @@
             }
         }
 
-        setupColliders() {
-            this.overlap = this.scene.physics.add.overlap(this.units,this.units,this.handleUnitCollision, null, this)
+        handleUnitCollision(me,other) {
+            other.setVelocity(0);
         }
 
-        handleDeadBuilding(player) {
-
+        handleDeadBuilding(build) {
+            if (build.isEnemy) {
+                this.scene.add.text(755, 227, "Je hebt gewonnen", {
+                    color: "#ffffff",
+                    fontSize: '30px',
+                    fontStyle: "bold",
+                }).setOrigin(0.5, 7);
+                build.destroy();
+            } else {
+                this.scene.add.text(755, 227, "Je hebt verloren", {
+                    color: "#ffffff",
+                    fontSize: '30px',
+                    fontStyle: "bold",
+                }).setOrigin(0.5, 7);
+                build.destroy();
+            }
         }
 
         isDead() {
@@ -239,15 +255,17 @@
             super(scene, x, y, troopType, group);
             this.isEnemy = group;
 
-            this.movementSpeed = 0
-            this.units = this.scene.unitTroopGroup
+            this.movementSpeed = 0;
+            this.units = this.scene.unitTroopGroup;
+            this.buildings = this.scene.BuildingGroup;
+
             if (!this.isEnemy) {
-                this.movementSpeed = 80
-                // this.health += 20;
+                this.movementSpeed = 80;
             } else {
-                this.movementSpeed = -80
+                this.movementSpeed = -80;
                 this.flipX = true;
             }
+
             this.playerNewAnimation = true;
             this.attacking = false;
             this.isColliding = false;
@@ -274,7 +292,6 @@
 
         update() {
             this.once('animationcomplete', () => {
-                this.isCollidingUnit = false;
                 this.playerNewAnimation = true;
             });
 
@@ -311,6 +328,7 @@
 
         setupColliders() {
             this.overlap = this.scene.physics.add.overlap(this.units,this.units,this.handleUnitCollision, null, this)
+            this.overlapBuilding = this.scene.physics.add.overlap(this.units,this.buildings,this.handleUnitCollision, null, this)
         }
 
         handleUnitCollision(me, other) {
@@ -348,13 +366,14 @@
                 if (player.isEnemy) {
                     gameConfig.alive.enemy -= 1
                 }
-                this.scene.physics.world.colliders.destroy();
                 player.once('animationcomplete', () => {
-                    this.units.getChildren().forEach(child => {
-                        child.isCollidingUnit = false;
-                    })
                     setTimeout(() => {
                         player.destroy();
+                        this.units.getChildren().forEach(child => {
+                            console.log("hi");
+                            child.isCollidingUnit = false;
+                            child.newAnimation = true;
+                        })
                     }, 2000);
                 });
             }
@@ -366,8 +385,6 @@
         }
     }
 
-    let troopsInQueue = 0;
-
     const phaserConfig = {
         type: Phaser.AUTO,
         parent: "game",
@@ -375,6 +392,7 @@
         height: 455,
         backgroundColor: '#774F35',
         antialias: true,
+        key: "scene",
         physics: {
             default: 'arcade',
             arcade: {
@@ -437,7 +455,9 @@
 
     const game = new Phaser.Game(phaserConfig);
     let rectangles = [];
+    let progressBar = [];
     let additive = 300
+    let isSpawningUnit = false;
 
     function preloadScene() { // images & html laden
         this.load.html("htmlForm", "storage/html/ageofwords/form.html");
@@ -495,29 +515,30 @@
             });
         }
 
-        //this.playerCave = this.add.image(50, 270, 'cave').setScale(0.4);
-
-        new BuildingGameObject(this, 50, 270, 'cave', false);
-
-        //this.enemyCave = this.add.image(1450, 270, 'cave').setScale(0.4).setFlipX(true);
-
-        new BuildingGameObject(this, 1380, 270, 'cave', true);
-
         this.unitTroopGroup = this.physics.add.group({
             defaultKey: 'unitTroop',
             maxSize: -1,
             runChildUpdate: true,
             collideWorldBounds: true
         });
-        this.enemyTroopGroup = this.physics.add.group({
-            defaultKey: 'unitTroop',
+
+        this.BuildingGroup = this.physics.add.group({
+            defaultKey: 'buildingGroup',
             maxSize: -1,
             runChildUpdate: true,
             collideWorldBounds: true
         });
 
         this.troops = [];
-        this.Enemytroops = [];
+        this.buildings = [];
+
+        const playerBuilding = new BuildingGameObject(this, 50, 270, 'cave', false);
+
+        this.BuildingGroup.add(playerBuilding);
+
+        const enemyBuilding = new BuildingGameObject(this, 1380, 270, 'cave', true);
+
+        this.BuildingGroup.add(enemyBuilding);
 
         this.spelling = this.add.text(670, 510, "Let op je spelling!!!", {
             color: "#ffffff",
@@ -582,10 +603,9 @@
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 25;
                     gameConfig.troopsInQueue.player += 1;
-                    this.time.addEvent(this.timedEventProgressBar);
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
-
+                    isSpawningUnit = true;
                     setTimeout(() => {
                         const troop = new PlayerTroopGameObject(this, 200, 320, 'meleeTroop', false);
                         troop.deathAnimation = false;
@@ -593,7 +613,6 @@
                         troop.health = 100;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
-                        this.progressFill.width = 0;
                     }, delay);
                 }
             }
@@ -607,7 +626,6 @@
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 50;
                     gameConfig.troopsInQueue.player += 1;
-                    this.time.addEvent(this.timedEventProgressBar);
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
@@ -618,7 +636,6 @@
                         troop.health = 100;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
-                        this.progressFill.width = 0;
                     }, delay);
                 }
             }
@@ -632,7 +649,6 @@
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 100;
                     gameConfig.troopsInQueue.player += 1;
-                    this.time.addEvent(this.timedEventProgressBar);
 
                     const delay = gameConfig.troopsInQueue.player * 3000;
 
@@ -643,7 +659,6 @@
                         troop.health = 300;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
-                        this.progressFill.width = 0;
                     }, delay);
                 }
             }
@@ -679,13 +694,17 @@
             rectangles.push(r);
         }
 
-        this.progress = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
-        this.progressFill = this.add.rectangle(200, 50, 200, 11, 0xF70000);
+        for (let i = 0; i < 1; i++) {
+            let r = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
+            r.isFilled = false;
+            r.setStrokeStyle(1, 0x000000);
+            progressBar.push(r);
+        }
 
-        this.progressFill.width = 0.1;
-
-        this.progress.isFilled = false;
-        this.progress.setStrokeStyle(1, 0x000000);
+        // this.progress = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
+        //
+        // this.progress.isFilled = false;
+        // this.progress.setStrokeStyle(1, 0x000000);
 
         this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
@@ -715,25 +734,26 @@
             }
         });
 
-        // if (gameConfig.coins.enemy >= 25 && gameConfig.alive.enemy < 3) {
-        //     if (gameConfig.troopsInQueue.enemy < 5) {
-        //         gameConfig.coins.enemy -= 25;
-        //         gameConfig.alive.enemy += 1;
-        //         gameConfig.troopsInQueue.enemy += 1;
-        //
-        //         const delay = gameConfig.troopsInQueue.enemy * 3000;
-        //
-        //         setTimeout(() => {
-        //             const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
-        //
-        //             troop.deathAnimation = false;
-        //             troop.attackDamage = 20;
-        //             troop.isEnemy = true;
-        //             this.unitTroopGroup.add(troop);
-        //             gameConfig.troopsInQueue.enemy -= 1;
-        //         }, delay);
-        //     }
-        // }
+        if (gameConfig.coins.enemy >= 25 && gameConfig.alive.enemy < 3) {
+            if (gameConfig.troopsInQueue.enemy < 5) {
+                gameConfig.coins.enemy -= 25;
+                gameConfig.alive.enemy += 1;
+                gameConfig.troopsInQueue.enemy += 1;
+
+                const delay = gameConfig.troopsInQueue.enemy * 3000;
+
+                setTimeout(() => {
+                    const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
+
+                    troop.deathAnimation = false;
+                    troop.attackDamage = 20;
+                    troop.health = 100;
+                    troop.isEnemy = true;
+                    this.unitTroopGroup.add(troop);
+                    gameConfig.troopsInQueue.enemy -= 1;
+                }, delay);
+            }
+        }
 
         this.money.setText(gameConfig.coins.player);
 
@@ -747,16 +767,33 @@
         }
 
         const progress = this.timedEvent.getProgress();
-        const progressBar = this.timedEventProgressBar.getProgress();
 
-        if (progressBar >= 0.01 && this.progressFill.width >= 0 && this.progressFill.width < 200 && progressBar < 1) {
-            const decreaseStep = () => {
-                if (this.progressFill.width <= 200) {
-                    this.progressFill.width += 0.04;
-                    setTimeout(decreaseStep, 100);
-                }
-            };
-            decreaseStep();
+        // if (progressBar >= 0.01 && this.progressFill.width >= 0 && this.progressFill.width < 200) {
+        //     const decreaseStep = () => {
+        //         if (this.progressFill.width <= 200) {
+        //             this.progressFill.width += 0.04;
+        //             setTimeout(decreaseStep, 100);
+        //         }
+        //     };
+        //     decreaseStep();
+        // }
+
+        for (let i = 0; i < gameConfig.troopsInQueue.player; i++) {
+            let progress = this.add.rectangle(100, 50, 0, 11, 0xF70000);
+            if (gameConfig.troopsInQueue.player >= (i + 1)) {
+                const decreaseStep = () => {
+                    if (gameConfig.troopsInQueue.player >= 1) {
+                        if (progress.width <= 194) {
+                            progress.width += 10;
+                        }
+                    } else {
+                        progress.width = 0;
+                    }
+                    setTimeout(decreaseStep, 150);
+                };
+
+                decreaseStep();
+            }
         }
 
         if (progress >= 0.5 && this.correct.alpha > 0) {
