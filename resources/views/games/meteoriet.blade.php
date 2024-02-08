@@ -235,12 +235,12 @@
                     fetch("{!! route('resultaten.store') !!}", {
                         method: "POST",
                         body: JSON.stringify({
-                            userId: 1,
-                            title: "result",
-                            period_id: "Fix my bugs",
-                            wordlist_id: "Fix my bugs",
-                            student_id: "Fix my bugs",
-                            result: "Fix my bugs",
+                            userId: 2,
+                            title: "hoi",
+                            period_id: '8',
+                            wordlist_id: "8",
+                            student_id: "8",
+                            result: "9",
                             completed: false
                         }),
                         headers: {

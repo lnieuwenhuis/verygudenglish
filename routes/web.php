@@ -73,7 +73,7 @@ Route::get("/ageofwords", function () {
 })->name('ageofwords');
 // ->middleware(['auth', 'verified'])->name('ageofwords');
 
-Route::get("/meteor/{id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->name('meteoriet');
+Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->name('meteoriet');
 // ->middleware(['auth', 'verified'])->name('meteoriet');
 
 

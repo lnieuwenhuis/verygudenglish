@@ -23,12 +23,12 @@ class ResultController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required',
             'period_id' => 'required',
             'wordlist_id' => 'required',
-            'student_id' => 'required',
-            'mistakes' => 'required',
+            'student_id' => 'required'
         ]);
 
         $period_id = (int)$request->get('period_id');
@@ -40,10 +40,11 @@ class ResultController extends Controller
         $result->period_id = $period_id;
         $result->wordlist_id = $wordlist_id;
         $result->student_id = $student_id;
-        $result->result = $request->get('result');
-        $result->mistakes = $request->get('mistakes');
+        $result->result = 4;
+        $result->mistakes = "hoi";
 
-        $result->save();
+        $test = $result->save();
+        return $test;
 
         return redirect()->route('studenten.periodes');
     }

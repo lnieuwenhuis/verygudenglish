@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 
 class MeteorController extends Controller
 {
-    public function meteor($id, $period_id)
+    public function meteor(Request $request, $period_id)
     {
-        $words = Word::where('list_id', $id)->get();
 
-        $periodId = Period::where('period_id', $period_id)->get();
-        $listId = WordList::where('id', $id)->get();
+        $words = Word::where('list_id', $request->list_id)->get();
+
+        $periodId = Period::where('id', $period_id)->get();
+        $listId = WordList::where('id', $request->list_id)->get();
 
         return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId]);
     }
