@@ -39,6 +39,8 @@ Route::get("/studenten/resultaten", [ResultController::class, "student_index"])-
 
 Route::get('/studenten/resultaten/fouten', [ResultController::class, 'student_mistakes'])->name('studenten.results.mistakes');
 
+Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class, 'student_wordlist'])->name('studenten.woordenlijst');
+
 
 //Routes voor docenten
 Route::get("/docenten", function () {

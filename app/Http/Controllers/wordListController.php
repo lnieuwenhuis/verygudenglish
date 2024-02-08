@@ -13,6 +13,11 @@ class WordListController extends Controller
     {
         return view("docenten.woordenlijsten", ['wordlists' => WordList::all(), 'periods' => Period::all()]);
     }
+
+    public function student_wordlist($id)
+    {
+        return view('studenten.woordenlijst', ['wordlist' => WordList::findOrFail($id), 'words' => Word::where('list_id', $id)->get()]);
+    }
     public function create()
     {
         return view('docenten.create.woordenlijsten', ['periods' => Period::all()]);
