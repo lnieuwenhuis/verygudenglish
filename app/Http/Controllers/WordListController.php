@@ -38,19 +38,23 @@ class WordListController extends Controller
     }
     public function edit($id)
     {
-        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail((int)$id)], ['words' => Word::where('list_id', $id)->get()]);
+        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail((int)$id), 'words' => Word::where('list_id', $id)->get(), 'periodes' => Period::all()]);
     }
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|max:100',
+            'period_id' => 'required',
         ]);
 
         $wordList = new WordList;
         $wordList = WordList::findOrFail($id);
         $wordList->title = $request->get('title');
+        $wordList->period_id = $request->get('period_id');
 
         $wordList->save();
+
+        return redirect()->route('woordenlijsten.index')->with('message', 'Woordenlijst aangepast');
     }
     public function destroy($id)
     {

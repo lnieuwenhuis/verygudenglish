@@ -25,39 +25,58 @@
         <h1 class="text-2xl font-extrabold m-7 ml-0 text-white">Woordenlijst '{{ $wordlist->title }}' Bewerken</h1>
     </div>
     <div class="flex flex-col m-5">
-        <form action="{{ route('woorden.store') }}" method="POST">
-            @csrf
-            <div class="flex flex-row">
-                <input type="text" name="words" id="word" placeholder="Woord" class="rounded-lg mr-1">
-                <input type="text" name="answers" id="answer" placeholder="Antwoord" class="rounded-lg mr-1">
-                <input type="hidden" name="list_id" placeholder="{{ $wordlist['id'] }}" value="{{ $wordlist['id'] }}"
-                    class="hidden">
-                <button class="pt-2 pb-2 pr-4 pl-4 bg-blue-600 text-xl text-sky-50 rounded-lg" type="submit">+</button>
-            </div>
-        </form>
-        <div class="mt-4">
-            <div class=" grid grid-cols-3 gap-x-10 border-b-gray-400 border-b-2">
-                <div>
-                    Woord
+        <div class="flex flex-row">
+            <form action="{{ route('woorden.store') }}" method="POST">
+                @csrf
+                <div class="flex flex-row">
+                    <input type="text" name="words" id="word" placeholder="Woord" class="rounded-lg mr-1">
+                    <input type="text" name="answers" id="answer" placeholder="Antwoord" class="rounded-lg mr-1">
+                    <input type="hidden" name="list_id" placeholder="{{ $wordlist['id'] }}"
+                        value="{{ $wordlist['id'] }}" class="hidden">
+                    <button class="pt-2 pb-2 pr-4 pl-4 bg-blue-600 text-xl text-sky-50 rounded-lg"
+                        type="submit">+</button>
                 </div>
-                <div class="ml-auto mr-auto">
-                    Antwoord
-                </div>
-                <div class="ml-auto">Acties</div>
-            </div>
-            <div class="grid grid-cols-3 gap-x-10">
-                @foreach ($words as $word)
-                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $word['words'] }}</div>
-                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $word['answers'] }}
-                    </div>
-                    <form action="{{ route('woorden.destroy', $word->id) }}" method="POST" class="ml-auto">
-                        @csrf
-                        @method('delete')
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
-                    </form>
-                @endforeach
-            </div>
+            </form>
+            <form action="{{ route('woordenlijsten.update', $wordlist->id) }}" method="POST" class="ml-auto">
+                @csrf
+                @method('patch')
+                <div class="px-5 flex flex-row">
+                    <input type="hidden" name="title" id="title" value="{{ $wordlist->title }}">
+                    <select name="period_id" id="period_id" class="rounded-lg">
+                        @foreach ($periodes as $period)
+                            <option value="{{ $period->id }}" @if ($wordlist->period_id == $period->id) selected @endif>
+                                {{ $period->title }}</option>
+                        @endforeach
+                    </select>
+                    <button class="pt-2 pb-2 pr-4 pl-4 bg-blue-600 text-xl text-sky-50 rounded-lg ml-2"
+                        type="submit">Save</button>
+            </form>
         </div>
+    </div>
+
+    <div class="mt-4">
+        <div class=" grid grid-cols-3 gap-x-10 border-b-gray-400 border-b-2">
+            <div>
+                Woord
+            </div>
+            <div class="ml-auto mr-auto">
+                Antwoord
+            </div>
+            <div class="ml-auto">Acties</div>
+        </div>
+        <div class="grid grid-cols-3 gap-x-10">
+            @foreach ($words as $word)
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $word['words'] }}</div>
+                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">{{ $word['answers'] }}
+                </div>
+                <form action="{{ route('woorden.destroy', $word->id) }}" method="POST" class="ml-auto">
+                    @csrf
+                    @method('delete')
+                    <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                </form>
+            @endforeach
+        </div>
+    </div>
     </div>
 
 
