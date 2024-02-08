@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Period;
 use App\Models\Test;
+use App\Models\WordList;
 use Illuminate\Http\Request;
 
 class PeriodController extends Controller
@@ -19,7 +20,7 @@ class PeriodController extends Controller
 
     public function student_periode($id)
     {
-        return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'tests' => Test::all(), 'periodes' => Period::all()]);
+        return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'tests' => Test::all(), 'periodes' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
     }
     public function store(Request $request)
     {

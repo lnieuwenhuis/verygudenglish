@@ -87,7 +87,7 @@
 
             create() {
 
-                 this.qKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+
 
                 this.add.image(750, 370, 'sky');
                     this.hearts = this.add.image(1350, 50, 'hearts');
@@ -103,6 +103,7 @@
                     this.pointer = false;
                     this.exploding = false;
                     this.hasSent = false;
+                    this.won = false;
 
                     // const particles = this.add.particles(0, 0, 'green', {
                     //     speed: 500,
@@ -173,6 +174,10 @@
                 this.victoryText.depth = 1
                 this.tryAgain.alpha = 0;
 
+
+
+
+
                 this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
                 this.returnKey.on("down", event => { // als enter word ingedrukt
@@ -198,37 +203,12 @@
                             this.meteoor.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
                                 this.meteoor.destroy();
                                 this.idx--;
-                                this.health--;
                                 this.exploding = false;
                                 this.question.alpha = 100;
                                 randomPair = getRandomKeyValuePair();
                                 if(randomPair == null){
                                     this.victoryText.alpha = 100;
-                                    if(this.qkey.on('down', listener))
-                                    {
-                                        if(translationObject.length === 0 && !this.hasSent){
-                                            fetch("{!! route('resultaten.store') !!}", {
-                                                method: "POST",
-                                                body: JSON.stringify({
-                                                    userId: 1,
-                                                    title: "Fix my bugs",
-                                                    period_id: "Fix my bugs",
-                                                    wordlist_id: "Fix my bugs",
-                                                    student_id: "Fix my bugs",
-                                                    result: "Fix my bugs",
-                                                    completed: false
-                                                }),
-                                                headers: {
-                                                    "X-CSRF-Token": document.querySelector('meta[name="_token"]').content,
-                                                    "Content-type": "application/json; charset=UTF-8"
-                                                }
-                                            }).then(data => {
-                                                console.log(data.text())
-                                            });
-
-                                            this.hasSent = true
-                                        }
-                                    }
+                                    this.won = true;
                                     return
                                 }
                                 this.question.setText(randomPair.questionToAnswer);
@@ -251,7 +231,30 @@
             };
 
             update() {
+                if(this.won && !this.hasSent){
+                    fetch("{!! route('resultaten.store') !!}", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            userId: 1,
+                            title: "result",
+                            period_id: "Fix my bugs",
+                            wordlist_id: "Fix my bugs",
+                            student_id: "Fix my bugs",
+                            result: "Fix my bugs",
+                            completed: false
+                        }),
+                        headers: {
+                            "X-CSRF-Token": document.querySelector('meta[name="_token"]').content,
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    }).then(data => {
+                        console.log(data.text())
+                    });
 
+                    this.hasSent = true
+
+
+                }
 
                 if(!this.isGameOver) {
                     //Meteoor opniew inspawnen als hij kapot is

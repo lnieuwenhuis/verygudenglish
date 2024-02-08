@@ -10,7 +10,6 @@
 </head>
 
 <x-guest-layout>
-
     <div>
         <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
 
@@ -41,7 +40,7 @@
                         <div class="flex flex-row">
                                     <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Meteor Slash
                                     </div>
-                                    <form action="{{ route('meteoriet', $period->id) }}" method="GET" class=" ml-auto">
+                                    <form action="{{ route('meteoriet', $period->id, $wordlist->id) }}" method="GET" class=" ml-auto">
                                         @csrf
                                         <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Maken</button>
                                     </form>
