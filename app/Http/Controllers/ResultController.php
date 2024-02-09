@@ -44,9 +44,7 @@ class ResultController extends Controller
         $result->mistakes = "hoi";
 
         $test = $result->save();
-        return $test;
-
-        return redirect()->route('studenten.periodes');
+        return $test . redirect()->route('studenten.periodes');
     }
 
     public function destroy($id)
