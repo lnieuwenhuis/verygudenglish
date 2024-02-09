@@ -18,9 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('wordlist_id');
 
             $table->timestamps();
-
-            $table->foreign('period_id')->references('id')->on('periods');
-            $table->foreign('wordlist_id')->references('id')->on('lists');
         });
     }
 

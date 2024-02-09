@@ -12,6 +12,10 @@ class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function result()
+    {
+        return $this->belongsToMany(Result::class, 'students', 'id');
+    }
     /**
      * The attributes that are mass assignable.
      *
