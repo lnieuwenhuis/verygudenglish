@@ -14,7 +14,7 @@ class Student extends Authenticatable
 
     public function result()
     {
-        return $this->belongsTo(Result::class, 'id', 'student_id');
+        return $this->belongsToMany(Result::class, 'students', 'id');
     }
     /**
      * The attributes that are mass assignable.

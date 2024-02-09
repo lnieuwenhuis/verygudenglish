@@ -12,6 +12,6 @@ class Period extends Model
     public $timestamps = false;
     public function result()
     {
-        return $this->belongsTo(Result::class, 'id', 'period_id');
+        return $this->belongsToMany(Result::class, 'periods', 'id');
     }
 }

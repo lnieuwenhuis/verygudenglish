@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->unsignedBigInteger('period_id');
-            $table->foreign('period_id')->references('id')->on('periods');
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Period;
+use App\Models\Result;
 use App\Models\Word;
 use App\Models\WordList;
 use Illuminate\Http\Request;
@@ -60,9 +61,13 @@ class WordListController extends Controller
     {
         $wordList = WordList::findOrFail($id);
 
-        $wordList->words()->delete();
+//        $wordList->period()->detach();
+//        $wordList->words()->delete();
+//        Result::where('wordlist_id', $wordList->id)->delete();
+//        Period::where('id', $wordList->period_id)->delete();
+
         $wordList->delete();
 
-        return redirect()->back()->with('message', 'Woordenlijst verwijderd');
+        return redirect()->route('woordenlijsten.index')->with('message', 'Woordenlijst verwijderd');
     }
 }

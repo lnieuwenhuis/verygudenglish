@@ -9,24 +9,24 @@ class Result extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $table = 'lists';
+    protected $table = 'results';
 
 
     public $timestamps = false;
 
     public function wordlists()
     {
-        return $this->hasMany(WordList::class, 'wordlist_id');
+        return $this->hasMany(WordList::class, 'id', 'wordlist_id');
 
     }
     public function students()
     {
-        return $this->hasMany(Student::class, 'student_id');
+        return $this->hasMany(Student::class, 'id', 'student_id');
 
     }
     public function periods()
     {
-        return $this->hasMany(Period::class, 'period_id');
+        return $this->hasMany(Period::class, 'id', 'period_id');
 
     }
 

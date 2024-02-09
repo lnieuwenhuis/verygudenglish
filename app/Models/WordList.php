@@ -20,6 +20,6 @@ class WordList extends Model
     }
     public function result()
     {
-        return $this->belongsTo(Result::class, 'id', 'wordlist_id');
+        return $this->belongsToMany(Result::class, 'lists', 'id');
     }
 }
