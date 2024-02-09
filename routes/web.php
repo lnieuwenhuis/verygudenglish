@@ -5,6 +5,7 @@ use App\Http\Controllers\PeriodController as ControllersPeriodController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\wordController;
 use App\Http\Controllers\wordListController;
@@ -40,6 +41,8 @@ Route::get("/studenten/resultaten", [ResultController::class, "student_index"])-
 Route::get('/studenten/resultaten/fouten', [ResultController::class, 'student_mistakes'])->name('studenten.results.mistakes');
 
 Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class, 'student_wordlist'])->name('studenten.woordenlijst');
+
+Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'student_geenlijst'])->name('studenten.geenlijst');
 
 
 //Routes voor docenten

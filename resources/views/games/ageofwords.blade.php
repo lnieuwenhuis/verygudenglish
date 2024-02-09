@@ -137,10 +137,10 @@
             this.buildings = this.scene.BuildingGroup;
 
             if (!this.isEnemy) {
-                this.movementSpeed = 80;
+                this.movementSpeed = 40;
                 this.health += 10
             } else {
-                this.movementSpeed = -80;
+                this.movementSpeed = -40;
                 this.flipX = true;
             }
 
