@@ -61,11 +61,7 @@ class WordListController extends Controller
     {
         $wordList = WordList::findOrFail($id);
 
-//        Word::where('id', $wordList->period_id)->detach();
-
-        $words = Word::where('list_id', $wordList->id)->get();
-        $words->each->delete();
-
+        $wordList->words()->delete();
         $wordList->delete();
 
         return redirect()->route('woordenlijsten.index')->with('message', 'Woordenlijst verwijderd');

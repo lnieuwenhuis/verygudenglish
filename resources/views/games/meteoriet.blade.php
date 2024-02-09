@@ -210,6 +210,7 @@
                                 if(randomPair == null){
                                     this.victoryText.alpha = 100;
                                     this.won = true;
+                                    this.question.alpha = 0;
                                     return
                                 }
                                 this.question.setText(randomPair.questionToAnswer);
@@ -248,8 +249,10 @@
                             "X-CSRF-Token": document.querySelector('meta[name="_token"]').content,
                             "Content-type": "application/json; charset=UTF-8"
                         }
-                    }).then(data => {
-                        console.log(data.text())
+                    }).then(function (response) {
+                        if (response.status !== 200) {
+                            alert('asdfkjlasdf');
+                        }
                     });
 
                     this.hasSent = true
