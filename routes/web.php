@@ -68,9 +68,7 @@ Route::resource('/docenten/woorden', wordController::class);
 // ->middleware(['auth', 'verified']);
 
 //Routes voor de games
-Route::get("/ageofwords", function () {
-    return view('games.ageofwords');
-})->name('ageofwords');
+Route::get("/ageofwords/{list_id}", [\App\Http\Controllers\AgeOfWordsController::class, 'ageofwords'])->name('ageofwords');
 // ->middleware(['auth', 'verified'])->name('ageofwords');
 
 Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->name('meteoriet');
