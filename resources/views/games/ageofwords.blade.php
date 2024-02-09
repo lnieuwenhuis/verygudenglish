@@ -190,7 +190,7 @@
     class BuildingGameObject extends Phaser.Physics.Arcade.Sprite {
         constructor(scene, x, y, troopType, group) {
             super(scene, x, y, troopType, group);
-            this.health = 500;
+            this.health = 1000;
             this.isEnemy = group;
             this.buildings = this.scene.BuildingGroup;
             this.troops = this.scene.BuildingGroup;
@@ -199,6 +199,18 @@
 
             if (this.isEnemy) {
                 this.flipX = true;
+                this.buildingHealthText = this.scene.add.text(1360, 350, "", {
+                    color: "#ff0000",
+                    fontSize: '30px',
+                    fontStyle: "bold",
+                }).setOrigin(0.5, 7);
+            } else {
+                this.health += 100
+                this.buildingHealthText = this.scene.add.text(140, 350, "", {
+                    color: "#ff0000",
+                    fontSize: '30px',
+                    fontStyle: "bold",
+                }).setOrigin(0.5, 7);
             }
 
             scene.physics.add.existing(this);
@@ -215,12 +227,13 @@
         }
 
         update() {
-            console.log(this.health);
             this.setVelocity(0);
 
             if (this.isDead()) {
                 this.handleDeadBuilding(this);
             }
+
+            this.buildingHealthText.setText(this.health);
         }
 
         handleUnitCollision(me,other) {
@@ -261,6 +274,7 @@
 
             if (!this.isEnemy) {
                 this.movementSpeed = 80;
+                this.health += 10
             } else {
                 this.movementSpeed = -80;
                 this.flipX = true;
@@ -335,13 +349,13 @@
             if (!me.isDead() && !me.isCollidingUnit) {
                 me.setPushable(false);
                 me.setVelocityX(0);
-                me.isCollidingUnit = true;
 
                 if ((me.isEnemy && other.isEnemy) || ((!me.isEnemy  && !other.isEnemy))) {
                     me.attacking = false;
                     me.isCollidingUnit = false;
                     me.playerNewAnimation = true;
                 } else {
+                    me.isCollidingUnit = true;
                     me.attacking = true;
                     me.playerNewAnimation = true;
                     if (!other.isDead()) {
@@ -360,17 +374,19 @@
 
         handleDeadTroop(player) {
             if (!player.deathAnimation) {
+                player.setVelocityX(0);
                 player.attacking = false;
                 player.deathAnimation = true;
                 player.play(player.deathAnimationKey);
                 if (player.isEnemy) {
                     gameConfig.alive.enemy -= 1
+                } else {
+                    gameConfig.coins.enemy += 25;
                 }
                 player.once('animationcomplete', () => {
                     setTimeout(() => {
                         player.destroy();
                         this.units.getChildren().forEach(child => {
-                            console.log("hi");
                             child.isCollidingUnit = false;
                             child.newAnimation = true;
                         })
@@ -378,8 +394,7 @@
                 });
             }
         }
-
-
+        
         isDead() {
             return this.health <= 0;
         }
@@ -440,9 +455,13 @@
             rangedTroop: 2,
             tankTroop: 3,
         },
+        spawnCost: {
+            meleeTroop: 25,
+            tankTroop: 100,
+        },
         coins: {
-            player: 2000,
-            enemy: 100,
+            player: 175,
+            enemy: 175,
         },
         troopsInQueue: {
             player: 0,
@@ -471,8 +490,6 @@
         this.load.spritesheet('meleeTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/meleeTroop.png', { frameWidth: 97, frameHeight: 174, endFrame: 50 });
         this.load.spritesheet('meleeTroopDeath', 'storage/images/ageofwords/sprites/troops/death/meleeDeath.png', { frameWidth: 225, frameHeight: 180, endFrame: 24 });
         this.load.spritesheet('meleeTroopAttack', 'storage/images/ageofwords/sprites/troops/attack/meleeTroop.png', { frameWidth: 170, frameHeight: 175, endFrame: 40 });
-        this.load.spritesheet('rangedTroop', 'storage/images/ageofwords/sprites/troops/rangedTroop.png', { frameWidth: 84, frameHeight: 135, endFrame: 43 });
-        this.load.spritesheet('rangedTroopDeath', 'storage/images/ageofwords/sprites/troops/death/rangedDeath.png', { frameWidth: 163, frameHeight: 162, endFrame: 24 });
         this.load.spritesheet('tankTroop', 'storage/images/ageofwords/sprites/troops/tankTroop.png', { frameWidth: 180, frameHeight: 133, endFrame: 40 });
         this.load.spritesheet('tankTroopIdle', 'storage/images/ageofwords/sprites/troops/idle/tankTroop.png', { frameWidth: 178, frameHeight: 131, endFrame: 48 });
         this.load.spritesheet('tankTroopDeath', 'storage/images/ageofwords/sprites/troops/death/tankDeath.png', { frameWidth: 280, frameHeight: 148, endFrame: 50 });
@@ -599,7 +616,6 @@
         meleeBuyButton.on('pointerdown', () => {
 
             if (gameConfig.coins.player >= 25) {
-
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 25;
                     gameConfig.troopsInQueue.player += 1;
@@ -608,29 +624,6 @@
                     isSpawningUnit = true;
                     setTimeout(() => {
                         const troop = new PlayerTroopGameObject(this, 200, 320, 'meleeTroop', false);
-                        troop.deathAnimation = false;
-                        troop.attackDamage = 20;
-                        troop.health = 100;
-                        this.unitTroopGroup.add(troop);
-                        gameConfig.troopsInQueue.player -= 1;
-                    }, delay);
-                }
-            }
-        }, this);
-
-        const rangedBuyButton = this.add.image(1350, 50, 'rangedTroopBuy').setInteractive();
-        rangedBuyButton.on('pointerdown', () => {
-
-            if (gameConfig.coins.player >= 25) {
-
-                if (gameConfig.troopsInQueue.player < 5) {
-                    gameConfig.coins.player -= 50;
-                    gameConfig.troopsInQueue.player += 1;
-
-                    const delay = gameConfig.troopsInQueue.player * 3000;
-
-                    setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 200, 320, 'rangedTroop', false);
                         troop.deathAnimation = false;
                         troop.attackDamage = 15;
                         troop.health = 100;
@@ -641,10 +634,10 @@
             }
         }, this);
 
-        const tankBuyButton = this.add.image(1400, 50, 'tankTroopBuy').setInteractive();
+        const tankBuyButton = this.add.image(1350, 50, 'tankTroopBuy').setInteractive();
         tankBuyButton.on('pointerdown', () => {
 
-            if (gameConfig.coins.player >= 25) {
+            if (gameConfig.coins.player >= 100) {
 
                 if (gameConfig.troopsInQueue.player < 5) {
                     gameConfig.coins.player -= 100;
@@ -655,7 +648,7 @@
                     setTimeout(() => {
                         const troop = new PlayerTroopGameObject(this, 200, 320, 'tankTroop', false);
                         troop.deathAnimation = false;
-                        troop.attackDamage = 75;
+                        troop.attackDamage = 70;
                         troop.health = 300;
                         this.unitTroopGroup.add(troop);
                         gameConfig.troopsInQueue.player -= 1;
@@ -664,29 +657,29 @@
             }
         }, this);
 
-        const enemyMeleeBuyButton = this.add.image(1450, 50, 'meleeTroopBuy').setInteractive();
-        enemyMeleeBuyButton.on('pointerdown', () => {
-
-            if (gameConfig.coins.enemy >= 25) {
-
-                if (gameConfig.troopsInQueue.enemy < 5) {
-                    gameConfig.coins.enemy -= 25;
-                    gameConfig.troopsInQueue.enemy += 1;
-
-                    const delay = gameConfig.troopsInQueue.enemy * 3000;
-
-                    setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 1300, 320, 'meleeTroop', true);
-
-                        troop.deathAnimation = false;
-                        troop.attackDamage = 20;
-                        troop.health = 100;
-                        this.unitTroopGroup.add(troop);
-                        gameConfig.troopsInQueue.enemy -= 1;
-                    }, delay);
-                }
-            }
-        }, this);
+        // const enemyMeleeBuyButton = this.add.image(1450, 50, 'meleeTroopBuy').setInteractive();
+        // enemyMeleeBuyButton.on('pointerdown', () => {
+        //
+        //     if (gameConfig.coins.enemy >= 25) {
+        //
+        //         if (gameConfig.troopsInQueue.enemy < 5) {
+        //             gameConfig.coins.enemy -= 25;
+        //             gameConfig.troopsInQueue.enemy += 1;
+        //
+        //             const delay = gameConfig.troopsInQueue.enemy * 3000;
+        //
+        //             setTimeout(() => {
+        //                 const troop = new PlayerTroopGameObject(this, 1300, 320, 'meleeTroop', true);
+        //
+        //                 troop.deathAnimation = false;
+        //                 troop.attackDamage = 20;
+        //                 troop.health = 100;
+        //                 this.unitTroopGroup.add(troop);
+        //                 gameConfig.troopsInQueue.enemy -= 1;
+        //             }, delay);
+        //         }
+        //     }
+        // }, this);
 
         for (let i = 0; i < 5; i++) {
             additive += 20;
@@ -694,17 +687,10 @@
             rectangles.push(r);
         }
 
-        for (let i = 0; i < 1; i++) {
-            let r = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
-            r.isFilled = false;
-            r.setStrokeStyle(1, 0x000000);
-            progressBar.push(r);
-        }
+        let r = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
+        r.isFilled = false;
+        r.setStrokeStyle(1, 0x000000);
 
-        // this.progress = this.add.rectangle(200, 50, 200, 12, 0xc4c4c4);
-        //
-        // this.progress.isFilled = false;
-        // this.progress.setStrokeStyle(1, 0x000000);
 
         this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
@@ -734,24 +720,45 @@
             }
         });
 
-        if (gameConfig.coins.enemy >= 25 && gameConfig.alive.enemy < 3) {
+        if (gameConfig.coins.enemy >= 100) {
             if (gameConfig.troopsInQueue.enemy < 5) {
-                gameConfig.coins.enemy -= 25;
+                gameConfig.coins.enemy -= 100;
                 gameConfig.alive.enemy += 1;
                 gameConfig.troopsInQueue.enemy += 1;
 
                 const delay = gameConfig.troopsInQueue.enemy * 3000;
 
                 setTimeout(() => {
-                    const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
+                    const troop = new PlayerTroopGameObject(this, 1390, 320, 'tankTroop', true);
 
                     troop.deathAnimation = false;
-                    troop.attackDamage = 20;
+                    troop.attackDamage = 70;
                     troop.health = 100;
                     troop.isEnemy = true;
                     this.unitTroopGroup.add(troop);
                     gameConfig.troopsInQueue.enemy -= 1;
                 }, delay);
+            }
+        } else {
+            if (gameConfig.coins.enemy >= 25) {
+                if (gameConfig.troopsInQueue.enemy < 5) {
+                    gameConfig.coins.enemy -= 25;
+                    gameConfig.alive.enemy += 1;
+                    gameConfig.troopsInQueue.enemy += 1;
+
+                    const delay = gameConfig.troopsInQueue.enemy * 3000;
+
+                    setTimeout(() => {
+                        const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
+
+                        troop.deathAnimation = false;
+                        troop.attackDamage = 20;
+                        troop.health = 100;
+                        troop.isEnemy = true;
+                        this.unitTroopGroup.add(troop);
+                        gameConfig.troopsInQueue.enemy -= 1;
+                    }, delay);
+                }
             }
         }
 
