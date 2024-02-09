@@ -21,6 +21,12 @@ class StudentController extends Controller
     {
         return view('studenten.periodes', ['periodes' => Period::all()]);
     }
+
+    public function student_geenlijst()
+    {
+        return view('studenten.geenlijst');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
