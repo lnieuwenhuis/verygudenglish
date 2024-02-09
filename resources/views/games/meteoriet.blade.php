@@ -104,6 +104,7 @@
                     this.exploding = false;
                     this.hasSent = false;
                     this.won = false;
+                    this.fails = 0;
 
                     // const particles = this.add.particles(0, 0, 'green', {
                     //     speed: 500,
@@ -235,11 +236,11 @@
                     fetch("{!! route('resultaten.store') !!}", {
                         method: "POST",
                         body: JSON.stringify({
-                            userId: 2,
-                            title: "hoi",
+                            userId: 1,
+                            title: "result",
                             period_id: '8',
                             wordlist_id: "8",
-                            student_id: "8",
+                            student_id: "6",
                             result: "9",
                             completed: false
                         }),
@@ -297,9 +298,11 @@
 
                     if (this.health < 3 && this.health > 1) {
                         this.hearts = this.hearts.setCrop(0, 0, 42, 18)
+                        this.fails = 1;
                     }
                     if (this.health < 2 && this.health > 0) {
                         this.hearts = this.hearts.setCrop(0, 0, 21, 18)
+                        this.fails = 2;
                     }
                     if (this.health < 1) {
                         this.hearts.destroy();

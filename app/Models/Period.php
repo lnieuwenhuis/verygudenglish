@@ -10,8 +10,8 @@ class Period extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public function result()
-    {
-        return $this->belongsToMany(Result::class, 'periods', 'id');
-    }
+//    public function result()
+//    {
+//        return $this->belongsToMany(Result::class, 'periods', 'id');
+//    }
 }

@@ -14,12 +14,12 @@ class WordList extends Model
 
     public $timestamps = false;
 
-    public function words()
-    {
-        return $this->hasMany(Word::class, 'list_id');
-    }
-    public function result()
-    {
-        return $this->belongsToMany(Result::class, 'lists', 'id');
-    }
+//    public function words()
+//    {
+//        return $this->hasMany(Word::class, 'list_id');
+//    }
+//    public function result()
+//    {
+//        return $this->belongsToMany(Result::class, 'lists', 'id');
+//    }
 }

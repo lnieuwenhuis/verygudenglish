@@ -61,10 +61,10 @@ class WordListController extends Controller
     {
         $wordList = WordList::findOrFail($id);
 
-//        $wordList->period()->detach();
-//        $wordList->words()->delete();
-//        Result::where('wordlist_id', $wordList->id)->delete();
-//        Period::where('id', $wordList->period_id)->delete();
+//        Word::where('id', $wordList->period_id)->detach();
+
+        $words = Word::where('list_id', $wordList->id)->get();
+        $words->each->delete();
 
         $wordList->delete();
 
