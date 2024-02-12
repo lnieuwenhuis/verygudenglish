@@ -34,9 +34,9 @@
         <div class="flex flex-col gap-x-44 bg-indigo-200 rounded-lg mt-2">
             @foreach ($studenten as $student)
                 <div class="border-b-indigo-300 flex flex-row">
-                    <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">
+                    <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit z-50">
                         {{ $student['name'] }}</div>
-                    <div class=" border-b-2 border-b-indigo-300 mb-1 -ml-1 -mr-1 w-full"></div>
+                    <div class=" border-b-2 border-b-indigo-300 mb-1 -ml-3 -mr-3 w-full"></div>
                     <div class="flex flex-row ml-auto">
                         <form action="{{ route('resultaten.index', $student->id) }}" method="GET" class="ml-auto">
                             @csrf
