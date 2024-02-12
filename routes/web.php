@@ -44,7 +44,6 @@ Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class,
 
 Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'student_geenlijst'])->name('studenten.geenlijst');
 
-
 //Routes voor docenten
 Route::get("/docenten", function () {
     return view('docenten.index');
