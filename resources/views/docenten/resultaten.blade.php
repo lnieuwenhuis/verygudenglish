@@ -1,5 +1,5 @@
 <?php
-$student_id = $_GET['student_id'];
+//$student_id = $_GET['student_id'];
 
 ?>
 

@@ -40,8 +40,8 @@ class ResultController extends Controller
         $result->period_id = $period_id;
         $result->wordlist_id = $wordlist_id;
         $result->student_id = $student_id;
-        $result->result = 4;
-        $result->mistakes = "hoi";
+        $result->result = $result;
+        $result->mistakes = "";
 
         $test = $result->save();
 

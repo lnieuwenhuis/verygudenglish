@@ -233,16 +233,18 @@
             };
 
             update() {
+{{--                {{    dd($period_id )}};--}}
+
                 if(this.won && !this.hasSent){
                     fetch("{!! route('resultaten.store') !!}", {
                         method: "POST",
                         body: JSON.stringify({
                             userId: 1,
                             title: "result",
-                            period_id: '8',
-                            wordlist_id: "8",
-                            student_id: "6",
-                            result: "9",
+                            period_id: {!! $period_id !!},
+                            wordlist_id: {!! $list_id !!},
+                            student_id: "1",
+                            result: this.fails,
                             completed: false
                         }),
                         headers: {

@@ -20,7 +20,7 @@ class PeriodController extends Controller
 
     public function student_periode($id)
     {
-        return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'tests' => Test::all(), 'periodes' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
+        return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'periodes' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
     }
     public function store(Request $request)
     {
