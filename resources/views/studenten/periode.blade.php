@@ -46,18 +46,18 @@
 
             <div class="h-2/3 w-80 m-auto mt-5 mb-5 rounded">
                 <div class="flex justify-center">
-                        <form action="{{ route('ageofwords', $period->id, $wordlist->id) }}" method="GET" class="">
+                        <form action="{{ route('ageofwords', $wordlist->id) }}" method="GET" class="">
                             @csrf
                             <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Age of Words</button>
                         </form>
 
-                    <form action="{{ route('meteoriet', $period->id, $wordlist->id) }}" method="GET" class="">
+                    <form action="{{ route('meteoriet',  $wordlist->id) }}" method="GET" class="">
                         @csrf
                         <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Meteor Slash</button>
                     </form>
                 </div>
                 <div class="flex justify-center">
-                    <form action="{{ route('studenten.woordenlijst', $period->id, $wordlist->id) }}" method="GET" class="">
+                    <form action="{{ route('studenten.woordenlijst', $wordlist->id) }}" method="GET" class="">
                         @csrf
                         <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Woordenlijst</button>
                     </form>

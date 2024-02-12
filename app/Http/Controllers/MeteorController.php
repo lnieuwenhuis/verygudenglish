@@ -14,8 +14,8 @@ class MeteorController extends Controller
 
         $words = Word::where('list_id', $request->list_id)->get();
 
-        $periodId = Period::where('id', $period_id)->get();
-        $listId = WordList::where('id', $request->list_id)->get();
+        $periodId = Period::findOrFail($period_id);
+        $listId = WordList::findOrFail($request->list_id);
 
         return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId]);
     }

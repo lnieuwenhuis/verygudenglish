@@ -241,8 +241,8 @@
                         body: JSON.stringify({
                             userId: 1,
                             title: "result",
-                            period_id: {!! $period_id !!},
-                            wordlist_id: {!! $list_id !!},
+                            period_id: {{ $period_id->id }},
+                            wordlist_id: {{ $list_id->id }},
                             student_id: "1",
                             result: this.fails,
                             completed: false
