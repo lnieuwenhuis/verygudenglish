@@ -14,11 +14,17 @@
         @include('studenten.geenlijst')
     @else
         <div>
-            <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
+            <div class="text-white h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
+                <div class="ml-auto mr-auto p-3 text-2xl">
+                    {{$period->title}}
+                </div>
+            </div>
+
+            <div class="h-2/3 w-2/4 m-auto mt-5 mb-5 rounded flex flex-row">
 
                 @foreach ($periodes as $periode)
                     <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg mb-3 mt-3">
-                        <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 py-2 px-8 rounded-2xl"
+                        <a class="gap-2 flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 bg-gray-200 py-2 px-8 rounded-2xl"
                             @if ($periode->is_locked == 0) href="{{ route('studenten.period', $periode->id) }}">{{ $periode->title }}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -38,27 +44,24 @@
             </div>
 
 
-            <div class="bg-gray-400 h-2/3 w-3/4 m-auto mt-5 mb-5 rounded">
+            <div class="h-2/3 w-80 m-auto mt-5 mb-5 rounded">
+                <div class="flex justify-center">
+                        <form action="{{ route('ageofwords', $period->id, $wordlist->id) }}" method="GET" class="">
+                            @csrf
+                            <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Age of Words</button>
+                        </form>
 
-                <div class="flex flex-row">
-                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Meteor Slash
-                    </div>
-                    <form action="{{ route('meteoriet', $period->id, $wordlist->id) }}" method="GET" class=" ml-auto">
+                    <form action="{{ route('meteoriet', $period->id, $wordlist->id) }}" method="GET" class="">
                         @csrf
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Maken</button>
+                        <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Meteor Slash</button>
                     </form>
                 </div>
-                <div class="flex flex-row">
-                    <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Age of Words
-                    </div>
-                    <form action="{{ route('ageofwords', $period->id) }}" method="GET" class=" ml-auto">
+                <div class="flex justify-center">
+                    <form action="{{ route('studenten.woordenlijst', $period->id, $wordlist->id) }}" method="GET" class="">
                         @csrf
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Maken</button>
+                        <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Woordenlijst</button>
                     </form>
                 </div>
-                <a href="{{ route('studenten.woordenlijst', $wordlist->id) }}">
-                    <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Woordenlijst</button>
-                </a>
 
             </div>
         </div>
