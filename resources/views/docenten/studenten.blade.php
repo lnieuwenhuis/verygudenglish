@@ -28,8 +28,9 @@
 
     <div class="flex flex-col ml-auto mr-auto min-w-60 mt-5" style="width: 80vw">
         <div class="flex flex-row border-b-gray-400 border-b-2">
-            <div class="">Naam</div>
-            <button class="text-white m-1 mr-1 ml-auto p-1 bg-indigo-500 rounded-lg w-fit">Resultaten en Acties</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit">Student</button>
+            <button class="text-white m-1 mr-1 mb-2 ml-auto p-1.5 bg-indigo-500 rounded-lg w-fit">Resultaten en
+                Acties</button>
         </div>
         <div class="flex flex-col gap-x-44 bg-indigo-200 rounded-lg mt-2">
             @foreach ($studenten as $student)
