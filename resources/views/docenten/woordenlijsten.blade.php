@@ -33,8 +33,6 @@
                 <h1 class="text-lg ">Toevoegen</h1>
             </button>
         </a>
-
-
     </div>
 
     <div class="flex flex-col px-5 min-w-60 mt-4"">
