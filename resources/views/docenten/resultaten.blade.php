@@ -30,7 +30,7 @@ $student_id = $_GET['student_id'];
         </h1>
     </div>
 
-    <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
+    <div class="flex flex-col ml-auto mr-auto min-w-60" style="width: 80vw">
         <div class="grid grid-cols-5 gap-x-44 border-b-gray-400 border-b-2 pt-2">
             <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit">Toets</button>
             <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Periode</button>

@@ -37,31 +37,36 @@
 
     <div class="flex flex-col px-5 min-w-60 mt-4"">
         <div class="flex flex-row border-b-gray-400 border-b-2">
-            <div class="">Titel</div>
-            <div class="ml-auto">Periode</div>
-            <div class="ml-auto">Actions</div>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit">Titel</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Periode</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Actions</button>
         </div>
 
-        <div class="grid grid-cols-3 gap-x-44">
+        <div class="grid grid-cols gap-x-44 bg-indigo-200 rounded-lg mt-2">
             @foreach ($wordlists as $wordlist)
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">{{ $wordlist['title'] }}</div>
-                <div class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit ml-auto mr-auto">
-                    @foreach ($periods as $period)
-                        @if ($period->id == $wordlist->period_id)
-                            <div>{{ $period->title }}</div>
-                        @endif
-                    @endforeach
-                </div>
-                <div class="flex flex-row">
-                    <a href="{{ route('woordenlijsten.edit', $wordlist->id) }}"class=" ml-auto">
-                        @csrf
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Edit</button>
-                    </a>
-                    <form action="{{ route('woordenlijsten.destroy', $wordlist->id) }}" method="POST" class="">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
-                    </form>
+                <div class="border-b-indigo-300 flex flex-row">
+                    <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">{{ $wordlist['title'] }}</div>
+                    <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit ml-auto mr-auto">
+                        @foreach ($periods as $period)
+                            @if ($period->id == $wordlist->period_id)
+                                <div>{{ $period->title }}</div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <div class="flex flex-row">
+                        <a href="{{ route('woordenlijsten.edit', $wordlist->id) }}"class=" ml-auto">
+                            @csrf
+                            <button class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">Edit</button>
+                        </a>
+                        <form action="{{ route('woordenlijsten.destroy', $wordlist->id) }}" method="POST"
+                            class="">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"
+                                class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">Delete</button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>
