@@ -1,5 +1,5 @@
 <?php
-//$student_id = $_GET['student_id'];
+$student_id = $_GET['student_id'];
 
 ?>
 
@@ -26,14 +26,16 @@
     </div>
 
     <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
-        <div class="grid grid-cols-6 gap-x-44">
-            <div class="">Toets</div>
-            <div class="ml-auto">Periode</div>
-            <div class="ml-auto">Woordenlijst</div>
-            <div class="ml-auto">Resultaat</div>
-            <div class="ml-auto">Fouten</div>
-            <div class="ml-auto">Student</div>
+        <div class="grid grid-cols-6 gap-x-44 border-b-gray-400 border-b-2">
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit">Toets</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Periode</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Woordenlijst</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Resultaat</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Fouten</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Student</button>
+        </div>
 
+        <div class="grid grid-cols-6 gap-x-44">
 
             @foreach ($results as $result)
                 @if ($student_id == $result->student_id)
