@@ -63,7 +63,7 @@
             </a>
         </div>
         <div>
-            <a href="{{ route('resultaten.index') }}">
+            <a href="{{ route('toetsen.index') }}">
                 <div class=" dark:bg-indigo-500 bg-indigo-500 overflow-hidden shadow-sm sm:rounded-lg h-36">
                     <div class="p-6 text-gray-900 dark:text-gray-100 text-center mt-9 text-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 absolute opacity-10 -ml-6 -mt-12"
@@ -72,7 +72,7 @@
                                 d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
                                 clip-rule="evenodd" />
                         </svg>
-                        Resultaten
+                        Toetsen
                     </div>
                 </div>
             </a>
