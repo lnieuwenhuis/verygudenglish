@@ -33,8 +33,8 @@ if (isset($_GET['periodList'])) {
         <h1 class="text-2xl font-extrabold m-7 ml-0 text-white">Periodes</h1>
 
     </div>
-    <div class="flex flex-col pl-5 min-w-60" style="width: 80vw">
-        <div class="grid grid-cols-4 gap-x-10 pt-5">
+    <div class="flex flex-col ml-auto mr-auto min-w-60" style="width: 80vw">
+        <div class="grid grid-cols-4 gap-x-10 pt-8">
             @foreach ($periods as $period)
                 <div class="grid grid-cols-1">
                     <div class="text-white m-1 p-5 bg-indigo-400 rounded-lg min-w-fit h-[60px] flex flex-row">
