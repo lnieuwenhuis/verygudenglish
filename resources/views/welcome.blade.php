@@ -14,7 +14,6 @@
 </head>
 
 <body class="text-gray-800 antialiased">
-
     <nav class="flex flex-row bg-indigo-500">
         <div class="text-3xl font-extrabold text-white mt-6 ml-2">Very Gud English</div>
         <a href="{{ route('studenten.periode') }}" class="w-fit h-fit ml-auto mr-2">
@@ -29,7 +28,6 @@
                 </button></a>
         </a>
     </nav>
-
     <main class="">
         <div class="relative pt-16 pb-32 flex content-center items-center justify-center h-screen"
             style="min-height: 75vh; height:calc(100vh - 86px)">
@@ -44,14 +42,11 @@
                             <h1 class="text-white font-semibold text-4xl">
                                 De plek om Engelse Woordenschat te leren
                             </h1>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
 </body>
 
 </html>
