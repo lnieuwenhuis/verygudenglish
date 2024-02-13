@@ -16,7 +16,7 @@
 <body class="text-gray-800 antialiased">
 
     <nav class="flex flex-row bg-indigo-500">
-        <h1 class="text-3xl l-6 font-extrabold text-white mt-6">Very Gud English</h1>
+        <div class="text-3xl font-extrabold text-white mt-6 ml-2">Very Gud English</div>
         <a href="{{ route('studenten.periode') }}" class="w-fit h-fit ml-auto mr-2">
             <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
                 <h1 class="text-lg ">Studenten</h1>
