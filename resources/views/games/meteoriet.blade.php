@@ -233,7 +233,6 @@
             };
 
             update() {
-{{--                {{    dd($period_id )}};--}}
 
                 if(this.won && !this.hasSent){
                     fetch("{!! route('resultaten.store') !!}", {
@@ -245,7 +244,6 @@
                             wordlist_id: {{ $list_id->id }},
                             student_id: "1",
                             result: this.fails,
-                            completed: false
                         }),
                         headers: {
                             "X-CSRF-Token": document.querySelector('meta[name="_token"]').content,
@@ -253,7 +251,7 @@
                         }
                     }).then(function (response) {
                         if (response.status !== 200) {
-                            alert('asdfkjlasdf');
+                            alert('oei');
                         }
                     });
 

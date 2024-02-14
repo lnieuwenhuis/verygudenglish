@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
+Route::get('/inloggen/azure', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])->name('auth.login');
+Route::get('/inloggen/azure/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback'])->name('auth.login.callback');
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
