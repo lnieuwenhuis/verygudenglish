@@ -31,50 +31,45 @@ Route::get('/', function () {
 })->name('home');
 
 //Routes voor studenten
-Route::get("/studenten", [UserController::class, 'studentPeriodes'])->name('studenten.periode');
+Route::get("/studenten", [UserController::class, 'studentPeriodes'])->middleware('student')->name('studenten.periode');
 
-Route::get('/studenten/periode/{toetsen}', [PeriodController::class, 'student_periode'])->name('studenten.period');
+Route::get('/studenten/periode/{toetsen}', [PeriodController::class, 'student_periode'])->middleware('student')->name('studenten.period');
 
-Route::get("/studenten/toets", [TestController::class, 'student_test'])->name('test.index');
+Route::get("/studenten/toets", [TestController::class, 'student_test'])->middleware('student')->name('test.index');
 // ->middleware(['auth', 'verified'])->name('studenten_resultaten');
 
-Route::get("/studenten/resultaten", [ResultController::class, "student_index"])->name('studenten.resultaten');
+Route::get("/studenten/resultaten", [ResultController::class, "student_index"])->middleware('student')->name('studenten.resultaten');
 
-Route::get('/studenten/resultaten/fouten', [ResultController::class, 'student_mistakes'])->name('studenten.results.mistakes');
+Route::get('/studenten/resultaten/fouten', [ResultController::class, 'student_mistakes'])->middleware('student')->name('studenten.results.mistakes');
 
-Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class, 'student_wordlist'])->name('studenten.woordenlijst');
+Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class, 'student_wordlist'])->middleware('student')->name('studenten.woordenlijst');
 
-Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'student_geenlijst'])->name('studenten.geenlijst');
+Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'student_geenlijst'])->middleware('student')->name('studenten.geenlijst');
 
 //Routes voor docenten
 Route::get("/docenten", function () {
     return view('docenten.index');
 })->middleware(['admin'])->name('docenten');
 
-Route::resource('/docenten/studenten', UserController::class);
-// ->middleware(['auth', 'verified']);
+Route::resource('/docenten/studenten', UserController::class)->middleware(['admin']);
 
-Route::resource('/docenten/woordenlijsten', WordListController::class);
-// ->middleware(['auth', 'verified']);
+Route::resource('/docenten/woordenlijsten', WordListController::class)->middleware(['admin']);
 
-Route::resource('/docenten/periodes', PeriodController::class);
-// ->middleware(['auth', 'verified']);
+Route::resource('/docenten/periodes', PeriodController::class)->middleware(['admin']);
 
-Route::resource('/docenten/toetsen', TestController::class);
-// ->middleware(['auth', 'verified']);
+Route::resource('/docenten/toetsen', TestController::class)->middleware(['admin']);
 
-Route::resource('/docenten/resultaten', ResultController::class);
-// ->middleware(['auth', 'verified']);
-Route::get('/docenten/resultaten/{}/fouten', [ResultController::class, 'ResultController@docent_fouten'])->name('resultaten.mistakes');
+Route::resource('/docenten/resultaten', ResultController::class)->middleware(['admin']);
 
-Route::resource('/docenten/woorden', wordController::class);
-// ->middleware(['auth', 'verified']);
+Route::get('/docenten/resultaten/{}/fouten', [ResultController::class, 'ResultController@docent_fouten'])->middleware(['admin'])->name('resultaten.mistakes');
+
+Route::resource('/docenten/woorden', wordController::class)->middleware(['admin']);
 
 //Routes voor de games
-Route::get("/ageofwords/{list_id}", [\App\Http\Controllers\AgeOfWordsController::class, 'ageofwords'])->name('ageofwords');
+Route::get("/ageofwords/{list_id}", [\App\Http\Controllers\AgeOfWordsController::class, 'ageofwords'])->middleware('student')->name('ageofwords');
 // ->middleware(['auth', 'verified'])->name('ageofwords');
 
-Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->name('meteoriet');
+Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->middleware('student')->name('meteoriet');
 // ->middleware(['auth', 'verified'])->name('meteoriet');
 
 

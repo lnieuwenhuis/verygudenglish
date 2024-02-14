@@ -3,23 +3,20 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class Authentication
+class StudentAuth
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
+        if (!Auth::id()) {
             return redirect()->route('auth.login');
         }
 
-        if (Auth::user()->type !== 'docent') {
+        if (Auth::user()->type !== 'student') {
             return redirect()->route('home');
         }
-
-        return $next($request);
     }
 }
