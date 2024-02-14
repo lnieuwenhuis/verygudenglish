@@ -32,7 +32,6 @@ Route::get('/', function () {
 
 //Routes voor studenten
 Route::get("/studenten", [UserController::class, 'studentPeriodes'])->name('studenten.periode');
-// ->middleware(['auth', 'verified'])->name('studenten');
 
 Route::get('/studenten/periode/{toetsen}', [PeriodController::class, 'student_periode'])->name('studenten.period');
 

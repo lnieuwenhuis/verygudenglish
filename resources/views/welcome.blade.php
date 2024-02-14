@@ -16,11 +16,34 @@
 <body class="text-gray-800 antialiased">
     <nav class="flex flex-row bg-indigo-500">
         <div class="text-3xl font-extrabold text-white mt-6 ml-2">Very Gud English</div>
+        @if (!Auth::check())
         <a href="{{ route('auth.login') }}" class="w-fit h-fit ml-auto mr-2">
             <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
                 <h1 class="text-lg ">Inloggen</h1>
             </button>
         </a>
+        @else
+            <div class="flex flex-row justify-end ml-auto">
+                <a href="" class="w-fit h-fit ml-auto mr-2">
+                    <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
+                        <h1 class="text-lg ">Uitloggen</h1>
+                    </button>
+                </a>
+                @if (Auth::user()->type == 'student')
+                <a href="{{ route('studenten.periode') }}" class="w-fit h-fit ml-auto mr-2">
+                    <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
+                        <h1 class="text-lg ">Studenten</h1>
+                    </button>
+                </a>
+                @else
+                    <a href="{{ route('docenten') }}" class="w-fit h-fit ml-auto mr-2">
+                        <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
+                            <h1 class="text-lg ">Docenten</h1>
+                        </button>
+                    </a>
+                @endif
+            </div>
+        @endif
     </nav>
     <main class="">
         <div class="relative pt-16 pb-32 flex content-center items-center justify-center h-screen"
