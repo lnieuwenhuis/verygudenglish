@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Docent;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -30,19 +32,27 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $azureUser = Socialite::driver('azure')->user();
-        
 
-        $user = User::where('email', $azureUser->getEmail())->first();
-
-        if (!$user) {
-            $user = User::create([
-                'name' => $azureUser->getName(),
-                'email' => $azureUser->getEmail(),
-            ]);
+        if ((explode('@', $azureUser->email))[1] != 'student.landstede.nl') {
+            $user = Docent::where('email', $azureUser->getEmail())->first();
+            if (!$user) {
+                $user = Docent::create([
+                    'name' => $azureUser->getName(),
+                    'email' => $azureUser->getEmail(),
+                ]);
+            }
+        } else {
+            $user = Student::where('email', $azureUser->getEmail())->first();
+            if (!$user) {
+                $user = Student::create([
+                    'name' => $azureUser->getName(),
+                    'email' => $azureUser->getEmail(),
+                ]);
+            }
         }
 
         Auth::login($user, true);
 
-        return redirect()->route('index');
+        return redirect()->route('home');
     }
 }
