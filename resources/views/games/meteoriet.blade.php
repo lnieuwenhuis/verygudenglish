@@ -8,7 +8,11 @@
     @vite('resources/css/app.css')
 </head>
 <body  class="bg-blue-900 m-2">
-
+<div class="text-sky-50 ml-4">
+    <h1 class="text-4xl">Meteor Slash</h1>
+    <p>Lees dit voordat je begint</p>
+    <p>Verander tijdens deze minigame niet van tabs want dan zal je game over gaan en is al je progressie weg.</p>
+</div>
 <script>
     // async function getWordlist() {
     //     const response = await fetch("http://127.0.0.1:8000/api/products");
@@ -120,7 +124,7 @@
                         repeat: 0,
                     });
                 this.question = this.add.text(755, 250, "", {
-                    color: "#ff0000",
+                    color: "#ffffff",
                     fontSize: '30px',
                     fontStyle: "bold",
                 }).setOrigin(0.5, 7);
@@ -129,12 +133,6 @@
                 this.question.depth = 1
                 this.question.alpha = 100;
 
-
-                this.spelling = this.add.text(670, 510, "Let op je spelling!!!", {
-                    color: "#ffffff",
-                    fontSize: '20px',
-                    fontStyle: "bold",
-                }).setOrigin(0.5, 7);
 
                 this.correct = this.add.text(755, 250, "Correct", {
                     color: "#5dff00",
@@ -184,7 +182,6 @@
                 this.returnKey.on("down", event => { // als enter word ingedrukt
                     let name = this.nameInput.getChildByName("name");
                     if (name.value !== "") {
-                        this.spelling.alpha = 0;
                         this.message.setText(sanitize(name.value));
                         var similarity = stringSimilarity.compareTwoStrings(randomPair.translation, name.value
                             .toLowerCase());
@@ -238,11 +235,10 @@
                     fetch("{!! route('resultaten.store') !!}", {
                         method: "POST",
                         body: JSON.stringify({
-                            userId: 1,
                             title: "result",
                             period_id: {{ $list_id->period_id }},
                             wordlist_id: {{ $list_id->id }},
-                            student_id: "1",
+                            user_id: {{ $user_id }},
                             result: this.fails,
                         }),
                         headers: {
@@ -312,12 +308,13 @@
                 } else {
 
                     if (!this.pointer){
-                        this.input.on('pointerdown', () => this.scene.restart())
+                        this.input.on('pointerdown', () => location.reload())
                         this.gameOverText.alpha = 100;
                         this.tryAgain.alpha = 100;
                         this.meteoor.destroy();
                         this.pointer = true;
                         this.question.alpha = 0;
+
                     }
                 }
                 const progress = this.timedEvent.getProgress();

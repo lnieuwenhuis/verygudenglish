@@ -23,23 +23,23 @@ class ResultController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => 'required',
             'period_id' => 'required',
             'wordlist_id' => 'required',
-            'student_id' => 'required'
+            'user_id' => 'required'
         ]);
 
         $period_id = (int)$request->get('period_id');
         $wordlist_id = (int)$request->get('wordlist_id');
-        $student_id = (int)$request->get('student_id');
+        $user_id = (int)$request->get('user_id');
 
         $result = new Result;
         $result->title = $request->get('title');
         $result->period_id = $period_id;
         $result->wordlist_id = $wordlist_id;
-        $result->student_id = $student_id;
+        $result->student_id = $user_id;
+
         $result->result = $request->get('result');
         $result->mistakes = "";
 

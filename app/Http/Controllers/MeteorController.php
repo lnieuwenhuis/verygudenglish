@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Period;
+use App\Models\Student;
 use App\Models\Word;
 use App\Models\WordList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class MeteorController extends Controller
 {
@@ -16,7 +19,8 @@ class MeteorController extends Controller
 
         $periodId = WordList::findOrFail($period_id);
         $listId = WordList::findOrFail($request->list_id);
+        $userId = Auth::id();
 
-        return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId]);
+        return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId, 'user_id' => $userId]);
     }
 }

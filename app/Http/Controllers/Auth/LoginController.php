@@ -53,6 +53,8 @@ class LoginController extends Controller
 
         Auth::login($user, true);
 
+        $_SESSION['user'] = $user;
+
         if ($user->type == "docent") {
             return redirect()->route('docenten');
         } else {
