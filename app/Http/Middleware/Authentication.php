@@ -11,12 +11,14 @@ class Authentication
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::id()) {
+        if (!Auth::check()) {
             return redirect()->route('auth.login');
         }
 
         if (Auth::user()->type !== 'docent') {
             return redirect()->route('home');
         }
+
+        return $next($request);
     }
 }
