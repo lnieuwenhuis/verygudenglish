@@ -41,6 +41,7 @@ class LoginController extends Controller
                     'email' => $azureUser->getEmail(),
                 ]);
             }
+            $user->type = "docent";
         } else {
             $user = Student::where('email', $azureUser->getEmail())->first();
             if (!$user) {
@@ -49,7 +50,10 @@ class LoginController extends Controller
                     'email' => $azureUser->getEmail(),
                 ]);
             }
+            $user->type = "student";
         }
+
+        dd($user);
 
         Auth::login($user, true);
 
