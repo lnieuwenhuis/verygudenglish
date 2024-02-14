@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('docenten.studenten', ['studenten' => Student::all()]);
+        return view('docenten.studenten', ['studenten' => User::where('type', 'student')->get()]);
     }
 
     public function studentPeriodes()
