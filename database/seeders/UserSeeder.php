@@ -19,11 +19,11 @@ class UserSeeder extends Seeder
 
 
         $users = [
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'type' => 'student', 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'type' => 'student', 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'type' => 'student', 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'type' => 'student', 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'type' => 'student', 'remember_token' => 'true'],
         ];
 
         foreach ($users as $user) {
