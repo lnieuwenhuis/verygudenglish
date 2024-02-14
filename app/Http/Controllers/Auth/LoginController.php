@@ -53,10 +53,12 @@ class LoginController extends Controller
             $user->type = "student";
         }
 
-        dd($user);
-
         Auth::login($user, true);
 
-        return redirect()->route('home');
+        if ($user->type == "docent") {
+            return redirect()->route('docenten');
+        } else {
+            return redirect()->route('studenten.periode');
+        }
     }
 }
