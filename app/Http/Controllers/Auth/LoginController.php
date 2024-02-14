@@ -28,29 +28,28 @@ class LoginController extends Controller
         return Socialite::driver('azure')->redirect();
     }
 
-
     public function handleProviderCallback()
     {
         $azureUser = Socialite::driver('azure')->user();
 
         if ((explode('@', $azureUser->email))[1] != 'student.landstede.nl') {
-            $user = Docent::where('email', $azureUser->getEmail())->first();
+            $user = User::where('email', $azureUser->getEmail())->first();
             if (!$user) {
-                $user = Docent::create([
+                $user = User::create([
                     'name' => $azureUser->getName(),
                     'email' => $azureUser->getEmail(),
+                    'type' => "docent"
                 ]);
             }
-            $user->type = "docent";
         } else {
-            $user = Student::where('email', $azureUser->getEmail())->first();
+            $user = User::where('email', $azureUser->getEmail())->first();
             if (!$user) {
-                $user = Student::create([
+                $user = User::create([
                     'name' => $azureUser->getName(),
                     'email' => $azureUser->getEmail(),
+                    'type' => "student"
                 ]);
             }
-            $user->type = "student";
         }
 
         Auth::login($user, true);

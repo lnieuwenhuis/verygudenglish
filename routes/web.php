@@ -50,8 +50,7 @@ Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'stud
 //Routes voor docenten
 Route::get("/docenten", function () {
     return view('docenten.index');
-})->name('docenten');
-// ->middleware(['auth', 'verified'])->name('docenten');
+})->middleware(['auth'])->name('docenten');
 
 Route::resource('/docenten/studenten', UserController::class);
 // ->middleware(['auth', 'verified']);

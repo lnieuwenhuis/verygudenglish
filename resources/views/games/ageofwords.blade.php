@@ -4,10 +4,12 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/string-similarity@4.0.4/umd/string-similarity.min.js"></script>
+    <meta name="_token" content="{{ csrf_token() }}">
 </head>
 
 <body style="overflow: hidden; pointer-events: none">
 <script>
+    var gameOver = false;
     function sanitize(string) {
         const map = {
             '&': '',
@@ -103,9 +105,11 @@
             if (build.isEnemy) {
                 build.destroy();
                 gameConfig.win.player = true;
+                gameOver = true;
             } else {
                 build.destroy();
                 gameConfig.win.enemy = true;
+                gameOver = true;
             }
         }
 
@@ -572,77 +576,83 @@
             }
         });
 
-        if (gameConfig.win.player) {
+        if (gameConfig.win.player && !this.hasSent) {
+            fetch("{!! route('resultaten.store') !!}", {
+                method: "POST",
+                body: JSON.stringify({
+                    userId: 1,
+                    title: "result",
+                    period_id: {{ $list_id->period_id }},
+                    wordlist_id: {{ $list_id->id }},
+                    student_id: "1",
+                    result: this.fails,
+                }),
+                headers: {
+                    "X-CSRF-Token": document.querySelector('meta[name="_token"]').content,
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(function (response) {
+                if (response.status !== 200) {
+                    alert('oei');
+                }
+            });
+            console.log("klaar")
+            this.hasSent = true
+        }
+
+        if (gameOver) {
+            const resultMessage = gameConfig.win.player ? "Je hebt gewonnen" : "Je hebt verloren";
             game.destroy(true);
             const newDiv = document.createElement("div");
-
-            // and give it some content
-            const newContent = document.createTextNode("Je hebt gewonnen");
-
-            // add the text node to the newly created div
+            const newContent = document.createTextNode(resultMessage);
             newDiv.appendChild(newContent);
-
-            // add the newly created element and its content into the DOM
-            const currentDiv = document.getElementById("div1");
-            document.body.insertBefore(newDiv, currentDiv);
-        } else if (gameConfig.win.enemy) {
-            game.destroy(true);
-            const newDiv = document.createElement("div");
-
-            // and give it some content
-            const newContent = document.createTextNode("Je hebt verloren");
-
-            // add the text node to the newly created div
-            newDiv.appendChild(newContent);
-
-            // add the newly created element and its content into the DOM
             const currentDiv = document.getElementById("div1");
             document.body.insertBefore(newDiv, currentDiv);
         }
 
-        if (gameConfig.alive.enemy <= 5) {
-            if (gameConfig.coins.enemy >= 100) {
-                if (gameConfig.troopsInQueue.enemy < 5) {
-                    gameConfig.coins.enemy -= 100;
-                    gameConfig.alive.enemy += 1;
-                    gameConfig.troopsInQueue.enemy += 1;
-
-                    const delay = gameConfig.troopsInQueue.enemy * 3000;
-
-                    setTimeout(() => {
-                        const troop = new PlayerTroopGameObject(this, 1390, 320, 'tankTroop', true);
-
-                        troop.deathAnimation = false;
-                        troop.attackDamage = 70;
-                        troop.health = 100;
-                        troop.isEnemy = true;
-                        this.unitTroopGroup.add(troop);
-                        gameConfig.troopsInQueue.enemy -= 1;
-                    }, delay);
-                }
-            } else {
-                if (gameConfig.coins.enemy >= 25) {
-                    if (gameConfig.troopsInQueue.enemy < 5) {
-                        gameConfig.coins.enemy -= 25;
-                        gameConfig.alive.enemy += 1;
-                        gameConfig.troopsInQueue.enemy += 1;
-
-                        const delay = gameConfig.troopsInQueue.enemy * 3000;
-
-                        setTimeout(() => {
-                            const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
-
-                            troop.deathAnimation = false;
-                            troop.attackDamage = 20;
-                            troop.health = 100;
-                            troop.isEnemy = true;
-                            this.unitTroopGroup.add(troop);
-                            gameConfig.troopsInQueue.enemy -= 1;
-                        }, delay);
-                    }
-                }
-            }
-        }
+        // if (gameConfig.alive.enemy <= 5) {
+        //     if (gameConfig.coins.enemy >= 100) {
+        //         if (gameConfig.troopsInQueue.enemy < 5) {
+        //             gameConfig.coins.enemy -= 100;
+        //             gameConfig.alive.enemy += 1;
+        //             gameConfig.troopsInQueue.enemy += 1;
+        //
+        //             const delay = gameConfig.troopsInQueue.enemy * 3000;
+        //
+        //             setTimeout(() => {
+        //                 const troop = new PlayerTroopGameObject(this, 1390, 320, 'tankTroop', true);
+        //
+        //                 troop.deathAnimation = false;
+        //                 troop.attackDamage = 70;
+        //                 troop.health = 100;
+        //                 troop.isEnemy = true;
+        //                 this.unitTroopGroup.add(troop);
+        //                 gameConfig.troopsInQueue.enemy -= 1;
+        //             }, delay);
+        //         }
+        //     } else {
+        //         if (gameConfig.coins.enemy >= 25) {
+        //             if (gameConfig.troopsInQueue.enemy < 5) {
+        //                 gameConfig.coins.enemy -= 25;
+        //                 gameConfig.alive.enemy += 1;
+        //                 gameConfig.troopsInQueue.enemy += 1;
+        //
+        //                 const delay = gameConfig.troopsInQueue.enemy * 3000;
+        //
+        //                 setTimeout(() => {
+        //                     const troop = new PlayerTroopGameObject(this, 1390, 320, 'meleeTroop', true);
+        //
+        //                     troop.deathAnimation = false;
+        //                     troop.attackDamage = 20;
+        //                     troop.health = 100;
+        //                     troop.isEnemy = true;
+        //                     this.unitTroopGroup.add(troop);
+        //                     gameConfig.troopsInQueue.enemy -= 1;
+        //                 }, delay);
+        //             }
+        //         }
+        //     }
+        // }
 
         this.money.setText(gameConfig.coins.player);
 

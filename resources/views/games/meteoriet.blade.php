@@ -254,10 +254,7 @@
                             alert('oei');
                         }
                     });
-
                     this.hasSent = true
-
-
                 }
 
                 if(!this.isGameOver) {
