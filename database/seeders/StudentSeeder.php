@@ -19,11 +19,11 @@ class StudentSeeder extends Seeder
 
 
         $users = [
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'password' => Hash::make('password'), 'group' => 'SD22', 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'password' => Hash::make('password'), 'group' => 'SD23', 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'password' => Hash::make('password'), 'group' => 'EX22', 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'password' => Hash::make('password'), 'group' => 'EX23', 'remember_token' => 'true'],
-            ['name' => Str::random('10'), 'email' => Str::random('10'), 'password' => Hash::make('password'), 'group' => 'SD22', 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
+            ['name' => Str::random('10'), 'email' => Str::random('10'), 'remember_token' => 'true'],
         ];
 
         foreach ($users as $user) {
