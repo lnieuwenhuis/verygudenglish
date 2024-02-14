@@ -49,7 +49,7 @@ Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'stud
 //Routes voor docenten
 Route::get("/docenten", function () {
     return view('docenten.index');
-})->middleware(['auth'])->name('docenten');
+})->middleware(['admin'])->name('docenten');
 
 Route::resource('/docenten/studenten', UserController::class);
 // ->middleware(['auth', 'verified']);
@@ -84,5 +84,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';

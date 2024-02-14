@@ -22,7 +22,6 @@ class LoginController extends Controller
     |
     */
 
-
     public function redirectToProvider()
     {
         return Socialite::driver('azure')->redirect();

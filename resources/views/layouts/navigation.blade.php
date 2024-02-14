@@ -16,9 +16,9 @@
                     HOME
                 </a>
                 @if (Auth::check())
-                    <form class="hover:underline cursor-pointer" method="POST" action="#">
+                    <form class="hover:underline cursor-pointer" method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="hover:text-red-500 hover:underline" type="submit" :href="">
+                        <button class="hover:text-red-500 hover:underline" type="submit">
                             UITLOGGEN
                         </button>
                     </form>

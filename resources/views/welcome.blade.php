@@ -24,11 +24,12 @@
         </a>
         @else
             <div class="flex flex-row justify-end ml-auto">
-                <a href="" class="w-fit h-fit ml-auto mr-2">
-                    <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
-                        <h1 class="text-lg ">Uitloggen</h1>
+                <form class="hover:underline cursor-pointer" method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="hover:text-red-500 hover:underline" type="submit">
+                        UITLOGGEN
                     </button>
-                </a>
+                </form>
                 @if (Auth::user()->type == 'student')
                 <a href="{{ route('studenten.periode') }}" class="w-fit h-fit ml-auto mr-2">
                     <button class="p-3 bg-white my-4 rounded-full border flex flex-row ">
