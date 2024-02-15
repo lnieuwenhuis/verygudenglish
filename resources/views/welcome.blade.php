@@ -30,8 +30,8 @@ session_start();
             <div class="flex flex-row justify-end ml-auto">
                 <form class="hover:underline cursor-pointer" method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="hover:text-red-500 hover:underline" type="submit">
-                        UITLOGGEN
+                    <button class="p-3 bg-white my-4 rounded-full border flex flex-row mr-2" type="submit">
+                        <h1 class="text-lg ">Uitloggen</h1>
                     </button>
                 </form>
                 @if (Auth::user()->type == 'student')
