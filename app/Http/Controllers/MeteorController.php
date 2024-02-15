@@ -14,7 +14,6 @@ class MeteorController extends Controller
 {
     public function meteor(Request $request, $period_id)
     {
-
         $words = Word::where('list_id', $request->list_id)->get();
 
         $periodId = WordList::findOrFail($period_id);

@@ -35,6 +35,8 @@ class ResultController extends Controller
         $wordlist_id = (int)$request->get('wordlist_id');
         $user_id = (int)$request->get('user_id');
 
+       // dd($user_id);
+
         $result = new Result;
         $result->title = $request->get('title');
         $result->period_id = $period_id;
