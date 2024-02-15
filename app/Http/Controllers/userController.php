@@ -25,10 +25,9 @@ class UserController extends Controller
         return view('docenten.index', ['user_name' => Auth::user()->name]);
     }
 
-
     public function studentPeriodes()
     {
-        return view('studenten.index', ['periodes' => Period::all()]);
+        return view('studenten.index', ['periodes' => Period::all(), 'user_name' => Auth::user()->name]);
     }
 
     public function create()
