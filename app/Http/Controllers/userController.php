@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +19,12 @@ class UserController extends Controller
     {
         return view('docenten.studenten', ['studenten' => User::where('type', 'student')->get()]);
     }
+
+    public function docenten_index()
+    {
+        return view('docenten.index', ['user_name' => Auth::user()->name]);
+    }
+
 
     public function studentPeriodes()
     {

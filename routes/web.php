@@ -47,9 +47,8 @@ Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class,
 Route::get('/studenten/woordenlijst/geenlijst', [StudentController::class, 'student_geenlijst'])->middleware('student')->name('studenten.geenlijst');
 
 //Routes voor docenten
-Route::get("/docenten", function () {
-    return view('docenten.index');
-})->middleware(['admin'])->name('docenten');
+
+Route::get('/docenten', [UserController::class, 'docenten_index'])->middleware('admin')->name('docenten');
 
 Route::resource('/docenten/studenten', UserController::class)->middleware(['admin']);
 
@@ -60,6 +59,8 @@ Route::resource('/docenten/periodes', PeriodController::class)->middleware(['adm
 Route::resource('/docenten/toetsen', TestController::class)->middleware(['admin']);
 
 Route::resource('/docenten/resultaten', ResultController::class)->middleware(['admin']);
+
+Route::post('/docenten/resultaten', [ResultController::class, 'store'])->name('resultaten.store');
 
 Route::get('/docenten/resultaten/{}/fouten', [ResultController::class, 'ResultController@docent_fouten'])->middleware(['admin'])->name('resultaten.mistakes');
 
