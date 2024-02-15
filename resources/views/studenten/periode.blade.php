@@ -16,7 +16,7 @@
         <div>
             <div class="text-white h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
                 <div class="ml-auto mr-auto p-3 text-2xl">
-                    {{$period->title}}
+                    {{ $period->title }}
                 </div>
             </div>
 
@@ -46,12 +46,12 @@
 
             <div class="h-2/3 w-80 m-auto mt-5 mb-5 rounded">
                 <div class="flex justify-center">
-                        <form action="{{ route('ageofwords', $wordlist->id) }}" method="GET" class="">
-                            @csrf
-                            <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Age of Words</button>
-                        </form>
+                    <form action="{{ route('ageofwords', $wordlist->id) }}" method="GET" class="">
+                        @csrf
+                        <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Age of Words</button>
+                    </form>
 
-                    <form action="{{ route('meteoriet',  $wordlist->id) }}" method="GET" class="">
+                    <form action="{{ route('meteoriet', $wordlist->id) }}" method="GET" class="">
                         @csrf
                         <button class="text-white w-32 h-16 m-1 p-1 bg-gray-600 rounded-lg">Meteor Slash</button>
                     </form>

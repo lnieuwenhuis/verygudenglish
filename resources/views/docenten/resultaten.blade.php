@@ -26,43 +26,52 @@ $student_id = $_GET['student_id'];
                     Terug
                 </h1>
             </button></a>
-        <h1 class="text-2xl font-extrabold m-7 ml-0 text-white">Resultaten
+        <h1 class="text-2xl font-extrabold m-7 ml-0 text-white">Resultaten van
+            @foreach ($students as $student)
+                @if ($student->id == $student_id)
+                    {{ $student->name }}
+                @endif
+            @endforeach
         </h1>
     </div>
 
     <div class="flex flex-col ml-auto mr-auto min-w-60" style="width: 80vw">
-        <div class="grid grid-cols-5 gap-x-44 border-b-gray-400 border-b-2 pt-2">
+        <div class="grid grid-cols-4 gap-x-44 border-b-gray-400 border-b-2 pt-2">
             <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit">Toets</button>
             <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Periode</button>
             <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Woordenlijst</button>
-            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Resultaat</button>
-            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Student</button>
+            <button class="text-white m-1 mr-1 mb-2 p-1.5 bg-indigo-500 rounded-lg w-fit ml-auto">Fouten</button>
         </div>
 
-        <div class="grid grid-cols-5 gap-x-44 bg-indigo-200 rounded-lg mt-2">
+        <div class="grid grid-cols-4 gap-x-44 bg-indigo-200 rounded-lg mt-2">
 
             @foreach ($results as $result)
                 @if ($student_id == $result->student_id)
                     <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">{{ $result['title'] }}</div>
                     @foreach ($periods as $period)
                         @if ($period->id == $result->period_id)
-                            <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit ml-auto mr-auto">
+                            <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit ml-auto">
                                 {{ $period->title }}
                             </div>
                         @endif
                     @endforeach
                     @foreach ($wordlists as $wordlist)
                         @if ($wordlist->id == $result->wordlist_id)
-                            <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">{{ $wordlist->title }}</div>
+                            <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit mx-auto">
+                                {{ $wordlist->title }}</div>
                         @endif
                     @endforeach
-                    <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">{{ $result['result'] }}%</div>
-
-                    @foreach ($students as $student)
-                        @if ($student->id == $result->student_id)
-                            <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">{{ $student->name }}</div>
+                    <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit ml-auto">
+                        @if ($result->result == 0)
+                            Geen fouten
+                        @else
+                            {{ $result->result }} @if ($result->result == 1)
+                                fout
+                            @else
+                                fouten
+                            @endif
                         @endif
-                    @endforeach
+                    </div>
                 @endif
             @endforeach
         </div>

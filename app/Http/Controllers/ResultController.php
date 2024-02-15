@@ -7,6 +7,7 @@ use App\Models\Period;
 use App\Models\Result;
 use App\Models\Student;
 use App\Models\WordList;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -35,7 +36,7 @@ class ResultController extends Controller
         $wordlist_id = (int)$request->get('wordlist_id');
         $user_id = (int)$request->get('user_id');
 
-       // dd($user_id);
+        // dd($user_id);
 
         $result = new Result;
         $result->title = $request->get('title');
@@ -65,6 +66,6 @@ class ResultController extends Controller
 
     public function student_index()
     {
-        return view('studenten.resultaten', ['results' => Result::all(), 'student' => Student::findOrFail(1)]);
+        return view('studenten.resultaten', ['results' => Result::all(), 'student' => Auth::id()]);
     }
 }
