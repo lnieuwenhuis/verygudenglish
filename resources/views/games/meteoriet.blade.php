@@ -237,10 +237,10 @@
             update() {
 
                 if (this.won && !this.hasSent) {
-                    fetch("{!! route('resultaten.store') !!}", {
+                    fetch("{{ route('resultaten.store') }}", {
                         method: "POST",
                         body: JSON.stringify({
-                            title: "result",
+                            title: "result meteor slash",
                             period_id: {{ $list_id->period_id }},
                             wordlist_id: {{ $list_id->id }},
                             user_id: {{ $user_id }},
