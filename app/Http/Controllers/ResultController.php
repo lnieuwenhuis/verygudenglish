@@ -49,7 +49,7 @@ class ResultController extends Controller
 
         $test = $result->save();
 
-        return response(200);
+        return route('studenten.periode');
     }
 
     public function destroy($id)

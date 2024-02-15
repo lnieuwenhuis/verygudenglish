@@ -14,6 +14,7 @@
         <h1 class="text-4xl">Meteor Slash</h1>
         <p>Lees dit voordat je begint</p>
         <p>Verander tijdens deze minigame niet van tabs want dan zal je game over gaan en is al je progressie weg.</p>
+        <p>Om naar beneden te scrollen moet je met je muis naar 1 van de zijkanten van de pagina.</p>
     </div>
     <script>
         // async function getWordlist() {
@@ -213,6 +214,8 @@
                                     this.victoryText.alpha = 100;
                                     this.won = true;
                                     this.question.alpha = 0;
+                                    this.input.on('pointerdown', () => { window.location.href = '{{ route('studenten.periode') }}' });
+
                                     return
                                 }
                                 this.question.setText(randomPair.questionToAnswer);
@@ -253,6 +256,7 @@
                     }).then(function(response) {
                         if (response.status !== 200) {
                             alert('oei');
+
                         }
                     });
                     this.hasSent = true
