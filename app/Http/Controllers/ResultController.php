@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Period;
 use App\Models\Result;
 use App\Models\Student;
@@ -13,7 +14,7 @@ class ResultController extends Controller
     //docenten gedeelte
     public function index()
     {
-        return view('docenten.resultaten', ['results' => Result::all(), 'students' => Student::all(), 'wordlists' => WordList::all(), 'periods' => Period::all()]);
+        return view('docenten.resultaten', ['results' => Result::all(), 'students' => User::where('type', 'student')->get(), 'wordlists' => WordList::all(), 'periods' => Period::all()]);
     }
 
     public function docent_fouten(Request $id)
