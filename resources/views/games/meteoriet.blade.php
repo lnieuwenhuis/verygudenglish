@@ -162,6 +162,11 @@
                     fontSize: '50px',
                     fontStyle: "bold",
                 })
+                this.victoryRoute = this.add.text(150, 450, "Click anywhere on the screen to submit the minigame result", {
+                    color: "#ffffff",
+                    fontSize: '30px',
+                    fontStyle: "bold",
+                })
 
                 this.message = this.add.text(755, 250, "", {
                     color: "#FFFFFF",
@@ -177,6 +182,7 @@
                 this.victoryText.alpha = 0;
                 this.victoryText.depth = 1
                 this.tryAgain.alpha = 0;
+                this.victoryRoute.alpha = 0;
 
 
 
@@ -215,7 +221,7 @@
                                     this.won = true;
                                     this.question.alpha = 0;
                                     this.input.on('pointerdown', () => { window.location.href = '{{ route('studenten.periode') }}' });
-
+                                    this.victoryRoute.alpha = 100;
                                     return
                                 }
                                 this.question.setText(randomPair.questionToAnswer);
