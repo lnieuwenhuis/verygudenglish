@@ -72,13 +72,10 @@ Route::get("/ageofwords/{list_id}", [\App\Http\Controllers\AgeOfWordsController:
 Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->middleware('student')->name('meteoriet');
 // ->middleware(['auth', 'verified'])->name('meteoriet');
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 
 require __DIR__ . '/auth.php';
