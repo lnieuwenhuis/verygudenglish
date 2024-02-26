@@ -20,7 +20,12 @@ class PeriodController extends Controller
 
     public function student_periode($id)
     {
-        return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'periodes' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
+        $period = Period::where('id', $id)->first();
+        if ($period->is_locked == 1) {
+            return redirect()->route('studenten.periode')->with('message', 'Die is gesloten!');
+        } else {
+            return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'periodes' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
+        }
     }
     public function store(Request $request)
     {

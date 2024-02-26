@@ -14,12 +14,18 @@ class MeteorController extends Controller
 {
     public function meteor(Request $request, $period_id)
     {
-        $words = Word::where('list_id', $request->list_id)->get();
+        $periode = Period::findOrFail($period_id);
+        if ($periode->is_locked == 1) {
+            return redirect()->route('studenten.periode')->with('message', 'Die is gesloten!');
+        } else {
 
-        $periodId = WordList::findOrFail($period_id);
-        $listId = WordList::findOrFail($request->list_id);
-        $userId = Auth::id();
+            $words = Word::where('list_id', $request->list_id)->get();
 
-        return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId, 'user_id' => $userId]);
+            $periodId = WordList::findOrFail($period_id);
+            $listId = WordList::findOrFail($request->list_id);
+            $userId = Auth::id();
+
+            return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId, 'user_id' => $userId]);
+        }
     }
 }
