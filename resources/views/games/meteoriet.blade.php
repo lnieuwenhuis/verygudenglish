@@ -10,12 +10,14 @@
 </head>
 
 <body class="bg-blue-900 m-2">
-    <div class="text-sky-50 ml-4">
+<div class="flex justify-center">
+    <div class="text-sky-50">
         <h1 class="text-4xl">Meteor Slash</h1>
         <p>Lees dit voordat je begint</p>
         <p>Verander tijdens deze minigame niet van tabs want dan zal je game over gaan en is al je progressie weg.</p>
         <p>Om naar beneden te scrollen moet je met je muis naar 1 van de zijkanten van de pagina.</p>
     </div>
+</div>
     <script>
         // async function getWordlist() {
         //     const response = await fetch("http://127.0.0.1:8000/api/products");

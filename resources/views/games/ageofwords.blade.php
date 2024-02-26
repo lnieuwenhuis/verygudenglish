@@ -7,7 +7,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
 </head>
 
-<body style="overflow: hidden; pointer-events: none">
+<body style="overflow: hidden; pointer-events: none; background: #1F6925">
 <script>
     var gameOver = false;
     function sanitize(string) {
@@ -562,7 +562,7 @@
             fetch("{{ route('resultaten.store') }}", {
                 method: "POST",
                 body: JSON.stringify({
-                    title: "result Age of Words",
+                    title: "Age of Words",
                     period_id: {{ $list_id->period_id }},
                     wordlist_id: {{ $list_id->id }},
                     user_id: {{ $user_id }},
@@ -683,7 +683,11 @@
         }
     }
 </script>
-
 </body>
-
+<div style="display: flex; justify-content: center; color: white">
+    <h1>Age of Words</h1>
+</div>
+<div style="display: flex; justify-content: center; color: white">
+    <p>Typ woorden correct in het engels voor munten</p>
+</div>
 </html>
