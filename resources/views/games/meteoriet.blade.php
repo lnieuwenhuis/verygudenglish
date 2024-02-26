@@ -228,6 +228,9 @@
                                 }
                                 this.question.setText(randomPair.questionToAnswer);
                             }, this);
+                        } else {
+                            this.fails += 1;
+                            name.value = "";
                         }
                         name.value = "";
                     }
@@ -311,11 +314,9 @@
 
                     if (this.health < 3 && this.health > 1) {
                         this.hearts = this.hearts.setCrop(0, 0, 42, 18)
-                        this.fails = 1;
                     }
                     if (this.health < 2 && this.health > 0) {
                         this.hearts = this.hearts.setCrop(0, 0, 21, 18)
-                        this.fails = 2;
                     }
                     if (this.health < 1) {
                         this.hearts.destroy();
