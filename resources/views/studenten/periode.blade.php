@@ -25,7 +25,8 @@
                 @foreach ($periodes as $periode)
                     <div class="flex items-center justify-center ml-auto mr-auto px-3 text-lg mb-3 mt-3">
                         <a class="gap-2 sm:text-[0.8rem] md:text-[1rem] flex items-center justify-center hover:bg-gray-200 border-2 border-gray-200 bg-gray-200 py-2 px-8 rounded-2xl"
-                            @if ($periode->is_locked == 0) href="{{ route('studenten.period', $periode->id) }}">{{ $periode->title }}
+
+                           @if ($periode->is_locked == 0) href="{{ route('studenten.period', $periode->id) }}">{{ $periode->title }}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"

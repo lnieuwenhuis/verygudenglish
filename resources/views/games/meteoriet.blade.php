@@ -252,8 +252,8 @@
                         method: "POST",
                         body: JSON.stringify({
                             title: "result meteor slash",
-                            period_id: {{ $list_id->period_id }},
-                            wordlist_id: {{ $list_id->id }},
+                            period_id: {{ $period_id }},
+                            list_id: {{ $list_id }},
                             user_id: {{ $user_id }},
                             result: this.fails,
                         }),

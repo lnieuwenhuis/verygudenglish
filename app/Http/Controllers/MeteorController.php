@@ -12,20 +12,22 @@ use Illuminate\Support\Facades\Auth;
 
 class MeteorController extends Controller
 {
-    public function meteor(Request $request, $period_id)
+    public function meteor(Request $request, $list_id)
     {
-        $periode = Period::findOrFail($period_id);
-        if ($periode->is_locked == 1) {
+        $wordList = WordList::findOrFail($list_id);
+        $periode = Period::findOrFail($wordList->period_id);
+        //$periode = Period::findOrFail($list_id);
+
+        if ($periode->is_locked === 1) {
             return redirect()->route('studenten.periode')->with('message', 'Die is gesloten!');
         } else {
 
             $words = Word::where('list_id', $request->list_id)->get();
 
-            $periodId = WordList::findOrFail($period_id);
-            $listId = WordList::findOrFail($request->list_id);
+           // $listId = WordList::findOrFail($request->list_id);
             $userId = Auth::id();
 
-            return view('games.meteoriet', ['words' => $words, 'period_id' => $periodId, 'list_id' => $listId, 'user_id' => $userId]);
+            return view('games.meteoriet', ['words' => $words, 'period_id' => $wordList->period_id, 'list_id' => $wordList->id, 'user_id' => $userId]);
         }
     }
 }

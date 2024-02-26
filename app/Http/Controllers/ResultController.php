@@ -28,12 +28,12 @@ class ResultController extends Controller
         $request->validate([
             'title' => 'required',
             'period_id' => 'required',
-            'wordlist_id' => 'required',
+            'list_id' => 'required',
             'user_id' => 'required'
         ]);
 
         $period_id = (int)$request->get('period_id');
-        $wordlist_id = (int)$request->get('wordlist_id');
+        $list_id = (int)$request->get('list_id');
         $user_id = (int)$request->get('user_id');
 
         // dd($user_id);
@@ -41,7 +41,7 @@ class ResultController extends Controller
         $result = new Result;
         $result->title = $request->get('title');
         $result->period_id = $period_id;
-        $result->wordlist_id = $wordlist_id;
+        $result->wordlist_id = $list_id;
         $result->student_id = $user_id;
 
         $result->result = $request->get('result');
