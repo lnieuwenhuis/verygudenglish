@@ -21,7 +21,7 @@ $user_name = Auth::user()->name;
     <div class="sidebar-content px-4 py-6 flex flex-col h-fit">
         <ul class="flex flex-col w-full">
             <li class="my-px">
-                <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Welkom
+                <span class="flex font-medium text-base text-gray-300 px-4 my-4 uppercase text-center">Welkom
                     {{ $user_name }}</span>
             </li>
             <li class="my-px">
