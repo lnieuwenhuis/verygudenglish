@@ -562,15 +562,9 @@
             fetch("{{ route('resultaten.store') }}", {
                 method: "POST",
                 body: JSON.stringify({
-<<<<<<< Updated upstream
                     title: "Age of Words",
-                    period_id: {{ $list_id->period_id }},
-                    wordlist_id: {{ $list_id->id }},
-=======
-                    title: "result Age of Words",
                     period_id: {{ $period_id }},
                     list_id: {{ $list_id }},
->>>>>>> Stashed changes
                     user_id: {{ $user_id }},
                     result: this.fails,
                 }),
