@@ -14,6 +14,7 @@
         <h1 class="text-4xl">Meteor Slash</h1>
         <p>Lees dit voordat je begint</p>
         <p>Verander tijdens deze minigame niet van tabs want dan zal je game over gaan en is al je progressie weg.</p>
+        <p>Om naar beneden te scrollen moet je met je muis naar 1 van de zijkanten van de pagina.</p>
     </div>
     <script>
         // async function getWordlist() {
@@ -161,6 +162,11 @@
                     fontSize: '50px',
                     fontStyle: "bold",
                 })
+                this.victoryRoute = this.add.text(150, 450, "Click anywhere on the screen to submit the minigame result", {
+                    color: "#ffffff",
+                    fontSize: '30px',
+                    fontStyle: "bold",
+                })
 
                 this.message = this.add.text(755, 250, "", {
                     color: "#FFFFFF",
@@ -176,6 +182,7 @@
                 this.victoryText.alpha = 0;
                 this.victoryText.depth = 1
                 this.tryAgain.alpha = 0;
+                this.victoryRoute.alpha = 0;
 
 
 
@@ -213,6 +220,8 @@
                                     this.victoryText.alpha = 100;
                                     this.won = true;
                                     this.question.alpha = 0;
+                                    this.input.on('pointerdown', () => { window.location.href = '{{ route('studenten.periode') }}' });
+                                    this.victoryRoute.alpha = 100;
                                     return
                                 }
                                 this.question.setText(randomPair.questionToAnswer);
@@ -253,6 +262,7 @@
                     }).then(function(response) {
                         if (response.status !== 200) {
                             alert('oei');
+
                         }
                     });
                     this.hasSent = true
