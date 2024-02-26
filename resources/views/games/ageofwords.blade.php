@@ -17,7 +17,6 @@
             '>': '',
             '"': '',
             "'": '',
-            "/": '',
         };
         const reg = /[&<>"'/]/ig;
         return string.replace(reg, (match) => (map[match]));
