@@ -29,8 +29,9 @@
             <form action="{{ route('woorden.store') }}" method="POST">
                 @csrf
                 <div class="flex flex-row">
-                    <input type="text" name="words" id="word" placeholder="Woord" class="rounded-lg mr-1">
-                    <input type="text" name="answers" id="answer" placeholder="Antwoord" class="rounded-lg mr-1">
+                    <input type="text" name="words" id="word" placeholder="Nederlands"
+                        class="rounded-lg mr-1">
+                    <input type="text" name="answers" id="answer" placeholder="Engels" class="rounded-lg mr-1">
                     <input type="hidden" name="list_id" placeholder="{{ $wordlist['id'] }}"
                         value="{{ $wordlist['id'] }}" class="hidden">
                     <button class="pt-2 pb-2 pr-4 pl-4 bg-blue-600 text-xl text-sky-50 rounded-lg"
@@ -57,10 +58,10 @@
     <div class="mt-4">
         <div class=" grid grid-cols-3 gap-x-10 border-b-gray-400 border-b-2">
             <div>
-                Woord
+                Nederlands
             </div>
             <div class="ml-auto mr-auto">
-                Antwoord
+                Engels
             </div>
             <div class="ml-auto">Acties</div>
         </div>
