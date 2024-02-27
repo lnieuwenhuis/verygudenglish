@@ -63,8 +63,8 @@
                             class="">
                             @csrf
                             @method('delete')
-                            <button type="submit"
-                                class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">Delete</button>
+                            <button type="submit" class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit"
+                                onclick="return confirm('Weet je zeker dat je dit woord wilt verwijderen?')">Delete</button>
                         </form>
                     </div>
                 </div>

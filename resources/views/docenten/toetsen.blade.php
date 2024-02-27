@@ -45,7 +45,8 @@
                     <form action="{{ route('toetsen.destroy', $toets->id) }}" method="POST" class="">
                         @csrf
                         @method('delete')
-                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit">Delete</button>
+                        <button class="text-white m-1 p-1 bg-gray-600 rounded-lg w-fit"
+                            onclick="return confirm('Weet je zeker dat je dit woord wilt verwijderen?')">Delete</button>
                     </form>
                 </div>
             @endforeach

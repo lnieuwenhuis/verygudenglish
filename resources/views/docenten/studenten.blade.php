@@ -47,7 +47,8 @@
                         <form action="{{ route('studenten.destroy', $student->id) }}" method="POST" class="">
                             @csrf
                             @method('delete')
-                            <button class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit">Delete</button>
+                            <button class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit"
+                                onclick="return confirm('Weet je zeker dat je {{ $student->name }} wilt verwijderen?')">Delete</button>
                         </form>
                     </div>
                 </div>
