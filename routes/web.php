@@ -36,7 +36,6 @@ Route::middleware('admin')->group(function () {
     Route::resource('/docenten/woordenlijsten', WordListController::class);
     Route::resource('/docenten/periodes', PeriodController::class);
     Route::resource('/docenten/resultaten', ResultController::class);
-    Route::post('/docenten/resultaten', [ResultController::class, 'store'])->name('results.store');
     Route::resource('/docenten/woorden', wordController::class);
 });
 
@@ -50,5 +49,7 @@ Route::middleware('student')->group(function () {
     Route::get("/ageofwords/{list_id}", [\App\Http\Controllers\AgeOfWordsController::class, 'ageofwords'])->name('ageofwords');
     Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->name('meteoriet');
 });
+
+Route::post('/docenten/resultaten', [ResultController::class, 'store'])->middleware(['admin', 'student'])->name('results.store');
 
 require __DIR__ . '/auth.php';
