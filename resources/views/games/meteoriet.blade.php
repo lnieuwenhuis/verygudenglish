@@ -255,6 +255,7 @@
             update() {
 
                 if (this.won && !this.hasSent) {
+                    console.log('karel');
                     fetch("{{ route('results.store') }}", {
                         method: "POST",
                         body: JSON.stringify({

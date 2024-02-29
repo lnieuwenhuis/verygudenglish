@@ -12,15 +12,9 @@ use Illuminate\Http\Request;
 
 class ResultController extends Controller
 {
-    //docenten gedeelte
     public function index()
     {
-        return view('docenten.resultaten', ['results' => Result::all(), 'students' => User::where('type', 'student')->get(), 'wordlists' => WordList::all(), 'periods' => Period::all()]);
-    }
-
-    public function docent_fouten(Request $id)
-    {
-        return view('docenten.fouten', ['results' => Result::findOrFail($id)]);
+        return view('teachers.results', ['results' => Result::all(), 'students' => User::where('type', 'student')->get(), 'wordlists' => WordList::all(), 'periods' => Period::all()]);
     }
 
     public function store(Request $request)
@@ -32,11 +26,11 @@ class ResultController extends Controller
             'user_id' => 'required'
         ]);
 
+        dd($request);
+
         $period_id = (int)$request->get('period_id');
         $list_id = (int)$request->get('list_id');
         $user_id = (int)$request->get('user_id');
-
-        // dd($user_id);
 
         $result = new Result;
         $result->title = $request->get('title');
@@ -47,9 +41,9 @@ class ResultController extends Controller
         $result->result = $request->get('result');
         $result->mistakes = "";
 
-        $test = $result->save();
+        $result->save();
 
-        return route('studenten.periode');
+        return route('students.periods');
     }
 
     public function destroy($id)
