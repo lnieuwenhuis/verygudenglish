@@ -9,11 +9,11 @@ class WordController extends Controller
 {
     public function index()
     {
-        return view('docenten.woorden', ['words' => Word::all()]);
+        return view('teachers.words', ['words' => Word::all()]);
     }
     public function create()
     {
-        return view('docenten.create.woorden');
+        return view('teachers.create.words');
     }
     public function store(Request $request)
     {
@@ -33,7 +33,7 @@ class WordController extends Controller
     }
     public function edit(Request $id)
     {
-        return view('docenten.edit.woorden', ['words' => Word::where('list_id', $id)->findOrFail()]);
+        return view('teachers.edit.words', ['words' => Word::findOrFail('list_id', $id)]);
     }
     public function update(Request $request, $id)
     {
@@ -50,7 +50,6 @@ class WordController extends Controller
     }
     public function destroy($id)
     {
-
         $word = Word::findOrFail($id);
 
         $word->delete();

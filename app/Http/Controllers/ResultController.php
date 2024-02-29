@@ -66,6 +66,6 @@ class ResultController extends Controller
 
     public function student_index()
     {
-        return view('studenten.resultaten', ['results' => Result::all(), 'student' => Auth::id()]);
+        return view('students.results', ['results' => Result::all(), 'student' => Auth::id()]);
     }
 }

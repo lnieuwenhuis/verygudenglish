@@ -10,14 +10,15 @@
 </head>
 
 <body class="bg-blue-900 m-2">
-<div class="flex justify-center">
-    <div class="text-sky-50">
-        <h1 class="text-4xl">Meteor Slash</h1>
-        <p>Lees dit voordat je begint</p>
-        <p>Verander tijdens deze minigame niet van tabs want dan zal je game over gaan en is al je progressie weg.</p>
-        <p>Om naar beneden te scrollen moet je met je muis naar 1 van de zijkanten van de pagina.</p>
+    <div class="flex justify-center">
+        <div class="text-sky-50">
+            <h1 class="text-4xl">Meteor Slash</h1>
+            <p>Lees dit voordat je begint</p>
+            <p>Verander tijdens deze minigame niet van tabs want dan zal je game over gaan en is al je progressie weg.
+            </p>
+            <p>Om naar beneden te scrollen moet je met je muis naar 1 van de zijkanten van de pagina.</p>
+        </div>
     </div>
-</div>
     <script>
         // async function getWordlist() {
         //     const response = await fetch("http://127.0.0.1:8000/api/products");
@@ -163,11 +164,12 @@
                     fontSize: '50px',
                     fontStyle: "bold",
                 })
-                this.victoryRoute = this.add.text(150, 450, "Click anywhere on the screen to submit the minigame result", {
-                    color: "#ffffff",
-                    fontSize: '30px',
-                    fontStyle: "bold",
-                })
+                this.victoryRoute = this.add.text(150, 450,
+                    "Click anywhere on the screen to submit the minigame result", {
+                        color: "#ffffff",
+                        fontSize: '30px',
+                        fontStyle: "bold",
+                    })
 
                 this.message = this.add.text(755, 250, "", {
                     color: "#FFFFFF",
@@ -221,7 +223,10 @@
                                     this.victoryText.alpha = 100;
                                     this.won = true;
                                     this.question.alpha = 0;
-                                    this.input.on('pointerdown', () => { window.location.href = '{{ route('studenten.periode') }}' });
+                                    this.input.on('pointerdown', () => {
+                                        window.location.href =
+                                            '{{ route('studenten.periode') }}'
+                                    });
                                     this.victoryRoute.alpha = 100;
                                     return
                                 }
@@ -250,10 +255,10 @@
             update() {
 
                 if (this.won && !this.hasSent) {
-                    fetch("{{ route('resultaten.store') }}", {
+                    fetch("{{ route('results.store') }}", {
                         method: "POST",
                         body: JSON.stringify({
-                            title: "result meteor slash",
+                            title: "Meteoor Game Resultaat",
                             period_id: {{ $period_id }},
                             list_id: {{ $list_id }},
                             user_id: {{ $user_id }},

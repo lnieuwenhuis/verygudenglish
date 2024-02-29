@@ -17,22 +17,22 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('docenten.studenten', ['studenten' => User::where('type', 'student')->get()]);
+        return view('teachers.students', ['students' => User::where('type', 'student')->get()]);
     }
 
-    public function docenten_index()
+    public function teacherIndex()
     {
-        return view('docenten.index', ['user_name' => Auth::user()->name]);
+        return view('teachers.index', ['user_name' => Auth::user()->name]);
     }
 
-    public function studentPeriodes()
+    public function studentIndex()
     {
-        return view('studenten.index', ['periodes' => Period::all(), 'user_name' => Auth::user()->name]);
+        return view('students.index', ['periodes' => Period::all(), 'user_name' => Auth::user()->name]);
     }
 
     public function create()
     {
-        return view('docenten.studenten.create');
+        return view('teachers.students.create');
     }
     public function store(Request $request)
     {
@@ -55,7 +55,7 @@ class UserController extends Controller
     }
     public function edit(Request $id)
     {
-        return view('docenten.studenten.edit', ['user' => User::findOrFail($id)]);
+        return view('teachers.students.edit', ['user' => User::findOrFail($id)]);
     }
     public function update(Request $request, $id)
     {
@@ -73,11 +73,15 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
-
         $user = User::findOrFail($id);
 
         $user->delete();
 
         return redirect()->back()->with('message', 'User Deleted');
+    }
+
+    public function student_geenlijst()
+    {
+        return view('students.geenlijst');
     }
 }

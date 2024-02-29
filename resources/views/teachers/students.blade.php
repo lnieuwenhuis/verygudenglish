@@ -33,7 +33,7 @@
                 Acties</button>
         </div>
         <div class="flex flex-col gap-x-44 bg-indigo-200 rounded-lg mt-2">
-            @foreach ($studenten as $student)
+            @foreach ($students as $student)
                 <div class="border-b-indigo-300 flex flex-row">
                     <div class="text-white m-1 p-1 bg-indigo-500 rounded-lg w-fit z-50">
                         {{ $student['name'] }}</div>

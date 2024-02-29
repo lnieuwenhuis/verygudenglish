@@ -15,15 +15,13 @@ class AgeOfWordsController extends Controller
     {
         $wordList = WordList::findOrFail($list_id);
         $periode = Period::findOrFail($wordList->period_id);
-        //$periode = Period::findOrFail($list_id);
 
         if ($periode->is_locked === 1) {
-            return redirect()->route('studenten.periode')->with('message', 'Die is gesloten!');
+            return redirect()->route('students.periods')->with('message', 'Die Periode is gesloten!');
         } else {
 
             $words = Word::where('list_id', $request->list_id)->get();
 
-            // $listId = WordList::findOrFail($request->list_id);
             $userId = Auth::id();
 
             return view('games.ageofwords', ['words' => $words, 'period_id' => $wordList->period_id, 'list_id' => $wordList->id, 'user_id' => $userId]);

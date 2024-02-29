@@ -11,25 +11,25 @@ class PeriodController extends Controller
 {
     public function index()
     {
-        return view("docenten.periodes", ['periods' => Period::all()]);
+        return view("teachers.periods", ['periods' => Period::all()]);
     }
     public function create()
     {
-        return view('docenten.create.periode');
+        return view('teachers.create.period');
     }
 
-    public function student_periode($id)
+    public function studentPeriod($id)
     {
-        $period = Period::where('id', $id)->first();
+        $period = Period::findOrFail($id);
         if ($period->is_locked == 1) {
-            return redirect()->route('studenten.periode')->with('message', 'Die is gesloten!');
+            return redirect()->route('students.periode');
         } else {
-            return view('studenten.periode', ['period' => Period::where('id', $id)->first(), 'periodes' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
+            return view('students.periods', ['period' => $period, 'periods' => Period::all(), 'wordlist' => WordList::where('period_id', $id)->first()]);
         }
     }
     public function store(Request $request)
     {
-        -$request->validate([
+        $request->validate([
             'periode' => 'required',
             'is_locked' => 'required'
         ]);
@@ -60,8 +60,6 @@ class PeriodController extends Controller
     }
     public function delete($id)
     {
-        $period = new Period;
-
         $period = Period::findOrFail($id);
         $period->wordlist()->detach();
         $period->delete();

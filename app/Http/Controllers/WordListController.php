@@ -12,16 +12,16 @@ class WordListController extends Controller
 {
     public function index()
     {
-        return view("docenten.woordenlijsten", ['wordlists' => WordList::all(), 'periods' => Period::all()]);
+        return view("teachers.wordlists", ['wordlists' => WordList::all(), 'periods' => Period::all()]);
     }
 
     public function student_wordlist($id)
     {
-        return view('studenten.woordenlijst', ['wordlist' => WordList::findOrFail($id), 'words' => Word::where('list_id', $id)->get()]);
+        return view('students.wordlist', ['wordlist' => WordList::findOrFail($id), 'words' => Word::where('list_id', $id)->get()]);
     }
     public function create()
     {
-        return view('docenten.create.woordenlijsten', ['periods' => Period::all()]);
+        return view('teachers.create.wordlist', ['periods' => Period::all()]);
     }
     public function store(Request $request)
     {
@@ -39,7 +39,7 @@ class WordListController extends Controller
     }
     public function edit($id)
     {
-        return view('docenten.edit.woordenlijsten', ['wordlist' => WordList::findOrFail((int)$id), 'words' => Word::where('list_id', $id)->get(), 'periodes' => Period::all()]);
+        return view('teachers.edit.wordlist', ['wordlist' => WordList::findOrFail((int)$id), 'words' => Word::where('list_id', $id)->get(), 'periodes' => Period::all()]);
     }
     public function update(Request $request, $id)
     {
@@ -48,7 +48,6 @@ class WordListController extends Controller
             'period_id' => 'required',
         ]);
 
-        $wordList = new WordList;
         $wordList = WordList::findOrFail($id);
         $wordList->title = $request->get('title');
         $wordList->period_id = $request->get('period_id');
