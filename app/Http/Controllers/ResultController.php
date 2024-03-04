@@ -19,6 +19,7 @@ class ResultController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required',
             'period_id' => 'required',
@@ -26,7 +27,7 @@ class ResultController extends Controller
             'user_id' => 'required'
         ]);
 
-        dd($request);
+
 
         $period_id = (int)$request->get('period_id');
         $list_id = (int)$request->get('list_id');
@@ -39,7 +40,6 @@ class ResultController extends Controller
         $result->student_id = $user_id;
 
         $result->result = $request->get('result');
-        $result->mistakes = "";
 
         $result->save();
 
