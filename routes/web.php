@@ -41,7 +41,7 @@ Route::middleware('admin')->group(function () {
 
 Route::middleware('student')->group(function () {
     Route::get('/studenten', [UserController::class, 'studentIndex'])->name('studenten.periode');
-    Route::get('/studenten/periode/{toetsen}', [PeriodController::class, 'studentPeriod'])->name('studenten.period');
+    Route::get('/studenten/periode/{id}', [PeriodController::class, 'studentPeriod'])->name('studenten.period');
     Route::get('/studenten/resultaten', [ResultController::class, 'student_index'])->name('studenten.resultaten');
     Route::get('/studenten/resultaten/fouten', [ResultController::class, 'student_mistakes'])->name('studenten.results.mistakes');
     Route::get('/studenten/woordenlijst/{woordenlijst}', [wordListController::class, 'student_wordlist'])->name('studenten.woordenlijst');
