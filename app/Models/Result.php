@@ -17,17 +17,13 @@ class Result extends Model
     public function wordlists()
     {
         return $this->hasMany(WordList::class, 'id', 'wordlist_id');
-
     }
     public function students()
     {
-        return $this->hasMany(Student::class, 'id', 'student_id');
-
+        return $this->hasMany(User::class, 'id', 'student_id');
     }
     public function periods()
     {
         return $this->hasMany(Period::class, 'id', 'period_id');
-
     }
-
 }

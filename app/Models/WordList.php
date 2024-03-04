@@ -18,9 +18,4 @@ class WordList extends Model
     {
         return $this->hasMany(Word::class, 'list_id');
     }
-
-//    public function result()
-//    {
-//        return $this->belongsToMany(Result::class, 'lists', 'id');
-//    }
 }
