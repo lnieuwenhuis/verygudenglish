@@ -7,6 +7,7 @@ $user_name = Auth::user()->name;
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+<link rel="icon" type="image/x-icon" href="https://imgur.com/dUJsQ8V.png">
 <aside
     class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-indigo-500">
     <div class="sidebar-header flex items-center justify-center py-4 mt-2">

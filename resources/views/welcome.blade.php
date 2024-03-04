@@ -2,10 +2,14 @@
 session_start();
 ?>
 
+
 <!DOCTYPE html>
 <html>
 
+
 <head>
+    <link rel="icon" type="image/x-icon" href="https://imgur.com/dUJsQ8V.png">
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -69,6 +73,7 @@ session_start();
                 </div>
             </div>
         </div>
+    </main>
 </body>
 
 </html>
