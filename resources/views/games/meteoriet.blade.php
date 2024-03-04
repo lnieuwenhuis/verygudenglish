@@ -20,13 +20,6 @@
         </div>
     </div>
     <script>
-        // async function getWordlist() {
-        //     const response = await fetch("http://127.0.0.1:8000/api/products");
-        //     const words = await response.json();
-        //     return words.products;
-        // }
-
-
         function sanitize(string) {
             const map = {
                 '&': '',
@@ -269,10 +262,7 @@
                             "Content-type": "application/json; charset=UTF-8"
                         }
                     }).then(function(response) {
-                        if (response.status !== 200) {
-                            alert('oei');
 
-                        }
                     });
                     this.hasSent = true
                 }
