@@ -21,7 +21,7 @@
         <div>
             <a href="{{ route('periodes.index') }}">
                 <div class=" dark:bg-indigo-500 bg-indigo-500 overflow-hidden shadow-sm sm:rounded-lg h-36">
-                    <div class="p-6 text-gray-900 dark:text-gray-100 text-center mt-9 text-2xl">
+                    <div class="p-6 text-gray-100 dark:text-gray-100 text-center mt-9 text-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 absolute opacity-10 -ml-6 -mt-12"
                             viewBox="0 0 20 20" fill="currentColor">
                             <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
@@ -35,7 +35,7 @@
         <div>
             <a href="{{ route('studenten.index') }}">
                 <div class=" dark:bg-indigo-500 bg-indigo-500 overflow-hidden shadow-sm sm:rounded-lg h-36">
-                    <div class="p-6 text-gray-900 dark:text-gray-100 text-center mt-9 text-2xl">
+                    <div class="p-6 text-gray-100 dark:text-gray-100 text-center mt-9 text-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 absolute opacity-10 -ml-6 -mt-12"
                             viewBox="0 0 20 20" fill="currentColor">
                             <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
@@ -53,7 +53,7 @@
     <div class="m-8 mt-4">
         <a href="{{ route('woordenlijsten.index') }}">
             <div class=" dark:bg-indigo-500 bg-indigo-500 overflow-hidden shadow-sm sm:rounded-lg h-36">
-                <div class="p-6 text-gray-900 dark:text-gray-100 text-center mt-9 text-2xl">
+                <div class="p-6 text-gray-100 dark:text-gray-100 text-center mt-9 text-2xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 absolute opacity-10 -ml-6 -mt-12"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
