@@ -22,12 +22,14 @@ class UserController extends Controller
 
     public function teacherIndex()
     {
-        return view('teachers.index', ['user_name' => Auth::user()->name]);
+        return view('teachers.index');
+        //, ['user_name' => Auth::user()->name]
     }
 
     public function studentIndex()
     {
-        return view('students.index', ['periodes' => Period::all(), 'user_name' => Auth::user()->name]);
+        return view('students.index', ['periodes' => Period::all()]);
+        //, 'user_name' => Auth::user()->name
     }
 
     public function create()

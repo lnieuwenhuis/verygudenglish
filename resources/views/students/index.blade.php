@@ -15,7 +15,7 @@
     <div>
         <div class="text-white h-2/3 w-3/4 m-auto mt-5 mb-5 rounded flex flex-row">
             <div class="ml-auto mr-auto p-3 text-2xl">
-                Welkom {{ $user_name }}
+                Welkom Student
             </div>
         </div>
 

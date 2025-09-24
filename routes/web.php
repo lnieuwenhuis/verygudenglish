@@ -30,16 +30,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::middleware('admin')->group(function () {
+//Route::middleware('admin')->group(function () {
     Route::get('/docenten', [UserController::class, 'teacherIndex'])->name('docenten');
     Route::resource('/docenten/studenten', UserController::class);
     Route::resource('/docenten/woordenlijsten', WordListController::class);
     Route::resource('/docenten/periodes', PeriodController::class);
     Route::resource('/docenten/resultaten', ResultController::class)->except('store');
     Route::resource('/docenten/woorden', wordController::class);
-});
+//});
 
-Route::middleware('student')->group(function () {
+//Route::middleware('student')->group(function () {
     Route::get('/studenten', [UserController::class, 'studentIndex'])->name('studenten.periode');
     Route::get('/studenten/periode/{id}', [PeriodController::class, 'studentPeriod'])->name('studenten.period');
     Route::get('/studenten/resultaten', [ResultController::class, 'student_index'])->name('studenten.resultaten');
@@ -48,7 +48,7 @@ Route::middleware('student')->group(function () {
     Route::get('/studenten/woordenlijst/geenlijst', [UserController::class, 'student_geenlijst'])->name('studenten.geenlijst');
     Route::get("/ageofwords/{list_id}", [\App\Http\Controllers\AgeOfWordsController::class, 'ageofwords'])->name('ageofwords');
     Route::get("/meteor/{list_id}", [\App\Http\Controllers\MeteorController::class, 'meteor'])->name('meteoriet');
-});
+//});
 
 Route::post('/docenten/resultaten', [ResultController::class, 'store'])->middleware(['student'])->name('results.store');
 

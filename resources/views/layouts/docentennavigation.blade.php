@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 
-$user_name = Auth::user()->name;
+//$user_name = Auth::user()->name;
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,8 @@ $user_name = Auth::user()->name;
         <ul class="flex flex-col w-full">
             <li class="my-px">
                 <span class="flex font-medium text-base text-gray-300 px-4 my-4 uppercase text-center">Welkom
-                    {{ $user_name }}</span>
+                  Docent  </span>
+{{--                {{ $user_name }}--}}
             </li>
             <li class="my-px">
                 <a href="{{ route('studenten.index') }}"
